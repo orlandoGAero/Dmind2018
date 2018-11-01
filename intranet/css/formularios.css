@@ -1,0 +1,613 @@
+.buscar{
+  width: 50px;
+  height: 28px;
+  background-image:url(../images/buscar.jpg);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.buscar:hover{
+  cursor: pointer;
+}
+.buscar:active {
+  background-image:url(../images/buscar.png);
+}
+.regusuario {
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  width: 350px; 
+  margin-bottom: 10px;
+}
+.camps{
+   width: 350px; 
+  background-color: #ffffff;
+}
+label,input,select,textarea {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: normal;
+}
+label {
+  font-weight: bold;
+}
+.formarriba{
+  width: 350px;
+  color: white;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background: #16555B;
+  text-align: center;
+  vertical-align: middle;
+}
+.formabajo{
+  width: 350px;
+  background:#16555B;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+input[type=button], input[type=reset], input[type=submit] {
+  width: 120px;
+  height: 30px;
+}
+input{
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  height: 20px;
+  border-radius: 4px;
+}
+input:focus {
+  outline: 0;
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+.nuevusuario{
+  width: 180px;
+  padding:5px;
+  margin: 10px auto;
+  background-color: rgba(255,255,255,.5);
+  border-radius: 8px;
+  cursor: pointer;
+  text-shadow:1px 1px 1px #000;
+}
+.todasacciones{
+  background: rgba(0,0,0,.7);
+  display: none;
+  height:100%;
+  left: 0px;
+  position: fixed;
+  top: 100px;
+  width:100%;
+  z-index:1;
+}
+.alerta,.alertacorr{
+  display: none;
+  background: rgba(255,255,255,.95);
+  border-radius: 5px;
+  border:1px red solid;
+  font-size:1.1em;
+  margin: 200px auto;
+  width: 300px;
+  height: 120px;
+  padding: 10px;
+  z-index: 101;
+  letter-spacing: 1px;
+  box-shadow: 1px 1px 1px #fff;
+}
+.acept,.ok{
+  cursor: pointer;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border:1px solid blue;
+  float: right;
+}
+input[type="checkbox"]{
+  width: 20px;
+  margin-left: 15px;
+}
+.padd{
+  padding-left: 10px;
+  color: red;
+}
+#catego{
+  right: 100px;
+  top:200px;
+  position: absolute;
+  display: none;
+  width: 200px;
+}
+.newca{
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgba(255,255,255,.5);
+}
+.newca select{
+  width: 120px;
+}
+.newca input{
+  background-color: greenyellow;
+  font-weight: bold;
+}
+/* Botones */
+.btneliminar {
+  cursor: pointer;
+  display: inline-block;
+  background-color: #E00108;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#740900), color-stop(25%, #740900), to(#E00108));
+  background-image: -webkit-linear-gradient(#740900, #740900 25%, #E00108);
+  background-image: -moz-linear-gradient(top, #740900, #740900 25%, #E00108);
+  background-image: -ms-linear-gradient(#740900, #740900 25%, #E00108);
+  background-image: -o-linear-gradient(#740900, #740900 25%, #E00108);
+  background-image: linear-gradient(#740900, #740900 25%, #E00108);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#740900', endColorstr='#E00108', GradientType=0);
+  padding: 5px 14px 6px;
+  /*margin: .5em 0 0 0;*/
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  color: #FFF;
+  font-size: 13px;
+  line-height: normal;
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-transition: 0.1s linear all;
+  -moz-transition: 0.1s linear all;
+  -ms-transition: 0.1s linear all;
+  -o-transition: 0.1s linear all;
+  transition: 0.1s linear all;
+}
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  background-color: #e6e6e6;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -moz-linear-gradient(top, #ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -ms-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -o-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  padding: 5px 14px 6px;
+  margin: .5em 0 1em 0;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  color: #333;
+  font-size: 12px;
+  line-height: normal;
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-transition: 0.1s linear all;
+  -moz-transition: 0.1s linear all;
+  -ms-transition: 0.1s linear all;
+  -o-transition: 0.1s linear all;
+  transition: 0.1s linear all;
+}
+.btn:hover, .btneliminar:hover {
+  background-position: 0 -15px;
+  text-decoration: none;
+}
+.btn:focus {
+  outline: 1px dotted #666;
+}
+.btn.primary {
+  color: #ffffff;
+  background-color: #0064cd;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+  background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+  background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+  background-image: linear-gradient(top, #049cdb, #0064cd);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#049cdb', endColorstr='#0064cd', GradientType=0);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border-color: #0064cd #0064cd #003f81;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+.btn.active, .btn:active {
+  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.btn.disabled {
+  cursor: default;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  filter: alpha(opacity=65);
+  -khtml-opacity: 0.65;
+  -moz-opacity: 0.65;
+  opacity: 0.65;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.btn[disabled] {
+  cursor: default;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  filter: alpha(opacity=65);
+  -khtml-opacity: 0.65;
+  -moz-opacity: 0.65;
+  opacity: 0.65;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+form {
+  
+}
+fieldset {
+  border: 0;
+  margin-bottom: 18px;
+  padding-top: 18px;
+}
+form .clearfix {
+  zoom: 1;
+}
+form .clearfix:before, form .clearfix:after {
+  display: table;
+  content: "";
+  zoom: 1;
+}
+form .clearfix:after {
+  clear: both;
+}
+input,
+select,
+textarea {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: normal;
+}
+label {
+  font-weight: bold;
+  padding-top: 6px;
+  margin-top: 1em;
+  font-size: 13px;
+  line-height: 18px;
+  width: 120px;
+  color: #404040;
+}
+.label-textarea {
+  vertical-align: top;
+  line-height: 30px;
+}
+input,
+textarea,
+select,
+.uneditable-input {
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #757575;
+  display: inline-block;
+  line-height: 18px;
+  margin: .3em 0 0 0;
+  padding: 4px;
+  width: 190px;
+}
+  .errores{
+    -webkit-box-shadow: 0 0 10px rgba(,0,0,0,.3);
+    -moz-box-shadow: 0 0 10px rgba(,0,0,0,.3);
+    -o-box-shadow: 0 0 10px rgba(,0,0,0,.3);
+    background: red;
+    box-shadow: 0 0 10px rgba(,0,0,0,.3);
+    color:#fff;
+    display: none;
+    font-size: 14px;
+    width: 200px;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+/******************************************** Estilos CSS Irving G.R. ********************************************/
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Formularios de Registrar y Modificar Finanzas
+ */
+
+.finanzasform span{
+  color: red;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.finanzasform .azul {
+  color: #28C7E0;
+}
+
+.finanzasform ul {
+  width: 600px;
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 0px;
+  padding: 0px;
+  text-align: left;
+}
+
+.finanzasform li {
+  padding-top: 5px;
+  padding-left: 25px;
+}
+
+/*.finanzasform label {
+  width: 195px;
+  margin-top: 7px;
+  display: inline-block;
+  float: left;
+  padding: 3px;
+  text-align: left;
+}*/
+
+.finanzasform input[type="text"] {
+  height: 18px;
+  width: 230px;
+  padding: 5px 10px;
+  margin-left: 5px;
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition:border linear 0.2s, box-shadow linear 0.2s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.finanzasform select {
+  line-height: 18px;
+  width: 252px;
+  padding: 3px 10px;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #404040;
+}
+
+.finanzasform input[type="text"]:focus {
+  outline: 0;
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+.finanzasformtitulo{
+  width: 665px;
+  color: white;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background: #16555B;
+}
+
+.finanzasformcontenido{
+  width: 665px;
+  height: 405px;
+  overflow-y: scroll;
+  background-color: #ffffff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 0;
+  border-left-right:solid 2px black;
+}
+
+.finanzasformpie{
+  width: 665px;
+  background:#16555B;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 5px 0;
+}
+
+.finanzasform textarea.sello {
+  width: 337px;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Formulario de Nueva Venta
+ */
+
+.ventasform ul {
+  width: auto;
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 0px;
+  padding: 0px;
+  text-align: left;
+}
+
+.ventasform li {
+  padding: 5px 15px;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Estilos de boton para seleccionar archivos XML
+ */
+
+/*input file*/
+input[type="file"]{
+  padding: 3px 110px;
+  border-radius: 6px;
+  border-left: none;
+  border-top: none;
+  margin-bottom: 5px;
+  vertical-align: middle;
+  background: rgba(3, 146, 217, 0.5);
+  color: #fff;
+  cursor: pointer;
+  width: 45%;
+  line-height: 20px;
+}
+
+section#botonesFinanz{
+  height: 30%;
+  padding: 2px 0;
+}
+
+section#contenidoFinanz{
+  height: auto;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Estilos de un input con un botón
+ */
+
+#inputBoton {
+  background: #fff;
+  height: 35px;
+  width: 198px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-top: .3em;
+}
+
+.inputOculto {
+  height:27px;
+  width: 140px;
+  vertical-align: top;
+  border: none;
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+.inputOculto:focus {
+  box-shadow: none;
+}
+
+.mSerie {
+  margin: 0px 8px 0px 0px;
+}
+
+.mPImport {
+  margin: 0px 16px 0px 0px; 
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.mt3 {
+  margin-top: 1px;
+}
+
+.mt6 {
+  margin-top: 6px;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Estilos de checkbox en Registrar egresos
+ */
+ .cbGuardarProv{
+  vertical-align: middle;
+  cursor: pointer;
+  width: 16px;
+  height: 21px;
+ }
+ span.textGuardarProv{
+  font-size: 12px;
+  vertical-align: middle;
+  cursor: pointer;
+  font-weight: inherit;
+  color: #000;
+  font-family: serif;
+ }
+/***************************************************************************************************************************/
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Estilos de configuración de registros obligatorios.
+ */
+section#info{
+  border-radius: 5px;
+  width:570px;
+  height: auto;
+  margin: 5px auto 5px auto;
+  text-align: left;
+  background: #259CAF;
+  padding: 10px;
+}
+
+section#info span{
+  color: #000;
+  font-size: 10.5px;
+  font-weight: bold;
+  font-style: oblique;
+}
+
+section#transparente{
+  border-radius: 5px;
+  width: 570px;
+  height: auto;
+  margin: 10px 0 10px 0;
+  padding: 10px;
+  background: rgba(255,255,255,.2);
+}
+
+section#transparente ul{
+  list-style-type: none;
+  list-style-position: outside;
+}
+
+section#transparente li{
+  position: relative;
+}
+
+section#transparente label{
+  font-size: 14px;
+  display: inline-block;
+  margin: .5em 0 0 0;
+  color: #fff;
+  text-align: left;
+  width: 40%;
+}
+
+section#transparente input[type="checkbox"]{
+  vertical-align: middle;
+  cursor: pointer;
+  width: 16px;
+  height: 21px;
+}
+
+.btnConfigFP{
+  margin-top: 15px;
+  margin-left: 70%;
+}
+/***************************************************************************************************************************/
+
+/* Estilos del tipo de vista del detalle de egreso. */
+#vistaDetalleE {
+  text-align: left;
+  padding-left: 15%;
+}
+
+#vistaDetalleE form > ul > li > label {
+  color: #fff;
+}

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<cfdi:Comprobante version="3.2" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd" serie="TO" folio="6925" fecha="2016-07-25T12:37:53" sello="OilSXrfwleqjlhxihtGuR9Jr0U8a5qi8c+NF56gMpaYn+PalCu1kS9S+WwZj1q7X32y2+Ke8oOgD6Ggy1JWu9GHMFQeTZaaLxYNBwHppHml+P8277D1ObaYDZ8U9wTwCNq2NTZLDBlzDcsefa0+7ac7je8/+xny3AqzMlIdkYYk=" formaDePago="Pago en una sola exhibición" noCertificado="00001000000300042164" certificado="MIIEdTCCA12gAwIBAgIUMDAwMDEwMDAwMDAzMDAwNDIxNjQwDQYJKoZIhvcNAQEFBQAwggGKMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMTUwMwYJKoZIhvcNAQkCDCZSZXNwb25zYWJsZTogQ2xhdWRpYSBDb3ZhcnJ1YmlhcyBPY2hvYTAeFw0xMzA1MDcyMDEwMThaFw0xNzA1MDcyMDEwMThaMIHBMSEwHwYDVQQDExhDT01QVVJFUERJR0lUQUwgU0EgREUgQ1YxITAfBgNVBCkTGENPTVBVUkVQRElHSVRBTCBTQSBERSBDVjEhMB8GA1UEChMYQ09NUFVSRVBESUdJVEFMIFNBIERFIENWMSUwIwYDVQQtExxDT00xMzAzMTE3RDUgLyBDVVBWNTYwNzEwSDczMR4wHAYDVQQFExUgLyBDVVBWNTYwNzEwSE9DUlJDMDUxDzANBgNVBAsTBlVOSURBRDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzrCT0BQwtvYvEuCDmV6R/oOAfXW2nl8vH3xAVe/uePe11Jxpt3bOzPMKy+yKPsNzdX8aKQiU9u1ZV59HWZNLJrqrbvvByN7df1t8pG1YwxpTSg2Jh8pQKvgt492ETxn2zscW2p6Ar1oYLC6I69CmWMmajMBkWvMu771Gwx1aBE0CAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQEFBQADggEBALOcpn+kXg4XOqqcFIyt676JzZPwoUZ66npL2c1146jcTmItlXCTRvkQy2wfPOzr7CNb+eHqvxAszJD1p8nadRducs4BRRATKXXg1zwZTYb1ht16bkheavB5n57vTLjghKPssCbEkezQ5dCnvAzIu9C0xxkfTy5FWt3lkWyNBM5Wuv+3uFl7jf1DEXyya8g6Xdob2XsVy/BVsPH5NsthB15dzvCINHTS73ejuFDsk2+Fs1f49nHS7WOXLT86FGUVnHAjbiR0tDe1tR+Yc7KfDpR7q6CTkJUh8XkPRw9AJwOobyAm9jtdrXzgh2qOJU2LlaT3Y+thhrj+PcPdPrdApf8=" subTotal="706.900000" TipoCambio="1" Moneda="PESOS" total="820.000000" metodoDePago="01" tipoDeComprobante="ingreso" LugarExpedicion="Estado de México" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cfdi="http://www.sat.gob.mx/cfd/3">
+<cfdi:Emisor rfc="COM1303117D5" nombre="COMPUREPDIGITAL S.A. DE C.V.">
+<cfdi:DomicilioFiscal calle="Eje Central Lazaro Cardenas" noExterior="55" noInterior="204" colonia="Centro" localidad="Cuauhtemoc" municipio="Cuauhtemoc" estado="CDMX" pais="México" codigoPostal="06050" />
+<cfdi:ExpedidoEn calle="Av. Sebastian Lerdo de Tejada" noExterior="104" noInterior="252" colonia="Centro" localidad="Toluca" referencia="Loc. 252, 254 PB" estado="Estado de México" pais="México" codigoPostal="50000" />
+<cfdi:RegimenFiscal Regimen="Persona Moral" />
+<cfdi:RegimenFiscal Regimen="Regimen General de Ley" />
+</cfdi:Emisor>
+<cfdi:Receptor rfc="EERE780924Q89" nombre="EMMANUEL ESPEJEL RODRIGUEZ">
+<cfdi:Domicilio calle="MANUEL VILLAVERDE" noExterior="140" noInterior="B" colonia="C HANK GONZALEZ" municipio="TOLUCA" estado="MEXICO" pais="México" codigoPostal="50026" />
+</cfdi:Receptor>
+<cfdi:Conceptos>
+<cfdi:Concepto cantidad="1.000000" unidad="Pieza" noIdentificacion="DDSTOS1TBPC01" descripcion="DISCO DURO TOSHIBA 1TB NUEVO 3.5 SATA" valorUnitario="820.000000" importe="820.000000">
+<cfdi:Parte cantidad="1.000000" descripcion="NoSerie:46NJ4J0FSWK7;" />
+</cfdi:Concepto>
+</cfdi:Conceptos>
+<cfdi:Impuestos totalImpuestosTrasladados="113.100000">
+<cfdi:Traslados>
+<cfdi:Traslado impuesto="IVA" tasa="16.000000" importe="113.100000" />
+</cfdi:Traslados>
+</cfdi:Impuestos>
+<cfdi:Complemento>
+<tfd:TimbreFiscalDigital FechaTimbrado="2016-07-25T13:39:54" UUID="2E9FB048-E675-6242-5396-96B33BC3A89C" noCertificadoSAT="00001000000202771790" selloCFD="OilSXrfwleqjlhxihtGuR9Jr0U8a5qi8c+NF56gMpaYn+PalCu1kS9S+WwZj1q7X32y2+Ke8oOgD6Ggy1JWu9GHMFQeTZaaLxYNBwHppHml+P8277D1ObaYDZ8U9wTwCNq2NTZLDBlzDcsefa0+7ac7je8/+xny3AqzMlIdkYYk=" selloSAT="biEl77j2s6eTKiLxYyPIXVM9g2ihgv33VU/q09fQnwsJVZjA0ANl5BzCh9BRTceI8y8DvaOW/rg/yQFvMbLdpDoeFIcAI0pugisAqcsbiSWuuJY3Y+YxhDlP7TkG2Ap5QfZER/VjBGhe+X0onckpH6F6Ix+Bxe39OEHLG9gbCgM=" version="1.0" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/TimbreFiscalDigital/TimbreFiscalDigital.xsd" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" />
+</cfdi:Complemento>
+</cfdi:Comprobante>

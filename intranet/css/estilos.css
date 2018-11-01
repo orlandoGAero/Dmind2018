@@ -1,0 +1,259 @@
+﻿/*h5{color: #FFF; font-size: 12px; padding-right: 1em; text-align: right;}*/
+.dos{text-align: right;}
+.azul{color: #28C7E0;}
+
+.productos th{padding-right:.5em;text-align: right;}
+.contacto-cliente{margin: 0 auto;width: 500px;}
+
+/*Para menu en cuadricula*/
+
+/*Para el enlace de salir o cerrar sesion*/
+.sesion{background: #F5F5F5;width: 100%;}
+.sesiontext{background: #F5F5F5;margin: 0 auto;max-width: 960px;}
+.sesiontext p{text-align: right;}
+
+#nuevo {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+  display: none;
+  padding-bottom: 10px;
+  width: 480px;
+}
+/*Botones en Formularios*/
+.boton{background:#259CAF;border:0px;color:white;cursor: pointer;font-size:13px;margin: 1.2em 0 1em 0;padding: .5em 1.5em;}
+.boton:hover{background: #F5F5F5;color: #111;}
+.textwhite{color: #FFF;}
+.bgblack{background: #060606;}
+.titulo3 {color: #666666;font-size: 16px;text-align: right;}
+#div1{
+  background-color: #FFF;
+  height: 120px;
+  left: 50%;
+  margin-top: -60px;
+  margin-left: -50%;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  vertical-align: middle;
+  width: 100%;
+}
+/*Generales*/
+#ctabla{
+  text-align: center;
+  vertical-align: middle;
+  margin-top: -145px;
+  margin-left: -400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+/*Tabla en index*/
+#ctablainicio{
+  text-align: center;
+  vertical-align: middle;
+  margin-top: -145px;
+  margin-left: -400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 290px;
+}
+/*Tabla en acceso.php*/
+#ctablaacceso{
+  background: #16555B;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 3px 7px #111; -moz-box-shadow: 0 3px 7px #111; box-shadow: 0 3px 7px #111;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: -165px;
+  margin-left: -218px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 436px;
+  height: 300px;
+}
+/*Tabla en registro.php*/
+#ctablainicio input, #ctablaacceso input, #ctablaregistro input{ margin-bottom: 1em;}
+
+.menu-pro{width:960px;}
+.menu-pro ul{list-style: none;margin:0;padding:0;}
+.menu-pro ul li{margin:0;padding-bottom: 3px;}
+.menu-pro ul li a{background: #5B5B5B url(../images/arrow.png) no-repeat center right;color: #FFF;display:block;font-size: 14px;padding:5px 0 5px 1em;text-align: left;text-decoration: none;}
+/*.menu-pro ul li a:hover{background: #5DB1E0 url(../images/arrow2.png) no-repeat center right;}*/
+.menu-pro ul li ul{display:none; width:100%;}
+.menu-pro ul li ul a{background: #F5F5F5; color:#28C7E0; cursor: pointer; display:block;font-weight: normal;margin-top:2px;padding-left: 10px;text-decoration: none;}
+.menu-pro ul li ul a:hover{color: #111;}
+
+.nuevo-pro{background: #FFF;margin: 0;padding: 0;width: 100%;}
+.nuevo-pro th{padding-left: 4em;text-align: left;width: 250px;}
+.nuevo-pro input{text-align: left;}
+
+.detalle-pro{background: #FFF;margin: 0 auto;-webkit-box-shadow: 0 6px -6px #777; -moz-box-shadow: 0 6px -6px #777; box-shadow: 0 6px -6px #777;text-align: left; width: 100%;}
+.detalle-pro th{border-bottom: 1px dashed #CCC;padding: .4em 1em .3em 4em;width: 400px;}
+.detalle-pro td{border-bottom: 1px dashed #CCC;}
+
+.direccion{background: #F5F5F5;}
+
+.cursor-pointer{cursor: pointer;}
+
+/*Estilos etiquetas de formulario*/
+
+}
+select {
+  padding: initial;
+}
+input[type=checkbox], input[type=radio] {
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 3px 0;
+  margin-top: 0;
+  }
+input[type=button], input[type=reset], input[type=submit] {
+  width: auto;
+  height: auto;
+  margin-bottom: .5em;
+}
+select, input[type=file] {
+  height: 24px;
+  *height: auto;
+  line-height: 27px;
+  *margin-top: 4px;
+  /* For IE7, add top margin to align select with labels */
+}
+select[multiple] {
+  height: inherit;
+  background-color: #ffffff;
+}
+textarea {
+  height: auto;
+}
+.uneditable-input {
+  background-color: #ffffff;
+  display: block;
+  border-color: #eee;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  cursor: not-allowed;
+}
+:-moz-placeholder {
+  color: #bfbfbf;
+}
+::-webkit-input-placeholder {
+  color: #bfbfbf;
+}
+input, textarea {
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+input:focus, textarea:focus {
+  outline: 0;
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+input[type=file]:focus, input[type=checkbox]:focus, select:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  outline: 1px dotted #666;
+}
+
+/**************************************************** Estilos CSS Irving G.R. ****************************************************/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Capa o ventana sobrepuesta.
+ * =>Se utilizan en Inventario y Proveedores.
+ */
+
+/*href*/
+a.add_provee {
+  float: right;
+}
+
+.overlay {
+   display: none;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: #fdfdfd;
+   z-index:1001;
+   opacity:.75;
+   -moz-opacity: 0.75;
+   filter: alpha(opacity=75);
+}
+
+.modal {
+   display: none;
+   position: fixed;
+   /*position: absolute;*/
+   top: 18%;
+   left: 25%;
+   width: 50%;
+   height: 418px;
+   padding: 5px;
+   background: url(../images/bg.jpg);
+   z-index:1002;
+   overflow: auto;
+   border-radius: 10px;
+}
+
+input[type=text]:read-only{
+  background-color: #ECECEC;
+  cursor: not-allowed;
+
+}
+input[type=text]:-moz-read-only{
+  background-color: #ECECEC;
+  cursor: not-allowed;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Sin existencia.
+ * =>Se utilizan en Productos.
+ */
+
+.sinExistenciaProd{
+  color:#FF0000;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Búsqueda General.
+ * =>Se utilizan en Productos.
+ */
+
+.labelSearch{
+  color: #FFFFFF;
+}
+#nameSearch[type="text"]{
+  margin-left: 5px;
+  height: 10px;
+  padding: 5px 5px;
+}
+/****************************************************************************************************************************/
+.mensaje {
+    text-align: left;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: oblique;
+}
+
+.titulo {
+  color: #28C7E0;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}

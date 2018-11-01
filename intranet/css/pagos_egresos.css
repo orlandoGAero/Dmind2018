@@ -1,0 +1,45 @@
+.titulo {
+  color: #28C7E0;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+#pagos-saldos {
+	background: rgba(255, 255, 255, 0.3);
+	border-radius:5px;
+	width: 900px;
+	margin: 15px auto;
+	padding: 10px 20px;
+	text-align: center;
+}
+.tabla-pagos {
+	width: auto;
+	margin: 10px auto;
+	background: #fff;
+}
+.tabla-pagos th, td {
+	text-align: center;
+}
+.tabla-pagos td {
+	padding: 7px !important;
+}
+.sin-datos {
+	color: #fff;
+	text-align: center;
+	padding: 15px 0;
+	font-size: 13px;
+	font-weight: bolder;
+	font-style: italic;
+}
+.right {
+	text-align: right;
+}
+.totales {
+	text-align: right;
+	color: #fff;
+	padding-right: 30px;
+	font-size: 16px;
+}
+.totales span {
+	font-weight: bolder;
+}

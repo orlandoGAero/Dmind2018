@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd" version="3.2" serie="EA" folio="B1-19809104T1-4" fecha="2016-07-19T06:11:50" sello="k+LfORqA+W2lafzZMpOf+CgDs3MqHoQCQWVv4tXSLwL1D0rs5kf/To3fQOfaTV04moj58ZLjD/JUolD4tWCwxz3IX8Dp1UDj7bpYM++f1T3k7RLK56TB+PORCGnCG8UuEtqaXnKz2Zmje012++ur48spjw3k8sM6trurez0ow8M=" formaDePago="Pago en una sola exhibicion" noCertificado="00001000000304003052" certificado="MIIEYzCCA0ugAwIBAgIUMDAwMDEwMDAwMDAzMDQwMDMwNTIwDQYJKoZIhvcNAQEFBQAwggGKMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMTUwMwYJKoZIhvcNAQkCDCZSZXNwb25zYWJsZTogQ2xhdWRpYSBDb3ZhcnJ1YmlhcyBPY2hvYTAeFw0xNDA0MzAyMDU3MzVaFw0xODA0MzAyMDU3MzVaMIGvMRswGQYDVQQDExJUT1RBTCBCT1ggU0EgREUgQ1YxGzAZBgNVBCkTElRPVEFMIEJPWCBTQSBERSBDVjEbMBkGA1UEChMSVE9UQUwgQk9YIFNBIERFIENWMSUwIwYDVQQtExxUQk8xNDAzMDVESDAgLyBGT0dNNzEwNTA0RTE0MR4wHAYDVQQFExUgLyBGT0dNNzEwNTA0SERGTFJSMDkxDzANBgNVBAsTBk1BVFJJWjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAtlwORveSQSTdj5bkGSXlGB3cjFwmuwkFxBnWqk92wbDSb4n1iCwWwUF5oi7aB5fB6G6zTXUQLhqax4zCIe5xB7VS0xAqrEBIhK4hv2C+JXSx2znsxhpOahISo9h+feayCvX3tKMxTdzwrYF9mWWLcfMGMkTUt3szdmeXVUrfC4cCAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQEFBQADggEBAJxnstjqRR/0bgnqNPlsLlPlxekAc6vSXljW+BHLKBllY2E/1YGniqzZqN5KKbfYgKeCtECd6YrUq4WS2VuN05i1eXaY4/nzBufUoK5RjP6CnasoA5bf9RxvRZPOePL+SYkp7M6atqy3X7M6InaOmL7O+Q55GyUjMXKh5fU2RCYi7SLn9u1CIX4LuZPi95tJ68LV//nFK7HNY/yLOfC6+FJLHG92K+rVNm/Rc0HMBewE00pO4x5dl3ZTj9GPnHBy5TRSFYzGVn6PTjKki9NA3aEmOSqqHR8jWSF0PXXsfz1A78iYj23D/L6cdrNiJvL0k44zYnP5tCXtjRqjdAOYssE=" subTotal="79.65" Moneda="MXN" total="92.39" tipoDeComprobante="ingreso" metodoDePago="99" LugarExpedicion="México, DF">
+  <cfdi:Emisor rfc="TBO140305DH0" nombre="TOTAL BOX SA DE CV">
+    <cfdi:DomicilioFiscal calle="PERIFERICO SUR" noExterior="4119" noInterior="TORRE A PISO 7" colonia="FUENTES DEL PEDREGAL" localidad="TLALPAN" municipio="TLALPAN" estado="DISTRITO FEDERAL" pais="MEXICO" codigoPostal="14141" />
+    <cfdi:RegimenFiscal Regimen="Régimen General de Ley Personas Morales" />
+  </cfdi:Emisor>
+  <cfdi:Receptor rfc="EERE780924Q89" nombre="EMANUEL  ESPEJEL RODRIGUEZ">
+    <cfdi:Domicilio calle="MANUEL VILLAVERDE 140-B FRACC. CARLOS HANK GONZALEZ" localidad="TOLUCA DE LERDO" municipio="TOLUCA" estado="MEX" pais="MX" codigoPostal="50026" />
+  </cfdi:Receptor>
+  <cfdi:Conceptos>
+    <cfdi:Concepto cantidad="1" unidad="Servicio y/o renta" noIdentificacion="SERVICIO_RENTA" descripcion="Renta de Equipos" valorUnitario="79.65" importe="79.65" />
+  </cfdi:Conceptos>
+  <cfdi:Impuestos totalImpuestosTrasladados="12.74">
+    <cfdi:Traslados>
+      <cfdi:Traslado impuesto="IVA" tasa="16" importe="12.74" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital version="1.0" UUID="0A4F59B7-5C84-4244-8CF7-5C7781A3176F" FechaTimbrado="2016-07-19T06:13:51" selloCFD="k+LfORqA+W2lafzZMpOf+CgDs3MqHoQCQWVv4tXSLwL1D0rs5kf/To3fQOfaTV04moj58ZLjD/JUolD4tWCwxz3IX8Dp1UDj7bpYM++f1T3k7RLK56TB+PORCGnCG8UuEtqaXnKz2Zmje012++ur48spjw3k8sM6trurez0ow8M=" noCertificadoSAT="00001000000202865018" selloSAT="J5TV7O3ON5VYCMU1OLWlKVzkYAJ/CUV7VRTFh8+kqdUul2SEo3hmpkQi3NL14+A4JLSvU8SS6WVs6Qmn/XmwtbBeFwPLzeiGXrRiXNpntyPLBIHm27U/lHdNVqJKOYwlYrIy1wRAHPbqNky50phWkfuSbt3CoUZlEN7GKxURzuM=" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/TimbreFiscalDigital/TimbreFiscalDigital.xsd" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

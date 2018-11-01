@@ -1,0 +1,38 @@
+table{border-collapse: separate;font-size: 13px; margin: 0 0 30px 0;}
+.detalle{ width: auto; background-color: #fff; border-radius: 10px; margin: 10px auto; padding: 10px;}
+.detalle th{width: 25%;}
+.detalle th, .detalle td{border-bottom: 1px dashed #CCC; padding: 4px; text-align: left; word-break: break-all;}
+
+.datos{background: #FFF;border-collapse: collapse;text-align: left;width: 960px;}
+.datos img{text-align: center;}
+.datos tr:hover{background: #E4E4E4;}
+.datos th{ text-align:center; background: #16555B;color: #FFF; font-weight: bold; padding: .4em;}
+.datos td{border-bottom: 1px #CCC dashed; padding: .3em; }
+.datos a{color:#16555B;}
+.datos a:hover{color: #259CAF;cursor:pointer;text-decoration: none;}
+
+.datos-bd{background: #FFF; border-collapse: collapse; width: 500px; }
+.datos-bd tr:hover{background: #E4E4E4;}
+.datos-bd th{background: #16555B;color: #FFF; font-weight: bold; text-align: center; padding: .4em;}
+.datos-bd td{border-bottom: 1px #CCC dashed; padding: .3em; text-align: center; }
+.datos-bd a{color:#16555B;margin: .5em;}
+.datos-bd a:hover{color: #259CAF;}
+
+.titl{color: #fff;}
+.noregistrs{
+	color: white;
+	text-shadow:1px 1px 1px  red;
+}
+.nuevopro{
+	float: right;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: GreenYellow;
+	cursor: pointer;
+}
+
+button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}

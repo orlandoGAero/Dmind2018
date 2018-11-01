@@ -1,0 +1,429 @@
+*{
+	margin:0;
+	padding: 0;
+}
+
+body{
+	color: transparent;
+}
+
+/*Aside*/
+#izquierdo{
+	background: rgba(255,255,255,.9);
+	margin: 0 0 0 5px;
+	width: 26em;
+	border-radius: 8px;
+	display: inline-block;
+}
+
+#izquierdo h3{
+	background-color: rgba(70,130,180,1);
+	box-shadow: 0 0 2px 0 #000;
+	color: white;
+	height: 2em;
+	font-size: .8em;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+#derecho{
+	background: rgba(255,255,255,.9);
+	/*margin: -488px 0 0 90em;*/
+	width: 15em;
+	border-radius: 8px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#derecho h3{
+	background-color: rgba(70,130,180,1);
+	box-shadow: 0 0 2px 0 #000;
+	color: white;
+	height: 2em;
+	font-size: .8em;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+article{
+	color: #000;
+	background: rgba(255,255,255,.9);
+	/*margin: 0 0 0 138px;*/
+	text-align: center;
+	width: 62em;
+	box-shadow: -1px -1px 2px 0px #000;
+	border-radius: 8px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.icono{
+	margin-left: 15px;
+	margin-top: 15px;
+	float: left;
+	width: 28em;
+	height: 7em;
+}
+
+#datosCot{
+	float: right;
+	margin: 25px 18px;
+	padding: 2px;
+	width: 200px;
+	font-weight: bold;
+	box-shadow: 1px 1px 1px 1px #000;
+}
+
+.datosclie{
+	margin-top: .5em;
+	margin-left: 5em;
+	width: 25em;
+	height: 15em;
+	border-radius: 5px;
+	border: .2em solid rgba(70,130,180,1);
+}
+
+.datosclie h3{
+	background-color: rgba(70,130,180,1);
+	box-shadow: -1px -2px 1px #000;
+	color: white;
+	margin-top: -1em;
+	margin-left: 5em;
+	width: 70%;
+	height: 2em;
+	font-size: .8em;
+}
+
+.datosclie ul {
+	padding: .3em .5em;
+}
+
+.datosclie li{
+	font-size: .9em;
+	list-style: none;
+	text-align: justify;
+}
+
+.datoscotizador{
+	margin-top: .5em;
+	margin-left: 1em;
+	width: 25em;
+	height: 15em;
+	border-radius: 5px;
+	border: .2em solid rgba(70,130,180,1);
+}
+
+.datoscotizador h3{
+	background-color: rgba(70,130,180,1);
+	box-shadow: -1px -2px 1px #000;
+	color: white;
+	margin-top: -1em;
+	margin-left: 5em;
+	width: 70%;
+	height: 2em;
+	font-size: .8em;
+}
+
+.datoscotizador ul {
+	padding: .6em .5em;
+}
+
+.datoscotizador li{
+	font-size: .9em;
+	list-style: none;
+	text-align: justify;
+}
+
+section{
+	padding: 1em 3em 2em 6em;
+	width: 80%;
+}
+section table{
+	width: 50em;
+}
+section table td img{
+	cursor: pointer;
+	margin-top: -.1em;
+	width: 1.2em;
+	height: 1.2em;
+}
+section table th{
+	background-color: rgba(70,130,180,.96);
+	border-collapse: 0px;
+	box-shadow: 2px 1px 1px #0E4A7C;
+	padding: .4em;
+}
+section table td{
+	padding-top: .2em;
+	text-align: center;
+	border-right: 2px;
+	box-shadow: 0px 1px 2px #0E4A7C;
+}
+
+table#operaciones {
+    margin-top: 0.1px;
+    border-collapse: separate;
+    border-spacing: 0px;
+}
+
+#operaciones tr td{
+	box-shadow: none;
+}
+
+.izqOperac {
+    width: 50%;
+	font-weight: normal;
+	font-size: 11.5px;
+	font-family: "Times New Roman", Times, serif;
+    text-align: left;
+    padding: 3px 0px 1px 0px;
+}
+
+.azulOperac {
+    background: #4682B4;
+    font-weight: bold; 
+    font-size: 11px;
+    text-align: right;
+    padding: 1px 0px;
+    width: 2%;
+}
+
+.costos {
+    background: #4682B4;
+    font-weight: normal; 
+    font-size: 11px;
+    text-align: right;
+    padding: 1px 5px 1px 0px;
+    width: 6%;
+}
+
+.radiusBottomIzq{
+    border-bottom-left-radius: 5px;
+}
+
+.radiusBottomDer {
+    border-bottom-right-radius: 5px;   
+}
+
+#masDatosVenta tr td {
+	box-shadow: none;
+}
+
+.ancho15Px{
+	width: 15px;
+}
+
+.btnImprimirVenta{
+  cursor: pointer;
+  display: inline-block;
+  background-color: #e6e6e6;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -moz-linear-gradient(top, #ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -ms-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -o-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  margin-top: 10px;
+  background-position: center;
+  width: 150px;
+  height: 40px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  color: #333;
+  font-size: 14px;
+  line-height: normal;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-transition: 0.1s linear all;
+  -moz-transition: 0.1s linear all;
+  -ms-transition: 0.1s linear all;
+  -o-transition: 0.1s linear all;
+  transition: 0.1s linear all;
+}
+
+.imgImprimir{
+	vertical-align: middle;
+}
+
+.btnCancelar{
+  cursor: pointer;
+  display: inline-block;
+  background-color: #E00108;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#740900), color-stop(25%, #740900), to(#E00108));
+  background-image: -webkit-linear-gradient(#740900, #740900 25%, #E00108);
+  background-image: -moz-linear-gradient(top, #740900, #740900 25%, #E00108);
+  background-image: -ms-linear-gradient(#740900, #740900 25%, #E00108);
+  background-image: -o-linear-gradient(#740900, #740900 25%, #E00108);
+  background-image: linear-gradient(#740900, #740900 25%, #E00108);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#740900', endColorstr='#E00108', GradientType=0);
+  padding: 7px 14px 6px;
+  margin-top: -8px;
+  margin-bottom: 10px;
+  width: 150px;
+  height: 40px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  color: #FFF;
+  font-size: 14px;
+  line-height: normal;
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-transition: 0.1s linear all;
+  -moz-transition: 0.1s linear all;
+  -ms-transition: 0.1s linear all;
+  -o-transition: 0.1s linear all;
+  transition: 0.1s linear all;
+}
+
+.btnImprimirVenta:hover, .btnCancelar:hover {
+  background-position: 0 -15px;
+  text-decoration: none;
+}
+
+.btnImprimirVenta:focus {
+  outline: 1px dotted #666;
+}
+
+.btnImprimirVenta[disabled] {
+  cursor: default;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  filter: alpha(opacity=65);
+  -khtml-opacity: 0.65;
+  -moz-opacity: 0.65;
+  opacity: 0.65;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  margin-top: 10px;
+}
+
+form input[type="submit"]{
+	width: 150px;
+	height: 40px;
+	font-weight: bold;
+	text-align: center;
+}
+
+form button[type="button"]{
+	width: 150px;
+	height: 40px;
+	font-weight: bold;
+	text-align: center;
+}
+
+form button[type="button"].btnReset {
+	width: 80px;
+	height: 33px;
+}
+
+label {
+	font-weight: bold;
+}
+input, select,input[type="number"]{
+	border-radius: 5px;
+	box-shadow: 1px 1px 1px #000;
+	height: 23px;
+	margin: 5px auto;
+	width: 180px;
+	text-align: justify;
+	padding: 2px;
+}
+
+/*.moneda{
+	background: rgba(210,115,30,.5);
+	font-weight: bold;
+	color: #000;
+	position: absolute;
+	margin-top: 40px;
+	margin-left: -230px;
+
+}*/
+
+#borrtodo{
+	background: url(../images/delreg.png) rgba(86,200,255,.7);
+	background-size: 30px;
+	background-repeat: no-repeat;
+	background-position: left;
+	border:1px solid #000;
+	border-radius: 5px;
+	margin-top: 10px;
+	width: 150px;
+	height: 45px;
+	padding-left: 20px;
+	cursor: pointer;
+}
+
+.divstatus{
+	display:inline-block;
+	position:relative;
+	padding:2px;
+	margin-left:618px;
+	margin-bottom: 10px;
+}
+
+#statusRegistrarVenta{
+	text-align: right;
+	margin:0 18px 10px 330px;
+}
+
+.overlay {
+	 display: none;
+	 position: fixed;
+	 top: 0;
+	 left: 0;
+	 width: 100%;
+	 height: 100%;
+	 background: #fdfdfd;
+	 z-index:1001;
+	 opacity:.75;
+	 -moz-opacity: 0.75;
+	 filter: alpha(opacity=75);
+}
+ .modal {
+	 display: none;
+	 position: fixed;
+	 top: 25%;
+	 left: 25%;
+	 width: auto;
+	 height: auto;
+	 padding: 16px;
+	 background: #fff;
+	 z-index:1002;
+	 overflow: auto;
+}
+
+.btn-del:disabled {
+	background: #dad8d8;
+	color: #b3b3b3;
+	cursor: auto;
+}
+
+.btn-del {
+	background-color: #E00108;
+	color: #fff;
+	cursor: pointer;
+}
+
+.impuestos{
+	width:60%;
+	height:20px;
+	vertical-align:middle;
+	padding: 0;
+	margin-right:1px;
+	font-size:11px;
+}

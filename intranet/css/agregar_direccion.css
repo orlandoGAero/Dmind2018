@@ -1,0 +1,9 @@
+.form-dialog {
+	text-align: center;
+	padding-top: 8px;
+	list-style: none;
+}
+
+.form-dialog label.cp {
+	color: #333;
+}

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="A" Folio="19845" Fecha="2018-02-09T13:53:58" Sello="SGu0D1T0aP5ZyJSAad0gSM6V3nMKGQRDyBpI+Mf7juZkKZAPNHa/8nHaOvssnwytrpOFXag6J9cX4Ij7TmPsjQP1nVZZZTMN6I4/RBSuqCW8UUMrH3G16l7Rd/VEyChwKU8UhkrZwGBev8oCwmc8ui75U4T/Y9OGioDQSjWYL/6Uq6wBoePQXd6915em2iJQBvNNDzSGJLd236lHR6RvoOHW2axv/btgvmIlUK3FpOH48R+fQXSrFAECNUdPiFJibHt39WD4OR2ODd9pfHIYX9jmuVej0peGBEn3FeVHK5He3kcd7eeAvt+FRAV0K3kHsAn8jANAWiGLRw3zrqWtnQ==" FormaPago="04" NoCertificado="00001000000407719831" Certificado="MIIGOTCCBCGgAwIBAgIUMDAwMDEwMDAwMDA0MDc3MTk4MzEwDQYJKoZIhvcNAQEL&#xA;BQAwggGyMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJh&#xA;Y2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3Ry&#xA;YWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBT&#xA;ZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29k&#xA;c0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVy&#xA;cmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0&#xA;cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FU&#xA;OTcwNzAxTk4zMV0wWwYJKoZIhvcNAQkCDE5SZXNwb25zYWJsZTogQWRtaW5pc3Ry&#xA;YWNpw7NuIENlbnRyYWwgZGUgU2VydmljaW9zIFRyaWJ1dGFyaW9zIGFsIENvbnRy&#xA;aWJ1eWVudGUwHhcNMTcxMDA1MTcxNDA2WhcNMjExMDA1MTcxNDA2WjCB2TEpMCcG&#xA;A1UEAxMgTEFCT1JBVE9SSU9TIEFSUVVJTUVERVMgU0EgREUgQ1YxKTAnBgNVBCkT&#xA;IExBQk9SQVRPUklPUyBBUlFVSU1FREVTIFNBIERFIENWMSkwJwYDVQQKEyBMQUJP&#xA;UkFUT1JJT1MgQVJRVUlNRURFUyBTQSBERSBDVjElMCMGA1UELRMcTEFSODgwNzIz&#xA;MlQ4IC8gUlVUUjU4MDYxMklCNDEeMBwGA1UEBRMVIC8gUlVUUjU4MDYxMkhNQ1pQ&#xA;RjAwMQ8wDQYDVQQLEwZNQVRSSVowggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK&#xA;AoIBAQCOpztEbfJsUVl4WZJBuAFSTCBsm8MK8ySOVKOQfcsZ6WJupenEVuw/Ni0y&#xA;snF+rFFc2+S1+MRzfaWPQHfBf4xThkv2LfiE2n6HAC4UPZemW1YrtdiuLj581yhz&#xA;Yx4OD48j5scTdz/L/QpLtSyj9bUZ5i3F7okas2op0sKa3wvRl6ClH+Var5NCHSG7&#xA;JugWwuAlsXMuz49AZOBU7S4LKFWdH+z3/RuSSVtEWKnoFIX/DuaoqHvl6Wzop1y0&#xA;ifzqH9cojgZ3EtXghFXAJwOHPZjwGdaAcWrjobHlSONRQRWupZdqrj6PiYHBDAsc&#xA;aapdnGzbD/eKJoGjxkaQUW+VhW2DAgMBAAGjHTAbMAwGA1UdEwEB/wQCMAAwCwYD&#xA;VR0PBAQDAgbAMA0GCSqGSIb3DQEBCwUAA4ICAQAgprP7lo1mY/MIEkTUCwzcF7wj&#xA;jMqlEyx91mb+CAQcjmIzUk7Ip9XRtq3TKPTI7flT+By+0vtJmnEmSsX5C9RFQEc7&#xA;Ow2XUJi7oGoUgQD6WXOfbkFQUJZ1+KZOv5WVHb4mWFTwKbNj3PmQoXMlGVAkmwpf&#xA;QsHaBZKvQx/COT1akpPLSDIkFiEJIBKmH+bkBt7nup+XbB4a4V3Mhig8e93ka4/R&#xA;BxeJ1sasDeGs8kK8u1QopMn2Z/sYExG8XFD37ZwJQjMhjKoaz7D4pyYxkJGiOPNq&#xA;dzkVPN6LzXUSi++SsQNS2zPzj3UOWJNErkC0mZLJxWYlsgFrz4XeVDJlLbDYR61v&#xA;07czdiKeaueqi8u178h6x2YJvjAaTS2WPKaPinuQ0YfZlBTPPZd+j4pMDV9cIfXG&#xA;i+J3syKq0qI7y22cfCZ7T3O5oDBJp4SoD/igw0sSitCZYOr4R/zk0JpXtCi5qfhD&#xA;gASXLKyXst4xs/37oaV6TAg+71hh+SbzzxHoT1uegmMM/264plaZBNPuO8kLa/yW&#xA;cHw2u1Gpbe7TCmq9z7IWHRytTO6w+7h4AcHEPKyrMu9SPrtgUGvn1ao3s3ITY5W4&#xA;OQlIoRW2A2kXw9VVtF4AAyAaqOvWdh2EuVzz3NWYvcPi+MQdAVak0SJje2RtuR6Q&#xA;QWoSja2+X7kLm43pNg==&#xA;" SubTotal="1578.88" Moneda="MXN" Total="1831.5" TipoDeComprobante="I" MetodoPago="PPD" LugarExpedicion="50150">
+	<cfdi:Emisor Rfc="LAR8807232T8" Nombre="LABORATORIOS ARQUIMEDES SA DE CV" RegimenFiscal="601" />
+	<cfdi:Receptor Rfc="EERE780924Q89" Nombre="EMMANUEL ESPEJEL RODRÍGUEZ" UsoCFDI="D01" />
+	<cfdi:Conceptos>
+					<cfdi:Concepto ClaveProdServ="85121801" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="Biometría hemática" ValorUnitario="135.78" Importe="135.78"><cfdi:Impuestos>
+			<cfdi:Traslados>
+				<cfdi:Traslado Base="135.78" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="21.7248" />
+		</cfdi:Traslados>
+	</cfdi:Impuestos></cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="85121801" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="Química sanguínea 9" ValorUnitario="372.41" Importe="372.41"><cfdi:Impuestos>
+			<cfdi:Traslados>
+				<cfdi:Traslado Base="372.41" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="59.5856" />
+		</cfdi:Traslados>
+	</cfdi:Impuestos></cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="85121805" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="Examen general de orina" ValorUnitario="100.86" Importe="100.86"><cfdi:Impuestos>
+			<cfdi:Traslados>
+				<cfdi:Traslado Base="100.86" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="16.1376" />
+		</cfdi:Traslados>
+	</cfdi:Impuestos></cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="85121808" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="Senos paranasales" ValorUnitario="698.28" Importe="698.28"><cfdi:Impuestos>
+			<cfdi:Traslados>
+				<cfdi:Traslado Base="698.28" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="111.7248" />
+		</cfdi:Traslados>
+	</cfdi:Impuestos></cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="85121808" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="Cuello lateral" ValorUnitario="271.55" Importe="271.55"><cfdi:Impuestos>
+			<cfdi:Traslados>
+				<cfdi:Traslado Base="271.55" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="43.4480" />
+		</cfdi:Traslados>
+	</cfdi:Impuestos></cfdi:Concepto>
+		</cfdi:Conceptos>
+	<cfdi:Impuestos TotalImpuestosTrasladados="252.62">
+		<cfdi:Traslados>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="252.62" />
+		</cfdi:Traslados>
+	</cfdi:Impuestos>
+	<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="E9842207-E135-4810-90CF-F342ACC51B2D" FechaTimbrado="2018-02-09T13:54:17" SelloCFD="SGu0D1T0aP5ZyJSAad0gSM6V3nMKGQRDyBpI+Mf7juZkKZAPNHa/8nHaOvssnwytrpOFXag6J9cX4Ij7TmPsjQP1nVZZZTMN6I4/RBSuqCW8UUMrH3G16l7Rd/VEyChwKU8UhkrZwGBev8oCwmc8ui75U4T/Y9OGioDQSjWYL/6Uq6wBoePQXd6915em2iJQBvNNDzSGJLd236lHR6RvoOHW2axv/btgvmIlUK3FpOH48R+fQXSrFAECNUdPiFJibHt39WD4OR2ODd9pfHIYX9jmuVej0peGBEn3FeVHK5He3kcd7eeAvt+FRAV0K3kHsAn8jANAWiGLRw3zrqWtnQ==" NoCertificadoSAT="00001000000404477432" SelloSAT="OTsgKpMT9pEc9q3Z/dte4NPqj++IEPeMEtrTw5XYSiFcPxEX4Z2RKgcVQShGnMsyMcdkhk5x++xHU6m/YL8VDdvKBRayoSBIaH2CdMgRQyTLl+emTrf7iWBJ/kim+YHr0l34Ux4VRg9ztgG3mlb921WdClGv1tP8QfVESE5MI12zMUHF6KjhyyYGgmhHTOo8u8ZCQIrxLoCSN2aPO8vStDl75UD4OuirqXW8EOJB/doeccToAWqrNc2vc28dHEdgCDtrkWRbgRzVS2re6M1l8/Wcmfe1sJ3egfPCRR32ZKmN6Z3HkJpD4XwQJ+12hrRH3r6vvkBrW5HlNk+TW/OmJw==" RfcProvCertif="EME000602QR9" /></cfdi:Complemento></cfdi:Comprobante>

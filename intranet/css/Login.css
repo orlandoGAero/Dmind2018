@@ -1,0 +1,100 @@
+*{ margin:0; padding: 0;
+  }*
+#grande{
+  background: url(../images/bg.jpg);
+  background-size: 100% 100%;
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  display:none;
+  z-index:999;
+
+}
+#contenido{
+ position:absolute;
+ top:25%;
+ left:30%;
+ width:auto;
+ height:55%;;
+}
+form  img{
+  width: 60%;
+}
+form{
+  box-shadow: 0px -1px 0px #fff;
+  background: #16555B;
+  border-radius: 10px;
+  height:20em;
+  width:30em;
+  text-align: center;
+}
+label{
+  font-weight: bold;
+}
+input[type="password"],input[type="text"]{
+  border-radius:5px;
+  border-color: #eee;
+  width: 45%;
+  height: 2.5em;
+  margin:auto;
+  text-align: justify;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.025);
+}
+.secion{
+  border:1px solid #fff;
+  color: white;
+  border-radius: 4px;
+  background: rgba(16,151,151,.7);
+  box-shadow: 1px 2px 1px #000;
+  text-shadow:1px 1px 1px #000.
+              -1.5px -1 1px #000;
+  font-weight: bold;
+  width: 8em;
+  height: 2.7em;
+
+}
+.secion:hover{
+  box-shadow: inset .5px 0px 0px .5px #000;
+  color: #bfffff;
+  cursor: pointer;
+}
+.secion:active{
+  background: rgba(16,151,151,.7);
+  box-shadow: outset .5px 0px 0px .5px #fff;
+  color: #000;
+  text-shadow:1px 1px 1px #ffd;
+  cursor: pointer;
+}
+.campos{
+  background-color: #F1EFDC;
+}
+.oculto{
+  position: relative;
+  display: none;
+}
+.errors{
+  margin:auto;
+  margin-top: 3px;
+  border-radius: 10px;
+  width: 70%;
+  height: 23px;
+  border:1px;
+  border-style: solid;
+  background-color: orange;
+}
+input[name="usuario"] {
+    background-image:url(../imagenes/user.png);
+    background-repeat: no-repeat;
+    background-position:left;
+    padding-left:15px;
+}
+input[name="contrasena"] {
+    background-image:url(../imagenes/pass1.png);
+    background-repeat: no-repeat;
+    background-position:left;
+    padding-left:15px;
+}

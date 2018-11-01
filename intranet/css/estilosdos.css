@@ -1,0 +1,188 @@
+﻿/**{border: 0;margin: 0;padding: 0;}
+body{
+	background: url(../img/bg.jpg) fixed; color:#444;
+	font-family: Verdana, 'Geneva', Arial, sans-serif;
+	font-size: 14px;
+	margin: 0px
+}*/
+h2{
+	color: #FFF;
+	font-family: Impact;
+	font-size: 36px;
+	font-style: normal;
+	text-align: center;
+
+}
+/*Botones*/
+.boton{
+      font-size:14px;
+      font-family:calibri;
+      /*font-weight:bold;*/
+      color:white;
+      cursor: pointer;
+      background:#259CAF;
+      border:0px;
+      margin: 1.2em 0 1em 0;
+      /*width:160px;
+      height:30px;*/
+    }
+.boton:hover{
+	background: #F5F5F5;
+	color: #111;
+}
+/*
+#ctabla table #ctexto td {
+	color: #FFF;
+}
+*/
+.textwhite{
+	color: #FFF;
+}
+.bgblack{
+	background: #060606;
+}
+.titulo3 {
+	color: #666666;
+	font-size: 16px;
+	text-align: right;
+}
+#div1{
+	font-family: calibri;
+	background-color: #ffffff;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: -60px;
+	margin-left: -50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	height: 120px;
+}
+table{
+	border-collapse: collapse;
+	font-size: 13px;
+}
+/*Generales*/
+#ctabla{
+  text-align: center;
+  vertical-align: middle;
+  margin-top: -145px;
+  margin-left: -400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+ 
+}
+/*Tabla en index*/
+#ctablainicio{
+  text-align: center;
+  vertical-align: middle;
+  margin-top: -145px;
+  margin-left: -400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 290px;
+}
+/*Tabla en acceso.php*/
+#ctablaacceso{
+	background: #16555B;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 3px 7px #111; -moz-box-shadow: 0 3px 7px #111; box-shadow: 0 3px 7px #111;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: -165px;
+	margin-left: -218px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 436px;
+	height: 300px;
+}
+/*Tabla en registro.php*/
+a:link, a:visited{
+  color: #666;
+  text-decoration: none
+}
+a:hover{
+  color: #259CAF;
+
+}
+
+
+/*Estilos etiquetas de formulario*/
+
+/*form .input {
+  margin-left: 150px;
+}
+input[type=checkbox], input[type=radio] {
+  cursor: pointer;
+}*/
+input,
+textarea,
+select,
+.uneditable-input {
+	border: 1px solid #ccc;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #808080;
+	display: inline-block;
+	line-height: 18px;
+	margin-bottom: 1em;
+	padding: 4px;
+	width: 220px;
+}/*
+select {
+  padding: initial;
+}
+input[type=checkbox], input[type=radio] {
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 3px 0;
+  *margin-top: 0;
+  /* IE6-7 
+
+  line-height: normal;
+  border: none;
+}
+input[type=file] {
+  background-color: #ffffff;
+  padding: initial;
+  border: initial;
+  line-height: initial;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}*/
+select, input[type=file] {
+  height: 27px;
+  *height: auto;
+  line-height: 27px;
+  *margin-top: 4px;
+}
+select[multiple] {
+  height: inherit;
+  background-color: #ffffff;
+}
+textarea {
+  height: auto;
+}
+.uneditable-input {
+  background-color: #ffffff;
+  display: block;
+  border-color: #eee;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  cursor: not-allowed;
+}
+:-moz-placeholder {
+  color: #bfbfbf;
+}
+::-webkit-input-placeholder {
+  color: #bfbfbf;
+}

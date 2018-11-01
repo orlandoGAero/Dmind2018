@@ -1,0 +1,211 @@
+.camposclie{
+	background-color: rgba(0,0,0,.3);
+	box-shadow: 1px 1px 2px orange;
+	width: 600px;
+	height: 30px;
+	padding: 10px;
+}
+
+.agregaclie{
+	margin-left: 30px;
+	width: 100px;
+	height: 20px;
+	background: orange;
+	border-radius: 5px;
+	padding: 4px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.as{
+	float: left;
+}
+th{
+	color: red;
+	text-align: justify;
+}
+td{
+	font-weight: bold;
+	padding-left: 15px;
+	width: auto;
+}
+.pri{
+	width: 80px;
+}
+h2{
+	text-align: center;
+}
+h3{
+	color: blue;
+}
+section {
+	background-color: rgba(119,136,153,.6);
+}
+b{
+	float: right;
+}
+form {
+	background-color: rgba(119,136,153,.6);
+	border-radius: 10px;
+	box-shadow: 0px 0px 0px 2px #000;
+	text-align: center;
+	margin-top: 10px;
+	margin-left: 2%;
+	width: 20%;
+	height: 500px;
+}
+form #agregaproducto {
+	width: 30%;
+}
+label {
+	font-weight: bold;
+}
+input, select {
+	border-radius: 5px;
+	box-shadow: 1px 1px 1px #000;
+	height: 23px;
+	margin: 5px auto;
+	width: 180px;
+	padding: 2px;
+}
+input[type="submit"]{
+	background-color: Greenyellow;
+	border-style: solid;
+	box-shadow: 1px -1px 1px 1px #000;
+	font-weight: bold;
+	font-size: 1em;
+	width: 80%;
+}
+caption{
+	font-style: !important;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+#datoscliente{
+	background-color: rgba(217,255,0,.4);
+	border-radius: 10px;
+	width: 90%;
+	height: 110px;
+}
+#datoscliente #numcot{
+	background: transparent;
+	border:none;
+	font-weight: bold;
+	float: left;
+	text-align: center;
+	width: 50px;
+	height: 20px;
+}
+#datoscliente input {
+	border-radius: 5px;
+	box-shadow: 1px 1px 1px #000;
+	height: 24px;
+	width: 80px;
+	
+}
+#adprod{
+	width: 90%;
+}
+#datoscliente #fecha{
+	font-weight: bold;
+	width: 30%;
+	background: transparent;
+}
+#datosproducto{
+	background-color: rgba(123,204,0,.5);
+	padding:10px; 
+	border-radius: 10px;
+	margin-top: 6px;
+	float: left;
+	width: 210px;
+	height: auto;	
+}
+#agregar{
+	background: rgba(255,255,255,.7);
+	border:1px;
+	border-style: solid;
+	border-radius: 5px;
+	font-weight: bold;
+	margin: auto;
+	padding-top: 7px;
+	width: 150px;
+	height: 30px;
+}
+#agregar:hover{
+	background: rgba(0,0,0,.8);
+	color: #fff;
+	cursor: pointer;
+	text-shadow:.5px .5px .5px Greenyellow;
+}
+.precio{
+	border: none;
+	width: 100px;
+}
+.importe{
+	text-align: center;
+	background: transparent;
+	border: none;
+}
+.total{
+	background: url(../Imagenes/nav.png);
+	padding-left: 20px;
+}
+
+#listap{
+	background-color: rgba(255,255,255,.6);
+	margin: auto;
+	width: 55%;
+	height: auto;
+
+}
+#listap table tr li{
+	font-weight: bold;
+	position: absolute;
+}
+#cuenta{
+	background-color: rgba(135,206,250,.7);
+	border-radius: 10px;
+	margin-top: 55px;
+	float: right;
+	position: relative;
+	padding: 5px;
+	width: 130px;
+}
+#cuenta input[type="number"]{
+	width: 100px;
+}
+
+.error{
+	font-size: 16px;
+    background-color: #F82A2A;
+    border-radius: 4px 4px 4px 4px;
+    color: white;
+    font-weight: bold;
+    margin-left: 16px;
+    margin-top: 6px;
+    padding: 6px 12px;
+    position: absolute;
+}
+.error:after{
+    border-color: transparent #BC1010 transparent transparent;
+    border-style: solid;
+    border-width: 6px 8px;
+    content: "";
+    display: block;
+    height: 0;
+    left: -16px;
+    position: absolute;
+    top: 8px;
+    width: 0;
+}
+#opac{
+  background: rgba(0,0,0,.9);
+  background-size: 100% 100%;
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  display: none;
+  height:100%;
+  z-index:999;
+
+}

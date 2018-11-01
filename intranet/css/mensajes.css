@@ -1,0 +1,202 @@
+.error h3{
+	/*top -- bottom -- left -- right*/
+	padding: 10px 8px;
+	letter-spacing: 1.1px;
+	border-radius: 6px;
+	background: rgba(223,0,0,0.9);
+	position: absolute;
+	top: 40%;
+	left: 25%;
+	width: 50%;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: medium;
+	color: #000;
+}
+
+.position-error h3 {
+	top: 40%;
+    left: 26%;
+    width: 46.8%;
+}
+
+.errorAddInv h3{
+	/*top -- left --bottom -- right*/
+	padding: 10px 8px 10px 8px;
+	letter-spacing: 1.3px;
+	border-radius: 6px;
+	background: rgba(223,0,0,0.9);
+	position: absolute;
+	top: 128%;
+	left: 10%;
+	width: auto;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: small;
+	color: #000;
+}
+
+.errorClonInv h3{
+	/*top -- left --bottom -- right*/
+	padding: 10px 8px 10px 8px;
+	letter-spacing: 1.3px;
+	border-radius: 6px;
+	background: rgba(223,0,0,0.9);
+	position: absolute;
+	top: 145.2%;
+	left: 33.2%;
+	width: auto;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: small;
+	color: #000;
+}
+
+.caption h3{
+	/*top -- left --bottom -- right*/
+	padding: 10px 8px 10px 8px;
+	letter-spacing: 1.3px;
+	border-radius: 6px;
+	background: rgba(245,245,3,0.9);
+	position: absolute;
+	top:50%;
+	left: 30%;
+	width: 40%;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: large;
+	color: #000;
+}
+
+.caption2 h3{
+	/*top -- left --bottom -- right*/
+	padding: 10px 8px 10px 8px;
+	letter-spacing: 1.3px;
+	border-radius: 6px;
+	background: rgba(245,245,3,0.9);
+	position: absolute;
+	top:140%;
+	left: 30%;
+	width: 40%;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: large;
+	color: #000;
+}
+
+.success h3 {
+	/*top -- bottom -- left -- right*/
+	padding: 10px 8px;
+	letter-spacing: 1.1px;
+	border-radius: 6px;
+	background: rgba(14,222,23,0.9);
+	position: absolute;
+	top: 40%;
+	left: 25%;
+	width: 50%;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: medium;
+	color: #000;
+}
+
+.errorConfig h3{
+	/*top-bottom -- left-right*/
+	padding: 4px 8px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	background: rgba(223,0,0,0.9);
+	position: relative;
+	width: auto;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: 10.5px;
+}
+.captionConfig h3{
+	/*top-bottom -- left-right*/
+	padding: 4px 8px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	background: rgba(245,245,3,0.9);
+	position: relative;
+	width: auto;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: 10.5px;
+	color: #000;
+}
+.errorDeleteConfig h3{
+	/*top-bottom -- left-right*/
+	padding: 4px 8px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	background: rgba(223,0,0,0.9);
+	position: absolute;
+	top:50%;
+	left: 30%;
+	width: 40%;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: 13px;
+	color: #000;
+}
+.successDeleteConfig h3{
+	/*top-bottom -- left-right*/
+	padding: 4px 8px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	background: rgba(14,222,23,0.9);
+	position: absolute;
+	top:50%;
+	left: 30%;
+	width: 40%;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: 13px;
+	color: #000;
+}
+.successConfig h3{
+	/*top-bottom -- left-right*/
+	padding: 4px 8px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	background: rgba(14,222,23,0.9);
+	position: absolute;
+	top:50%;
+	left: 30%;
+	width: 40%;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: 13px;
+	color: #000;
+}
+.success2 h3{
+	/*top-bottom -- left-right*/
+	padding: 4px 8px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	background: rgba(14,222,23,0.9);
+	position: absolute;
+	top:40%;
+	left: 38%;
+	width: 25%;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: 13px;
+	color: #000;
+}
+.error2 h3{
+	/*top-bottom -- left-right*/
+	padding: 4px 8px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	background: rgba(223,0,0,0.9);
+	position: absolute;
+	top:40%;
+	left: 38%;
+	width: 25%;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	font-size: 13px;
+	color: #000;
+}

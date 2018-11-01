@@ -1,0 +1,107 @@
+/*ESTILOS de Detalle EGRESOS e INGRESOS.*/
+#comprobanteFiscal {
+	margin-bottom: 15px;
+}
+.datos-comprobante {
+	display:inline-table;
+	position:relative;
+	padding:2px;
+	margin-left:372px;
+	margin-bottom: 10px;
+	font-size: 9px;
+}
+.datos-comprobante p {
+	text-align: right;
+}
+.datos-comprobante p span {
+	font-weight: bold;
+}
+.razonSocial {
+	padding-bottom: 6px;
+}
+
+.datosReceptor{
+	margin-top: .5em;
+	margin-left: 3em;
+	width: 25em;
+	height: 14em;
+	border-radius: 5px;
+	border: .2em solid rgba(70,130,180,1);
+}
+
+.datosReceptor h3{
+	background-color: rgba(70,130,180,1);
+	box-shadow: -1px -2px 1px #000;
+	color: white;
+	margin-top: -1em;
+	margin-left: 5em;
+	width: 70%;
+	height: 2em;
+	font-size: .8em;
+}
+
+.datosReceptor ul {
+	padding: .3em .5em;
+}
+
+.datosReceptor li{
+	font-size: .9em;
+	list-style: none;
+	text-align: justify;
+}
+
+.datosEmisor{
+	margin-top: .5em;
+	margin-left: 1em;
+	width: 25em;
+	height: 14em;
+	border-radius: 5px;
+	border: .2em solid rgba(70,130,180,1);
+}
+
+.datosEmisor h3{
+	background-color: rgba(70,130,180,1);
+	box-shadow: -1px -2px 1px #000;
+	color: white;
+	margin-top: -1em;
+	margin-left: 5em;
+	width: 70%;
+	height: 2em;
+	font-size: .8em;
+}
+.datosEmisor ul {
+	padding: .6em .5em;
+}
+.datosEmisor li{
+	font-size: .9em;
+	list-style: none;
+	text-align: justify;
+}
+section#comprobanteF {
+	padding: 1em 1em 1em 4em;
+	width: 88%;
+}
+table#conceptosComprobante {
+	margin-bottom: 2px;
+}
+table#conceptosComprobante td{
+	padding: 3px;
+}
+table#conceptosComprobante td.descripcion{
+	text-align: left;
+}
+table#conceptosComprobante th span{
+	font-weight: normal;
+	font-size: 11px;
+}
+#masDatosComprobante {
+	word-wrap: break-word;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 13px;
+}
+#masDatosComprobante span {
+	font-weight: bold;
+}
+.btnSalirDet {
+	text-align: right;
+}

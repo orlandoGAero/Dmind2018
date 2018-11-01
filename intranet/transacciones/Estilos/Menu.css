@@ -1,0 +1,156 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+body{
+	background: url(../Imagenes/fondo.jpg);
+	background-size: auto;
+	height: 110%;
+}
+div h1 img {
+	width: 45%;
+	height: 100%;
+}
+div h1{
+	background: url(../Imagenes/ban.png) Aliceblue;
+	background-size: 100% 105%;
+	border-radius:3px;
+	box-shadow: -2px 5px 10px #909090;
+	color:#2499e3;
+	font-size:4em;
+	text-align: center;
+	padding-bottom: 10px;
+	margin:auto;
+	width:90%;
+	height:120px;
+	text-align:center;
+	text-shadow: -3px -10px 1px rgba(217,17,17,.1);
+}
+h1{
+	margin:auto;
+	text-align: center;
+	padding-bottom: 10px;
+}
+ul, li {
+	list-style:none;
+}
+header nav {
+	font-size: 1.2em;
+	background: url(../Imagenes/nav.png) #3a5;
+	width:90%;
+	height: 2.3em;
+	margin-left: 5%;
+	box-shadow: 1px 1px .5px #000;	
+}
+/*Estilos de botones principales*/
+header nav > li {
+		float:left;
+}
+header nav li a {
+	color:#fff;
+	display:block;
+	font-weight: bold;
+	padding:10px 12px;
+	text-shadow:1px 1px 1px #000,
+				-1px -1px -1px #fff,
+				-2px -2px -0px #3ef
+				3px 2px 3px #fff;
+	text-decoration:none;
+}
+/*Efectos de menu*/
+header nav li a:active {
+	color: orange;
+}
+header nav li a {	
+	background: url(../Imagenes/nav.png) rgba(0,128,128,.5);
+}
+header nav li a:hover {
+	text-decoration:none;
+	background: rgba(0,128,128,.8);
+}
+header  nav li ul {
+	display:none;
+	position:absolute;
+	min-width:140px;
+}
+/*efecto para aparecer submenu*/			
+header nav li:hover > ul {
+	display:block;
+}
+/*Efectos para desplegar el tercer submenu*/			
+header nav li ul li {
+	position:relative;
+	background: rgba(0,128,128,.8);
+}
+			
+header  nav li ul li ul {
+	right:-140px;
+	top:0px;
+}
+header nav li .inicio:after {
+	background: url(../Imagenes/in.png); 
+}
+.addclies:before {
+	content: url(../imagenes/addcli.png); 
+}
+.userss:before{
+	content: url(../imagenes/users.png); 
+}
+.addusers:before{
+	content: url(../imagenes/usuario.png); 	
+}
+.imausario{
+	position: absolute;
+	margin-top: -5px;
+	margin-left: -30px;
+}
+.log{
+	color: white;
+	background: transparent;
+	text-decoration: none;
+	margin-top: .5em;
+	margin-right: 15%;
+	float: right;
+}
+.log:hover{
+	cursor: pointer;
+}
+.opc{
+	background:rgba(255,255,255,.1);
+	border-radius: 2px 5px 5px 2px; 
+	box-shadow: 1px 1px 1px #000;
+	color: blue;
+}
+.opc:hover{
+	background:rgba(255,255,255,.7);
+	color: #000;
+}
+input[type="button"]{
+	outline-border-color: #1E90FF;
+	border-radius: 5px;
+	margin-left: 20px;
+	background-color: rgba(255,17,2,.4);
+}
+input[type="button"]:hover{
+	cursor: pointer;
+	background-color: rgba(217,12,12,.4);
+	border-collapse: separate;
+	color: Green;
+}
+footer{
+	background: url(../Imagenes/bans.png);
+	background-color: rgba(0,0,0,.3);
+	background-size: 100% 100%;
+	color: #fff;
+	height: 25px;
+	position: absolute;
+	bottom: -10px;
+	left:0;
+	padding-top: 4px;
+	text-align: center;
+	width: 100%;
+}
+footer a{
+	text-decoration: none;
+	color: #fff;
+}

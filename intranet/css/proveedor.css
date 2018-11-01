@@ -1,0 +1,29 @@
+#titulo {
+	text-align: center;
+}
+#contactos-proveedor {
+	background: rgba(255, 255, 255, 0.3);
+	border-radius:5px;
+	width: 600px;
+	margin: 15px auto;
+	padding: 10px 20px;
+	text-align: center;
+}
+.lista-contactos {
+	width: auto;
+	margin: 10px auto;
+	background: #fff;
+	border-collapse: collapse;
+	text-align: center;
+}
+.lista-contactos th, td {
+	padding: 10px 15px;
+}
+.sin-contactos {
+	color: #fff;
+	text-align: center;
+	padding: 15px 0;
+	font-size: 13px;
+	font-weight: bolder;
+	font-style: italic;
+}
