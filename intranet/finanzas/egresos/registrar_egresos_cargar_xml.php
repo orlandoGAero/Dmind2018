@@ -43,23 +43,22 @@
 						</div>
 						<div class='div-btn'>
 							<form method='post' class='agregar-datos'>
-								<input type='hidden' name='concepto-id' value='datos{$i}'>
-								<button type='submit' name='boton-a'>
+								<input type='hidden' name='conceptoid' value='{$i}'>
+								<button style='display:none;' type='submit' id='boton-ag{$i}' name='boton-a'>
 									<img src='../../images/if_save.png' alt='Cargar Datos'/>
 								</button>
 							</form>
 						</div>
 						<div>
-							<input type='checkbox' onclick='validar(this)'/>
+							<span style='color: #030;'>Guardar en productos<span> <input type='checkbox' id='check{$i}' onclick='validar(this,{$i})' style='vertical-align: middle;'/>
 						</div>
-						<div class='msj-egresos' id='mensaje'></div>
+						<div class='msj-egresos' id='mensaje{$i}'></div>
 					</div>
 				</li>
 					<div id='fade' class='overlay-egresos cerrarDatos'></div>
 					
-					<div id='datos{$i}' >
+					<div id='datos{$i}'>
 						
-						<input type='hidden' value='' disabled/>
 					</div>
 				
 				<li>
@@ -223,10 +222,14 @@
 		});
 	});
 
-	function validar(obj) {
+	function validar(obj,index) {
 		if(obj.checked == true) {
+			// let mostrar = `check${index}`;
+			// console.log(mostrar);
+			document.getElementById(`boton-ag${index}`).style.display='block';
 			console.log('si');
 		} else {
+			document.getElementById(`boton-ag${index}`).style.display='none';
 			console.log('no');
 		}
 	}
@@ -244,15 +247,32 @@
 			sub: subcategoria,
 			div: division,
 			nom: nombre,
+			tip: tipo,
 			mar: marca,
 			mon: moneda
 		}
-		var idconcept = $('#idconcepto').val();
+		let idco = `datos${$('#idconcepto').val()}`;
+		let num = $('#idconcepto').val();
+		let mesj = `mensaje${num}`;
+		let cambiar = `#check${num}`;
+
+		let {cat, sub, div, nom, tip, mar, mon} = datos;
 		
-		document.getElementById(idconcept).innerHTML = datos;
-		document.getElementById('mensaje').innerHTML = `<p>Datos Agregados</p>`;
-		console.log(idconcept);
+		let entradas = `
+		<input type='hidden' name='${idco}c[cat]' id='${idco}-cat' value='${cat}' disabled/>
+		<input type='hidden' name='${idco}c[sub]' id='${idco}-sub' value='${sub}' disabled/>
+		<input type='hidden' name='${idco}c[div]' id='${idco}-div' value='${div}' disabled/>
+		<input type='hidden' name='${idco}c[nom]' id='${idco}-nom' value='${nom}' disabled/>
+		<input type='hidden' name='${idco}c[tip]' id='${idco}-tip' value='${tip}' disabled/>
+		<input type='hidden' name='${idco}c[mar]' id='${idco}-mar' value='${mar}' disabled/>
+		<input type='hidden' name='${idco}c[mon]' id='${idco}-mon' value='${mon}' disabled/>`;
+
+		document.getElementById(idco).innerHTML = entradas;
+		document.getElementById(mesj).innerHTML = `<p>Datos Agregados</p>`;
+		console.log(idco);
+		console.log(mesj);
 		console.log("array: ", datos);
+		$(cambiar).prop('checked', true);
 		$('#contenido').hide();
 		$('#fade').hide();
 		return false;
