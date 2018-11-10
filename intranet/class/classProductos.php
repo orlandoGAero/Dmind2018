@@ -1,5 +1,5 @@
 <?php
-	require	'../class/dataBaseConn.php';
+	require	'dataBaseConn.php';
 	class Productos {
 		// Convierte el PRECIO del PRODUCTO que está en DÓLARES AMERICANOS a PESOS MEXICANOS.
 		public function pesosMexicanos($precioProdEnDolaresAm){

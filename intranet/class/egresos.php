@@ -121,6 +121,7 @@
 																'claveUnidadConceptoE'=>'',
 																'unidadConceptoE'=>trim($concepto['unidad']),
 																'descripcionConceptoE'=>trim($concepto['descripcion']),
+																'modeloConceptoE'=>trim($concepto['noIdentificacion']),
 																'valorUnitarioConceptoE'=>trim($concepto['valorUnitario']),
 																'importeConceptoE'=>trim($concepto['importe'])
 															);				
@@ -215,6 +216,7 @@
 																'claveUnidadConceptoE'=>trim($concepto['ClaveUnidad']),
 																'unidadConceptoE'=>trim($concepto['Unidad']),
 																'descripcionConceptoE'=>trim($concepto['Descripcion']),
+																'modeloConceptoE'=>trim($concepto['NoIdentificacion']),
 																'valorUnitarioConceptoE'=>trim($concepto['ValorUnitario']),
 																'importeConceptoE'=>trim($concepto['Importe'])
 															);				
@@ -894,6 +896,7 @@
 																clave_unidad_concepto_e,
 																unidad_concepto_e,
 																descripcion_concepto_e,
+																modelo_concepto_e,
 																valor_unitario_concepto_e,
 																importe_concepto_e,
 																base_impuesto_concepto_e,
@@ -909,6 +912,7 @@
 																:clavUnidConcepto,
 																:unidConcepto,
 																:descripConcepto,
+																:modeloConcepto,
 																:valUnitConcepto,
 																:importConcepto,
 																:baseImpConcepto,
@@ -923,6 +927,7 @@
 					$query -> bindParam(':clavUnidConcepto', trim($conceptosComp['claveUnidadC']));
 					$query -> bindParam(':unidConcepto', trim($conceptosComp['unidadC']));
 					$query -> bindParam(':descripConcepto', trim(mb_strtoupper($conceptosComp['descripcionC'])));
+					$query -> bindParam(':modeloConcepto', trim($conceptosComp['modeloC']));
 					$query -> bindParam(':valUnitConcepto', trim($conceptosComp['valorUnitarioC']));
 					$query -> bindParam(':importConcepto', trim($conceptosComp['importeC']));
 					$query -> bindParam(':baseImpConcepto', trim($conceptosComp['baseImpuestoC']));

@@ -7,7 +7,7 @@ if (!isset($_SESSION["usuario"])){
 $_SESSION["usuario"];
 //termina inicio de sesion
 ?>
-<?php include("../conexion.php") ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

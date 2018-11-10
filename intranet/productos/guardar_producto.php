@@ -1,15 +1,15 @@
 <?php
-	include ("../conexion.php");
-
-  	$query = "SELECT id_producto FROM productos ORDER BY id_producto DESC LIMIT 1;";
-  	$result=mysql_query($query);
-  	$fila=mysql_fetch_array($result);
-  	if($fila[0]=="NULL"){
-	  	$id_producto=1;
-  	}else{
-	  	$id_producto=$fila[0]+1;
-  	}
-
+	require_once 'classProductos.php';
+	$productos = new Productos;
+	
+	$fila = $productos->getFila();
+	
+	if ($fila[0]=="NULL") {
+		$id_producto = 1;
+	} else{
+		$id_producto = $fila[0]+1;
+	}
+	
 	$id_categoria=$_REQUEST["id_categoria"];
 	$id_subcategoria=$_REQUEST["id_subcategoria"];
 	$id_division=$_REQUEST["id_division"];
@@ -28,11 +28,7 @@
 	$band = 0;
 
 	if ($band == 0) {
-		$queryValProd = "SELECT modelo
-						FROM productos
-						WHERE modelo = '".$modelo."' AND id_producto != ".$id_producto;
-		$resultValProd = mysql_query($queryValProd) or die(mysql_errno());
-		$rowsValProd = mysql_num_rows($resultValProd);
+		$rowsValProd = $productos->getFilaAfectada($modelo,$id_producto);
 		if ($rowsValProd != 0) {
 			echo"<div class='error'><h3>Modelo: ".$modelo." duplicado, ingresa un modelo diferente.</h3></div>";
 			$band = 1;
@@ -40,9 +36,9 @@
 	}
 
 	if ($band == 0) {
-		$queryGuardar="INSERT INTO productos VALUES ('$id_producto','$id_categoria','$id_subcategoria','$id_division',
-		 '$id_nombre','$id_tipo','$id_marca','$modelo','$precio','$moneda','$id_unidad','$descripcion','0','No')";
-		mysql_query($queryGuardar)or die(mysql_errno());
+		$productos->saveProducto($id_producto,$id_categoria,$id_subcategoria, 
+		$id_division,$id_nombre,$id_tipo,$id_marca,$modelo,$precio,$moneda,
+		$id_unidad,$descripcion);
 		$band = 0;
 	}
 

@@ -1,4 +1,7 @@
-<?php include ('../conexion.php'); ?>
+<?php 
+	require_once 'classProductos.php'; 
+	$productos = new Productos;	
+?>
 <center>
 	<form action="" method="POST" target="_self" id="formProdAdd">
 		<h2 style="box-shadow:0px -1px 1px;width:565px;background:#16555B; color:white;border-top-right-radius:10px;border-top-left-radius:10px;">NUEVO PRODUCTO</h2>
@@ -10,12 +13,12 @@
 						<select name="id_categoria" class="categoria">
 							<option value="0">Elige</option>		
 							<?php 
-								$query = "select * from categorias";
-								$result=mysql_query($query);
-								while($fila=mysql_fetch_array($result)){
-									echo "<option value='",$fila[0],"'>",$fila[1],"</option>";
-								}
+								$categorias = $productos->getCategorias();
+								foreach($categorias as $categoria) :
 							?>
+									<option value='<?=$categoria['id_categoria']?>'><?=$categoria['nombre_categoria']?></option>
+							
+							<?php endforeach; ?>
 						</select>
 					</td>
 					<td><spam id="alerta1" class="errores">Selecciona categoria</spam><br></td>
@@ -26,12 +29,11 @@
 						<select name="id_subcategoria" class="subcategoria">
 							<option value="0">Elige</option>		
 							<?php
-		  						$query = "select id_subcategoria, nombre_subcategoria from subcategorias";
-								$result=mysql_query($query);
-								while($fila=mysql_fetch_array($result)){
-									echo "<option value='",$fila[0],"'>",$fila[1],"</option>";
-		  						}
+								$subcategorias = $productos->getSubCategorias();
+								foreach($subcategorias as $subcategoria) :
 							?>
+									<option value='<?=$subcategoria['id_subcategoria']?>'><?=$subcategoria['nombre_subcategoria']?></option>
+							<?php endforeach; ?>
 						</select>
 					</td>
 					<td><spam id="alerta2" class="errores">Selecciona subcategoria</spam><br></td>
@@ -42,12 +44,11 @@
 						<select name="id_division" class="division">
 							<option value="0">Elige</option>		
 							<?php
-		 						$query = "select id_division, nombre_division from division";
-								$result=mysql_query($query);
-								while($fila=mysql_fetch_array($result)){
-									echo "<option value='",$fila[0],"'>",$fila[1],"</option>";
-		  						}
-							?>		
+								 $divisiones = $productos->getDivisiones();
+								 foreach($divisiones as $division) :
+							?>
+									<option value='<?=$division['id_division']?>'><?=$division['nombre_division']?></option>		
+							<?php endforeach;?>
 						</select>
 					</td>
 					<td><spam id="alerta3" class="errores">Selecciona división</spam><br><td>
@@ -58,12 +59,11 @@
 						<select name="id_nombre" class="nombre">
 							<option value="0">Elige</option>		
 							<?php
-							  $query = "select id_nombre, nombre from nombres";
-								$result=mysql_query($query);
-								while($fila=mysql_fetch_array($result)){
-								echo "<option value='",$fila[0],"'>",$fila[1],"</option>";
-							  }
-							?>	
+								 $nombres = $productos->getNombres();
+								 foreach($nombres as $nombre) :
+							?>
+									<option value='<?=$nombre['id_nombre']?>'><?=$nombre['nombre']?></option>		
+							<?php endforeach;?>
 						</select>
 					</td>
 					<td><spam id="alerta4" class="errores">Selecciona nombre</spam><br></td>
@@ -74,12 +74,11 @@
 						<select name="id_tipo" class="tipo">
 							<option value="0">Elige</option>		
 							<?php
-							  $query = "select id_tipo, nombre_tipo from tipos";
-								$result=mysql_query($query);
-								while($fila=mysql_fetch_array($result)){
-									echo "<option value='",$fila[0],"'>",$fila[1],"</option>";
-							  	}
-							?>		
+								 $tipos = $productos->getTipos();
+								 foreach($tipos as $tipo) :
+							?>
+									<option value='<?=$tipo['id_tipo']?>'><?=$tipo['nombre_tipo']?></option>		
+							<?php endforeach;?>		
 						</select>
 					</td>
 					<td><spam id="alerta5" class="errores">Selecciona tipo</spam><br></td>
@@ -90,12 +89,11 @@
 						<select name="id_marca" class="marca">
 							<option value="0">Elige</option>		
 							<?php
-							  	$query = "select id_marca, nombre_marca from marca_productos";
-								$result=mysql_query($query);
-								while($fila=mysql_fetch_array($result)){
-									echo "<option value='",$fila[0],"'>",$fila[1],"</option>";
-							  	}
-							?>		
+								 $marcas = $productos->getMarcas();
+								 foreach($marcas as $marca) :
+							?>
+									<option value='<?=$marca['id_marca']?>'><?=$marca['nombre_marca']?></option>		
+							<?php endforeach;?>		
 						</select>
 					</td>
 					<td><spam id="alerta6" class="errores">Selecciona marca</spam><br></td>
@@ -114,13 +112,12 @@
 					<td><label> Moneda :</label></td>
 					<td>
 						<select name="moneda">
-							<?php 
-							  	$query = "select id_moneda, nombre_moneda from moneda";
-								$result=mysql_query($query);
-								while($fila=mysql_fetch_array($result)){
-									echo "<option value='",$fila[0],"'>",$fila[1],"</option>";
-							  	}
-							 ?>		
+							<?php
+								 $monedas = $productos->getMonedas();
+								 foreach($monedas as $moneda) :
+							?>
+									<option value='<?=$moneda['id_moneda']?>'><?=$moneda['nombre_moneda']?></option>		
+							<?php endforeach;?>	
 						</select>
 					</td>
 				</tr>
@@ -130,12 +127,11 @@
 						<select name="id_unidad" class="unidad">
 							<option value="0">Elige</option>		
 							<?php
-								$query = "select DISTINCT id_unidad, nombre_unidad from unidades";
-							  	$result=mysql_query($query);
-								while($fila=mysql_fetch_array($result)){
-									echo "<option value='",$fila[0],"'>",$fila[1],"</option>";
-							  	}
+								 $unidades = $productos->getUnidades();
+								 foreach($unidades as $unidad) :
 							?>
+									<option value='<?=$unidad['id_unidad']?>'><?=$unidad['nombre_unidad']?></option>		
+							<?php endforeach;?>
 						</select>
 					</td>
 					<td><spam id="alerta9" class="errores">Selecciona unidad</spam><br></td>

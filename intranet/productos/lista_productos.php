@@ -1,44 +1,16 @@
 <?php
-	require_once("../conexion.php");
 	require_once("../libs/encrypt_decrypt_strings_urls.php");
 	require 'classProductos.php';
 	$fnProductos = new Productos;
 	// Obtiene la moneda predeterminada, para mostrar el precio del producto.
 	$monedaPredProduct = $fnProductos -> monedaPredeterminada();
+
+	// array de productos
+	$arrProductos =$fnProductos->obtenerProductos();
+	// contar si el array tiene datos
+	$rowsLp = count($arrProductos);
 ?>
-<?php
-	$queryLp = "SELECT 
-				  P.id_producto,
-				  categorias.nombre_categoria,
-				  subcategorias.nombre_subcategoria,
-				  D.nombre_division,
-				  nombre,
-				  nombre_tipo,
-				  M.nombre_marca,
-				  P.modelo,
-				  P.precio,
-				  P.exit_inventario,
-				  P.id_moneda 
-				FROM
-				  productos P 
-				  LEFT JOIN categorias 
-				    ON P.id_categoria = categorias.id_categoria 
-				  LEFT JOIN subcategorias 
-				    ON P.id_subcategoria = subcategorias.id_subcategoria 
-				  LEFT JOIN division D
-				    ON P.id_division = D.id_division
-				  LEFT JOIN marca_productos M 
-				    ON P.id_marca = M.id_marca 
-				  LEFT JOIN nombres 
-				    ON P.id_nombre = nombres.id_nombre 
-				  LEFT JOIN tipos 
-				    ON P.id_tipo = tipos.id_tipo 
-				WHERE P.descontinuado = 'No'
-				ORDER BY P.id_producto ASC;";
-	$resultLp=mysql_query($queryLp) or die(mysql_error());
-	$rowsLp = mysql_num_rows($resultLp)	;
-?>
-<?php if ($rowsLp >= 1) :?>
+<?php if ($rowsLp > 0) :?>
 	<div id="eliminacion"></div>
 	<table class="display" id="products">
 		<thead>
@@ -59,43 +31,43 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php while($fila=mysql_fetch_array($resultLp)) :?>
+			<?php foreach($arrProductos as $producto) : ?>
 			    <tr>
-			    	<td align="center"><?=$fila['id_producto']?></td>
-			    	<td align="center"><?=$fila['nombre_categoria']?></td>
-			    	<td align="center"><?=$fila['nombre_subcategoria']?></td>
-			    	<td align="center"><?=$fila['nombre_division']?></td>
-			    	<td align="center"><?=$fila['nombre']?></td>
-			    	<td align="center"><?=$fila['nombre_tipo']?></td>
-			    	<td align="center"><?=$fila['nombre_marca']?></td>
-			    	<td align="center"><?=$fila['modelo']?></td>
+			    	<td align="center"><?=$producto['id_producto']?></td>
+			    	<td align="center"><?=$producto['nombre_categoria']?></td>
+			    	<td align="center"><?=$producto['nombre_subcategoria']?></td>
+			    	<td align="center"><?=$producto['nombre_division']?></td>
+			    	<td align="center"><?=$producto['nombre']?></td>
+			    	<td align="center"><?=$producto['nombre_tipo']?></td>
+			    	<td align="center"><?=$producto['nombre_marca']?></td>
+			    	<td align="center"><?=$producto['modelo']?></td>
 			 		<!-- Si la MONEDA PREDETERMINADA es PESOS MEXICANOS, el precio de todos los PRODUCTOS se muestra en
 			 		 la MONEDA mencionada. -->
-			    	<?php if(in_array("PESO", $monedaPredProduct)) :?>
+					  <?php if(in_array("PESO", $monedaPredProduct)) :?>
 				    	<!-- 1 = Dólares Americanos -->
-				    	<?php if($fila['id_moneda'] == 1) :?>
+				    	<?php if($producto['id_moneda'] == 1) :?>
 				    		<!-- Si el PRECIO del PRODUCTO se encuentra en DÓLARES AMERICANOS se convierte a PESOS MEXICANOS. -->
-				    		<td align="center"><b>$</b><?=$fnProductos -> pesosMexicanos($fila['precio'])?></td>
+				    		<td align="center"><b>$</b><?=$fnProductos -> pesosMexicanos($producto['precio'])?></td>
 				    	<!-- 2 = Pesos Mexicanos -->
-				    	<?php elseif($fila['id_moneda'] == 2) :?>
-				    		<td align="center"><b>$</b><?=number_format($fila['precio'],2,'.',',')?></td>
+				    	<?php elseif($producto['id_moneda'] == 2) :?>
+				    		<td align="center"><b>$</b><?=number_format($producto['precio'],2,'.',',')?></td>
 				    	<?php endif; ?>
 					<!-- Si la MONEDA PREDETERMINADA es DÓLARES AMERICANOS, el precio de todos los PRODUCTOS se muestra en 
 					 la MONEDA mencionada. -->
 				    <?php elseif(in_array("DOLAR", $monedaPredProduct)) :?>
 						<!-- 1 = Dólares Americanos -->
-				    	<?php if($fila['id_moneda'] == 1) :?>
-				    		<td align="center"><b>US$</b><?=number_format($fila['precio'],2,'.',',')?></td>
+				    	<?php if($producto['id_moneda'] == 1) :?>
+				    		<td align="center"><b>US$</b><?=number_format($producto['precio'],2,'.',',')?></td>
 				    	<!-- 2 = Pesos Mexicanos -->
-				    	<?php elseif($fila['id_moneda'] == 2) :?>
+				    	<?php elseif($producto['id_moneda'] == 2) :?>
 				    		<!-- Si el PRECIO del PRODUCTO se encuentra en PESOS MEXICANOS se convierte a DÓLARES AMERICANOS. -->
-				    		<td align="center"><b>US$</b><?=$fnProductos -> dolaresAmericanos($fila['precio'])?></td>
+				    		<td align="center"><b>US$</b><?=$fnProductos -> dolaresAmericanos($producto['precio'])?></td>
 				    	<?php endif; ?>
 				    <?php endif; ?>
 			    	<?php 
-			    		$nomP = $fila['nombre'];
-			    		$modP = $fila['modelo'];
-			    		$existenciaProducto = $fila['exit_inventario'];
+			    		$nomP = $producto['nombre'];
+			    		$modP = $producto['modelo'];
+			    		$existenciaProducto = $producto['exit_inventario'];
 			    	?>
 					<?php if($existenciaProducto != 0) :?>
 						<td align="center">
@@ -114,11 +86,11 @@
 			    			</a>
 			    		<?php endif; ?>
 			    	</td>
-			    	<?php $idProducto = encrypt($fila['id_producto'],"productosDM") ?>
+			    	<?php $idProducto = encrypt($producto['id_producto'],"productosDM") ?>
 			    	<td><a href="detalle.php?productdetail=<?=$idProducto?>"><img src="../images/detalle.png" title="Detalle"></a></td>
 			    	<td><a href="editar.php?productedit=<?=$idProducto?>" class="edita"><img src="../images/editar.png" title="Editar"></a></td>
 			    </tr>
-			<?php endwhile; ?>
+			<?php endforeach; ?>
 		</tbody>
 		<tfoot style="display:table-header-group;">
 			<tr>

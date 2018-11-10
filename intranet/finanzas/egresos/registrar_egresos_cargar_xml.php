@@ -33,11 +33,35 @@
 		}
 		$i = 0;
 		foreach ($conceptosXmlEgresos as $conceptosComprobante) {
+			// echo"<pre>";print_r($conceptosComprobante)."</pre>"."\n";
 			$i = $i + 1;
 			$arrayConceptosComprobante[] = "
 				<li>
-					<span class='azul'><b> - Concepto ".$i." -</b></span>
+					<div class='div-save'>
+						<div>
+							<span class='azul'><b> - Concepto ".$i." -</b></span>
+						</div>
+						<div class='div-btn'>
+							<form method='post' class='agregar-datos'>
+								<input type='hidden' name='concepto-id' value='datos{$i}'>
+								<button type='submit' name='boton-a'>
+									<img src='../../images/if_save.png' alt='Cargar Datos'/>
+								</button>
+							</form>
+						</div>
+						<div>
+							<input type='checkbox' onclick='validar(this)'/>
+						</div>
+						<div class='msj-egresos' id='mensaje'></div>
+					</div>
 				</li>
+					<div id='fade' class='overlay-egresos cerrarDatos'></div>
+					
+					<div id='datos{$i}' >
+						
+						<input type='hidden' value='' disabled/>
+					</div>
+				
 				<li>
 					<label>Clave Concepto ".$i.":</label>
 					<input type='text' name='conceptosFactura[".$i."][claveC]' maxlength='20' value='".$conceptosComprobante['claveConceptoE']."' autocomplete='off'>
@@ -57,6 +81,10 @@
 				<li>
 					<label>Descripción ".$i.":</label>
 					<input type='text' name='conceptosFactura[".$i."][descripcionC]' maxlength='255' value='".$conceptosComprobante['descripcionConceptoE']."' autocomplete='off'>
+				</li>
+				<li>
+					<label>Modelo ".$i.":</label>
+					<input type='text' name='conceptosFactura[".$i."][modeloC]' maxlength='20' value='".$conceptosComprobante['modeloConceptoE']."' autocomplete='off'>
 				</li>
 				<li>
 					<label>Valor Unitario ".$i.":</label>
@@ -143,8 +171,27 @@
 		});
 	</script>
 <?php endif; ?>
+<div id='contenido' class='modal-egresos'></div>
 
 <script type="text/javascript">
+	$(".agregar-datos").click(function(e){
+		e.preventDefault();
+		$.ajax("cargar_datos.php", {
+			type: 'POST',
+			data: {conceptoid: e.currentTarget[0].value},
+			success: function(res) {
+				document.getElementById('contenido').innerHTML = res;
+			}
+		});
+		document.getElementById('contenido').style.display='block';
+		document.getElementById('fade').style.display='block';
+	});
+	
+	$(".cerrarDatos").click(function(){
+		document.getElementById('contenido').style.display='none';
+		document.getElementById('fade').style.display='none';
+	});
+
 	// Remueve los mensajes en pantalla.
 	setTimeout(function(){
 		$('.error').fadeOut(1000);
@@ -157,6 +204,7 @@
 	setTimeout(function(){
 		$('.success').fadeOut(1000);
 	},5000);
+
 	// Botón obtener Fecha de Pago.
 	$('#obtenerFechaP').click(function() {
 		var tot = $('#Total').val();
@@ -174,4 +222,39 @@
 			$('#opcionesFechaPag').html(data);
 		});
 	});
+
+	function validar(obj) {
+		if(obj.checked == true) {
+			console.log('si');
+		} else {
+			console.log('no');
+		}
+	}
+
+	function agregarDatos() {
+		var categoria = $("#selcategoria").val();
+		var subcategoria = $("#selsubcategoria").val();
+		var division = $("#seldivision").val();
+		var nombre = $("#selnombre").val();
+		var tipo = $("#seltipo").val();
+		var marca = $("#selmarca").val();
+		var moneda = $("#selmoneda").val();
+		var datos = {
+			cat: categoria,
+			sub: subcategoria,
+			div: division,
+			nom: nombre,
+			mar: marca,
+			mon: moneda
+		}
+		var idconcept = $('#idconcepto').val();
+		
+		document.getElementById(idconcept).innerHTML = datos;
+		document.getElementById('mensaje').innerHTML = `<p>Datos Agregados</p>`;
+		console.log(idconcept);
+		console.log("array: ", datos);
+		$('#contenido').hide();
+		$('#fade').hide();
+		return false;
+	}
 </script>

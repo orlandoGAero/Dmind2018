@@ -210,6 +210,34 @@ a.add_provee {
    border-radius: 10px;
 }
 
+.modal-egresos {
+  display: none;
+  position: fixed;
+  top: 25%;
+  left: 33%;
+  width: auto;
+  height: auto;
+  padding: 5px;
+  /* background: rgba(0, 0, 0, 0.466); */
+  z-index:1002;
+  overflow: auto;
+  border-radius: 10px;
+}
+
+.overlay-egresos {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 85, 91);
+  z-index: 1001;
+  opacity: 0.623;
+  -moz-opacity: 0.623;
+  filter: alpha(opacity=0.623);
+}
+
 input[type=text]:read-only{
   background-color: #ECECEC;
   cursor: not-allowed;
@@ -257,3 +285,21 @@ input[type=text]:-moz-read-only{
   font-size: 18px;
   font-weight: bold;
 }
+
+/*estilo guardar producto egresos*/
+
+.div-save {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.div-btn {
+  margin-left: 2rem;
+}
+.msj-egresos {
+  margin-left: 2%;
+  color: green;
+}
+/*
+  estilo guardar producto egresos
+*/

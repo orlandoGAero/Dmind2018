@@ -29,7 +29,9 @@
 <body>
   <?php
     include ("../menu.php");
-    include ('../Conexion.php');
+    require "classProductos.php";
+    $productos = new Productos();
+
     require_once("../libs/encrypt_decrypt_strings_urls.php");
 
     if(isset($_GET["productdetail"]))
@@ -40,104 +42,58 @@
     	<h4>Datos del Producto</h4>
       <center>
         <table style="text-align:justify;">
-          <?php //este se utiliza para llenar los campos editables
-            $query = "SELECT 
-                        P.id_producto,
-                        C.nombre_categoria,
-                        S.nombre_subcategoria,
-                        D.nombre_division,
-                        N.nombre 
-                      FROM
-                        productos P 
-                        INNER JOIN categorias C 
-                          ON P.id_categoria = C.id_categoria 
-                        INNER JOIN subcategorias S 
-                          ON P.id_subcategoria = S.id_subcategoria 
-                        INNER JOIN division D
-                          ON P.id_division = D.id_division
-                        INNER JOIN nombres N 
-                          ON P.id_nombre = N.id_nombre 
-                      WHERE P.id_producto = ".$id_pro;
-            $result=mysql_query($query);
+          <?php 
+            $detalleProducto = $productos->getProductoDet($id_pro);
           ?>
-          <?php while($fila=mysql_fetch_array($result)) :?>
             <tr>
               <td><b>Categoría:</b></td>
-              <td><?=$fila[1]?></td>
+              <td><?=$detalleProducto['nombre_categoria']?></td>
             </tr>
             <tr>
               <td><b>Subcategoría:</b></td>
-              <td><?=$fila[2]?></td>
+              <td><?=$detalleProducto['nombre_subcategoria']?></td>
             </tr>
             <tr>
               <td><b>División:</b></td>
-              <td><?=$fila[3]?></td>
+              <td><?=$detalleProducto['nombre_division']?></td>
             </tr>
             <tr>
-              <td><b>Nombre :</b></td>
-              <td><?=$fila[4]?></td>
+              <td><b>Nombre:</b></td>
+              <td><?=$detalleProducto['nombre']?></td>
             </tr>
-          <?php endwhile; ?>
-          <?php 
-            $sql="SELECT nombre_tipo FROM productos P
-          	       INNER JOIN tipos N on P.id_tipo=N.id_tipo where id_producto=$id_pro";
-            $result=mysql_query($sql);
-          ?>
-          <?php while($fila=mysql_fetch_array($result)) :?>
             <tr>
               <td><b>Tipo:</b></td>
-              <td><?=$fila[0]?></td>
+              <td><?=$detalleProducto['nombre_tipo']?></td>
             </tr>
-          <?php endwhile; ?>
-          <?php 
-            $sql="SELECT distinct nombre_marca FROM productos P
-          	       INNER JOIN marca_productos M on P.id_marca=M.id_marca where id_producto=$id_pro";
-            $result=mysql_query($sql);
-          ?>
-          <?php while($fila=mysql_fetch_array($result)) :?>
             <tr>
               <td><b>Marca :</b></td>
-              <td><?=$fila[0]?></td>
+              <td><?=$detalleProducto['nombre_marca']?></td>
             </tr>
-          <?php endwhile; ?>
-          <?php 
-            $sql="SELECT modelo,precio,exit_inventario,id_moneda FROM productos where id_producto=$id_pro";
-            $result=mysql_query($sql);
-          ?>
-          <?php while($fila=mysql_fetch_array($result)) :?>
             <tr>
               <td><b>Modelo :</b></td>
-              <td><?php echo $fila[0] ?></td>
+              <td><?= $detalleProducto['modelo'] ?></td>
             </tr>
             <tr>
               <td> <b>Precio :</b></td>
               <td>
-                <?php if($fila[3] == 1) :?>
+                <?php if($detalleProducto['id_moneda'] == 1) :?>
                   <!-- Dolares Americanos -->
-                  <b>US$</b><?=number_format($fila[1],2,'.',',')?>
-                <?php elseif($fila[3] == 2) :?>
+                  <b>US$</b><?=number_format($detalleProducto['precio'],2,'.',',')?>
+                <?php elseif($detalleProducto['id_moneda'] == 2) :?>
                   <!-- Pesos Mexicanos -->
-                  <b>$</b><?=number_format($fila[1],2,'.',',')?>
+                  <b>$</b><?=number_format($detalleProducto['precio'],2,'.',',')?>
                 <?php endif; ?>
               </td>
             </tr>
-            <!-- Existencia -->
-            <?php $exist=$fila[2]; ?>
-          <?php endwhile; ?>
-          <?php 
-            $sql="SELECT nombre_unidad FROM productos P 
-          	       INNER JOIN unidades U on P.id_unidad=U.id_unidad where id_producto=$id_pro";
-            $result=mysql_query($sql);
-          ?>
-          <?php while($fila=mysql_fetch_array($result)) :?>
             <tr>
               <td><b>Unidad de Medida:</b></td>
-              <td><?php echo $fila[0] ?></td>
+              <td><?=$detalleProducto['nombre_unidad'] ?></td>
             </tr>
-          <?php endwhile; ?>
           <tr>
             <td><b>Cantidad en inventario:</b></td>
-            <td><?php echo $exist ?></td>
+            <td>
+              <?=$detalleProducto['exit_inventario']; ?>
+            </td>
           </tr>
         </table>
         <a href="./" class="btn primary">Salir</a>
