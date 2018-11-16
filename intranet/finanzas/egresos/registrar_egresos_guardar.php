@@ -9,6 +9,7 @@
 
 	require('../../class/egresos.php');
 	$classEgresos = new egresos();
+
 ?>
 
 <?php
@@ -18,6 +19,13 @@
 	}else{
 		$guardarComoProveedor = 'No';
 	}
+
+	if (isset($_REQUEST['dataProd'])) {
+		$guardarProductos = $_REQUEST['dataProd'];
+	} else {
+		$guardarProductos = null;
+	}
+
 	if( $classEgresos -> registrarEgresos($_REQUEST['txtEfectCompr'],
 										$_REQUEST['txtVersion'],
 										$_REQUEST['txtTipoCompr'],
@@ -41,6 +49,7 @@
 										$_REQUEST['txtSerie'],
 										$_REQUEST['txtFolio'],
 										$_REQUEST['conceptosFactura'],
+										$guardarProductos,
 										$_REQUEST['txtDescuento'],
 										$_REQUEST['txtSubtotal'],
 										$_REQUEST['txtIva'],
@@ -68,8 +77,7 @@
 										$_REQUEST['txtHoraTimbr'],
 										$_REQUEST['txtSello'],
 										$_REQUEST['txtRFCprov'])) {
-
-		$band = 0;
+	$band = 0;
 	}else{
 		if(isset($classEgresos -> msjErr)) echo"<div class='error'><h3>".$classEgresos -> msjErr."</h3></div>";
 		if(isset($classEgresos -> msjCap)) echo"<div class='caption'><h3>".$classEgresos -> msjCap."</h3></div>";

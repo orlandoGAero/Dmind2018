@@ -298,7 +298,8 @@ input[type=text]:-moz-read-only{
 }
 .msj-egresos {
   margin-left: 2%;
-  color: green;
+  font-size: 13px;
+  color: #237e86;
 }
 /*
   estilo guardar producto egresos

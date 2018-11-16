@@ -338,6 +338,20 @@
 				$this -> msjErr = "Proveedor con el RFC: ".$rfcEmisor." guardado anteriormente.";
 			}
 		} // Fin obtener RFC Proveedores.
+
+		// Obtener Modelo
+		public function obtenerModelo($modelo) {
+			$Conexion = new dataBaseConn();
+			$sql = $Conexion -> prepare("SELECT modelo FROM productos WHERE modelo = :modeloConcepto;");
+			$sql -> bindParam(':modeloConcepto', $modelo);
+			$sql -> execute();
+			$rows = $sql -> rowCount();
+			if ($rows != 0) {
+				$this -> msjErr = "Modelo: ".$modelo." ya ha sido guardado anteriormente.";
+			}
+		} // Fin obtener Modelo
+
+
 		// Buscar Rfc de Proveedor.
 		public function buscarRfcProveedor($rfcEmisor) {
 			$Conexion = new dataBaseConn();
@@ -627,8 +641,8 @@
 		#FIN de Funciones para Obtener de la BD Información que llena las Listas Desplegables...
 			#...datos diferentes al seleccionado(Se utilizan para la modificación de Egresos).
 
-		// Registrar Egresos.
-		public function registrarEgresos($EfectoComprobante, $VersionComprobante, $TipoComprobante, $LugarExpedicionComprobante, $Fecha, $Hora, $rfcEmisor, $nombreEmisor, $guardarProv, $paisEmisor, $estadoEmisor, $municipioEmisor, $coloniaEmisor, $numExtEmisor, $numIntEmisor, $calleEmisor, $cpEmisor, $rfcReceptor, $nombreReceptor, $usoCFDIComprobante, $NumSerie, $NumFolio, $ConceptosComprobante, $Descuento, $SubTotal, $IVA, $Total, $MonedaComprobante, $MetodoPago, $CondicionesPagoComprobante, $FormaPagoComprobante, $FechaHoraPago, $NombreImpuesto, $TotalImpuesto, $TipoFactorImpuesto, $TasaImpuesto, $NumCuenta, $Concepto, $Clasificacion, $Estado, $Origen, $Destino, $EstadoComprobante, $FechaHoraCancel, $RegimenFiscalEmisor, $FolioFiscal, $FechaTimbrado, $HoraTimbrado, $SelloComprobante, $rfcProveedor) {
+		// -*-*-*Registrar Egresos.-*-*-*
+		public function registrarEgresos($EfectoComprobante, $VersionComprobante, $TipoComprobante, $LugarExpedicionComprobante, $Fecha, $Hora, $rfcEmisor, $nombreEmisor, $guardarProv, $paisEmisor, $estadoEmisor, $municipioEmisor, $coloniaEmisor, $numExtEmisor, $numIntEmisor, $calleEmisor, $cpEmisor, $rfcReceptor, $nombreReceptor, $usoCFDIComprobante, $NumSerie, $NumFolio, $ConceptosComprobante, $DatosProducto, $Descuento, $SubTotal, $IVA, $Total, $MonedaComprobante, $MetodoPago, $CondicionesPagoComprobante, $FormaPagoComprobante, $FechaHoraPago, $NombreImpuesto, $TotalImpuesto, $TipoFactorImpuesto, $TasaImpuesto, $NumCuenta, $Concepto, $Clasificacion, $Estado, $Origen, $Destino, $EstadoComprobante, $FechaHoraCancel, $RegimenFiscalEmisor, $FolioFiscal, $FechaTimbrado, $HoraTimbrado, $SelloComprobante, $rfcProveedor) {
 			$Conexion = new dataBaseConn();
 			$band = 0;
 			if ($EfectoComprobante != "" && $VersionComprobante != "" && $TipoComprobante != "" && $LugarExpedicionComprobante != "" && $Fecha != "" && $EfectoComprobante != "" && $Hora != "" && $rfcEmisor != "" && $nombreEmisor != "" && $rfcReceptor != "" && $nombreReceptor != "" && $NumSerie != "" && $NumFolio != "" && $SubTotal != "" && $IVA != "" && $Total != "" && $MonedaComprobante != "" && $MetodoPago != "" && $FormaPagoComprobante != "" && $NombreImpuesto != "" && $TotalImpuesto != "" && $TasaImpuesto != "" && $FolioFiscal != "" && $FechaTimbrado != "" && $HoraTimbrado != "" && $SelloComprobante != "") {
@@ -937,7 +951,47 @@
 					$query -> bindParam(':importImpConc', trim($conceptosComp['importeImpuestoC']));
 					$query -> bindParam(':IDegr', $idEgreso);
 					$resultQuery = $query -> execute();
+					
 				}
+				
+				if($DatosProducto) {
+					foreach($DatosProducto as $datoProd) {
+						$query = "INSERT INTO productos (id_categoria,
+														id_subcategoria,
+														id_division,
+														id_nombre,
+														id_tipo,
+														id_marca,
+														modelo,
+														precio,
+														id_moneda,
+														id_unidad,
+														descripcion,
+														exit_inventario,
+														descontinuado) 
+								VALUES (:IDcategoria,:IDsubcategoria,:IDdivision,:IDnombre,:IDtipo,
+														:IDmarca,:Modelo,:Precio,:Moneda,:IDunidad,:Descripcion,:Exist,:Descon)";
+						$sql = $Conexion->prepare($query);
+						$existencias = '0';
+						$descontinuado = 'No';
+						$borrar = 1;
+						$sql->bindParam(':IDcategoria',$datoProd['cat']);
+						$sql->bindParam(':IDsubcategoria',$datoProd['sub']);
+						$sql->bindParam(':IDdivision',$datoProd['div']);
+						$sql->bindParam(':IDnombre',$datoProd['nom']);
+						$sql->bindParam(':IDtipo',$datoProd['tip']);
+						$sql->bindParam(':IDmarca',$datoProd['mar']);
+						$sql->bindParam(':Modelo',$datoProd['mod']);
+						$sql->bindParam(':Precio',$datoProd['pre']);
+						$sql->bindParam(':Moneda',$datoProd['mon']);
+						$sql->bindParam(':IDunidad',$borrar);
+						$sql->bindParam(':Descripcion',$datoProd['des']);
+						$sql->bindParam(':Exist',$existencias);
+						$sql->bindParam(':Descon',$descontinuado);
+						$result = $sql->execute();
+					} 
+				}
+
 				// Registrar dirección del Emisor, en caso de que exista.
 				if ($paisEmisor != "" && $estadoEmisor != "" && $municipioEmisor != "" && $coloniaEmisor != "") {
 					// Incremento de id egresos direcciones.
@@ -1092,7 +1146,8 @@
 					return $resultRegEgre;
 				}
 			}
-		} // Fin registrar egresos.
+		} // -*-*-*Fin registrar egresos.-*-*-*
+
 		// Eliminar Egreso.
 		public function eliminarEgreso($idEgreso) {
 			$Conexion = new dataBaseConn();

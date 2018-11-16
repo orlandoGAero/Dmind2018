@@ -313,19 +313,32 @@ select,
   padding: 4px;
   width: 190px;
 }
-  .errores{
-    -webkit-box-shadow: 0 0 10px rgba(,0,0,0,.3);
-    -moz-box-shadow: 0 0 10px rgba(,0,0,0,.3);
-    -o-box-shadow: 0 0 10px rgba(,0,0,0,.3);
-    background: red;
-    box-shadow: 0 0 10px rgba(,0,0,0,.3);
-    color:#fff;
-    display: none;
-    font-size: 14px;
-    width: 200px;
-    border-radius: 5px;
-    padding: 10px;
-  }
+
+.errores{
+  -webkit-box-shadow: 0 0 10px rgba(,0,0,0,.3);
+  -moz-box-shadow: 0 0 10px rgba(,0,0,0,.3);
+  -o-box-shadow: 0 0 10px rgba(,0,0,0,.3);
+  background: red;
+  box-shadow: 0 0 10px rgba(,0,0,0,.3);
+  color:#fff;
+  display: none;
+  font-size: 14px;
+  width: 200px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.errores-e {
+  display: none;
+  background-color: rgb(219, 39, 39);
+  color: #fff;
+  padding: 0.1875rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  position: relative;
+}
+
+
 
 /******************************************** Estilos CSS Irving G.R. ********************************************/
 

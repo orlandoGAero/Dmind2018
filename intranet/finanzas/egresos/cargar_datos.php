@@ -27,7 +27,7 @@
                         <input type="hidden" name="idconcepto" id="idconcepto" value="<?=$id_concepto?>" disabled/>
                     </tr>
                     <tr>
-                        <td><label>Categoría</label></td>
+                        <td><label>Categoría:</label></td>
                         <td>
                             <select name="categoria" style="line-height: 0px;" id="selcategoria">
                                 <option value="0">Elige</option>		
@@ -40,10 +40,13 @@
                                 <?php endforeach; ?>
                             </select>
                         </td>
-                        <td><spam id="alerta1" class="errores">Selecciona categoria</spam><br></td>
+                        <td><span id="alerta1" class="errores-e">Elige categoria</span></td>
                     </tr>
                     <tr>
-                        <td><label>Subcategoría</label></td>
+                        
+                    </tr>
+                    <tr>
+                        <td><label>Subcategoría:</label></td>
                         <td>
                             <select name="id_subcategoria" style="line-height: 0px;" id="selsubcategoria">
                                 <option value="0">Elige</option>		
@@ -55,7 +58,7 @@
                                 <?php endforeach; ?>
                             </select>
                         </td>
-                        <td><spam id="alerta2" class="errores">Selecciona subcategoria</spam><br></td>
+                        <td><span id="alerta2" class="errores-e">Elige subcategoria</span><br></td>
                     </tr>
                     <tr>
                         <td><label>División:</label></td>
@@ -70,7 +73,7 @@
                                 <?php endforeach;?>
                             </select>
                         </td>
-                        <td><spam id="alerta3" class="errores">Selecciona división</spam><br><td>
+                        <td><span id="alerta3" class="errores-e">Elige división</span><br><td>
                     </tr>
                     <tr>
                         <td><label>Nombre :</label></td>
@@ -85,7 +88,7 @@
                                 <?php endforeach;?>
                             </select>
                         </td>
-                        <td><spam id="alerta4" class="errores">Selecciona nombre</spam><br></td>
+                        <td><span id="alerta4" class="errores-e">Elige nombre</span><br></td>
                     </tr>
                     <tr>
                         <td><label>Tipo:</label>
@@ -100,7 +103,7 @@
                                 <?php endforeach;?>		
                             </select>
                         </td>
-                        <td><spam id="alerta5" class="errores">Selecciona tipo</spam><br></td>
+                        <td><span id="alerta5" class="errores-e">Elige tipo</span><br></td>
                     </tr>
                     <tr>
                         <td><label>Marca :</label></td>
@@ -115,7 +118,7 @@
                                 <?php endforeach;?>		
                             </select>
                         </td>
-                        <td><spam id="alerta6" class="errores">Selecciona marca</spam><br></td>
+                        <td><span id="alerta6" class="errores-e">Elige marca</span><br></td>
                     </tr>
                     
                     <tr>
@@ -131,6 +134,7 @@
                                 <?php endforeach;?>	
                             </select>
                         </td>
+                        <td><span id="alerta7" class="errores-e">Elige moneda</span><br></td>
                     </tr>
                 </table>
                 <div style="">

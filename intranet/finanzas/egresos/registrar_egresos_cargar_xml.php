@@ -17,6 +17,11 @@
 
 ?>
 
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Div de Registrar Productos.
+* * * * * * * * *  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div id="registrarProd"></div>
+
 <?php $classEgresos -> obtenerDatosXML($nombreArchivo, $nombreArchTmp, $tipoArch) ?>
 <!-- Array para cargar los datos del Egreso en el formulario de registro -->
 <?php if(isset($classEgresos -> datosEgresosXML)) $xmlEgresos = $classEgresos -> datosEgresosXML ?>
@@ -50,9 +55,11 @@
 							</form>
 						</div>
 						<div>
-							<span style='color: #030;'>Guardar en productos<span> <input type='checkbox' id='check{$i}' onclick='validar(this,{$i})' style='vertical-align: middle;'/>
+							<span style='color: #000;'>Guardar en productos<span> 
+							<input type='checkbox' id='check{$i}' onclick='validar(this,{$i});' style='vertical-align: middle;'/>
 						</div>
 						<div class='msj-egresos' id='mensaje{$i}'></div>
+						
 					</div>
 				</li>
 					<div id='fade' class='overlay-egresos cerrarDatos'></div>
@@ -79,15 +86,15 @@
 				</li>
 				<li>
 					<label>Descripción ".$i.":</label>
-					<input type='text' name='conceptosFactura[".$i."][descripcionC]' maxlength='255' value='".$conceptosComprobante['descripcionConceptoE']."' autocomplete='off'>
+					<input type='text' id='desc{$i}' name='conceptosFactura[".$i."][descripcionC]' maxlength='255' value='".$conceptosComprobante['descripcionConceptoE']."' autocomplete='off'>
 				</li>
 				<li>
 					<label>Modelo ".$i.":</label>
-					<input type='text' name='conceptosFactura[".$i."][modeloC]' maxlength='20' value='".$conceptosComprobante['modeloConceptoE']."' autocomplete='off'>
+					<input type='text' id='model{$i}' name='conceptosFactura[".$i."][modeloC]' maxlength='20' value='".$conceptosComprobante['modeloConceptoE']."' autocomplete='off'>
 				</li>
 				<li>
 					<label>Valor Unitario ".$i.":</label>
-					<input type='text' name='conceptosFactura[".$i."][valorUnitarioC]' maxlength='10' value='".$conceptosComprobante['valorUnitarioConceptoE']."' autocomplete='off'>
+					<input type='text' id='price{$i}' name='conceptosFactura[".$i."][valorUnitarioC]' maxlength='10' value='".$conceptosComprobante['valorUnitarioConceptoE']."' autocomplete='off'>
 				</li>
 				<li>
 					<label>Importe Concepto ".$i.":</label>
@@ -224,17 +231,49 @@
 
 	function validar(obj,index) {
 		if(obj.checked == true) {
-			// let mostrar = `check${index}`;
-			// console.log(mostrar);
 			document.getElementById(`boton-ag${index}`).style.display='block';
-			console.log('si');
 		} else {
 			document.getElementById(`boton-ag${index}`).style.display='none';
-			console.log('no');
+			let idcon = `#agregados${index}`;
+			let men = `#texto${index}`;
+			$(idcon).remove();
+			$(men).remove();
 		}
 	}
 
+	let conceptosArrayJS = <?=json_encode($arrayConceptosComprobante)?>;
+
+	for(let i = 0 ; i < conceptosArrayJS.length ;i++){
+
+		let indice = ([i][0]) + 1;
+
+		$(`#check${indice}`).click(function(){
+			if( $(`#check${indice}`).attr('checked') ) {
+				let modeloConcepto = $(`#model${indice}`);
+
+				let valorModelo = modeloConcepto.val();
+				
+				if( valorModelo != "" ) {
+					let url = 'obtener_modelo.php';
+					$.ajax({
+						url,
+						type: 'POST',
+						data: {modelo: valorModelo, indice},
+						success: function(data) {
+							$("#registrarProd").html(data);
+						} 
+					});
+				}
+			}
+		});
+	}
+
 	function agregarDatos() {
+		let idco = `datos${$('#idconcepto').val()}`;
+		let num = $('#idconcepto').val();
+		let mesj = `mensaje${num}`;
+		let cambiar = `#check${num}`;
+
 		var categoria = $("#selcategoria").val();
 		var subcategoria = $("#selsubcategoria").val();
 		var division = $("#seldivision").val();
@@ -242,36 +281,89 @@
 		var tipo = $("#seltipo").val();
 		var marca = $("#selmarca").val();
 		var moneda = $("#selmoneda").val();
-		var datos = {
+		var modelo = $(`#model${num}`).val();
+		var precio = $(`#price${num}`).val();
+		var descripcion = $(`#desc${num}`).val();
+
+		if (categoria == 0) {
+      	  $("#selcategoria").focus();
+          $("#alerta1").fadeIn();
+          return false;
+	  	} else {
+      		$("#alerta1").fadeOut();
+	      	if (subcategoria == 0) {
+	      	  $("#selsubcategoria").focus();
+	          $("#alerta2").fadeIn();
+	          return false;
+		  	} else {
+				$("#alerta2").fadeOut();
+				if (division == 0) {
+					$("#seldivision").focus();
+					$("#alerta3").fadeIn();
+					return false;
+				} else {
+					$("#alerta3").fadeOut();
+					if (nombre == 0) {
+						$("#selnombre").focus();
+						$("#alerta4").fadeIn();
+						return false;
+					} else {
+						$("#alerta4").fadeOut();
+						if (tipo == 0) {
+							$("#seltipo").focus();
+							$("#alerta5").fadeIn();
+							return false;
+						} else {
+							$("#alerta5").fadeOut();
+							if (marca == 0) {
+								$("#selmarca").focus();
+								$("#alerta6").fadeIn();
+								return false;
+							} else {
+								$("#alerta6").fadeOut();
+								if (moneda == 0) {
+									$("#selmoneda").focus();
+									$("#alerta7").fadeIn();
+									return false;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+									  
+		let datos = {
 			cat: categoria,
 			sub: subcategoria,
 			div: division,
 			nom: nombre,
 			tip: tipo,
 			mar: marca,
-			mon: moneda
+			mon: moneda,
+			mod: modelo,
+			pre: precio,
+			des: descripcion
 		}
-		let idco = `datos${$('#idconcepto').val()}`;
-		let num = $('#idconcepto').val();
-		let mesj = `mensaje${num}`;
-		let cambiar = `#check${num}`;
-
-		let {cat, sub, div, nom, tip, mar, mon} = datos;
+		
+		let {cat, sub, div, nom, tip, mar, mon, mod, pre, des} = datos;
 		
 		let entradas = `
-		<input type='hidden' name='${idco}c[cat]' id='${idco}-cat' value='${cat}' disabled/>
-		<input type='hidden' name='${idco}c[sub]' id='${idco}-sub' value='${sub}' disabled/>
-		<input type='hidden' name='${idco}c[div]' id='${idco}-div' value='${div}' disabled/>
-		<input type='hidden' name='${idco}c[nom]' id='${idco}-nom' value='${nom}' disabled/>
-		<input type='hidden' name='${idco}c[tip]' id='${idco}-tip' value='${tip}' disabled/>
-		<input type='hidden' name='${idco}c[mar]' id='${idco}-mar' value='${mar}' disabled/>
-		<input type='hidden' name='${idco}c[mon]' id='${idco}-mon' value='${mon}' disabled/>`;
+		<div id='agregados${num}'>
+			<input type='hidden' name='dataProd[${num}][cat]' value='${cat}' readonly/>
+			<input type='hidden' name='dataProd[${num}][sub]' value='${sub}' readonly/>
+			<input type='hidden' name='dataProd[${num}][div]' value='${div}' readonly/>
+			<input type='hidden' name='dataProd[${num}][nom]' value='${nom}' readonly/>
+			<input type='hidden' name='dataProd[${num}][tip]' value='${tip}' readonly/>
+			<input type='hidden' name='dataProd[${num}][mar]' value='${mar}' readonly/>
+			<input type='hidden' name='dataProd[${num}][mon]' value='${mon}' readonly/>
+			<input type='hidden' name='dataProd[${num}][mod]' value='${mod}' readonly/>
+			<input type='hidden' name='dataProd[${num}][pre]' value='${pre}' readonly/>
+			<input type='hidden' name='dataProd[${num}][des]' value='${des}' readonly/>
+		</div>`;
 
 		document.getElementById(idco).innerHTML = entradas;
-		document.getElementById(mesj).innerHTML = `<p>Datos Agregados</p>`;
-		console.log(idco);
-		console.log(mesj);
-		console.log("array: ", datos);
+		document.getElementById(mesj).innerHTML = `<p id='texto${num}'>Datos Agregados</p>`;
 		$(cambiar).prop('checked', true);
 		$('#contenido').hide();
 		$('#fade').hide();

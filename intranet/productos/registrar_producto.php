@@ -21,7 +21,7 @@
 							<?php endforeach; ?>
 						</select>
 					</td>
-					<td><spam id="alerta1" class="errores">Selecciona categoria</spam><br></td>
+					<td><span id="alerta1" class="errores">Selecciona categoria</span><br></td>
 				</tr>
 				<tr>
 					<td><label>Subcategoría</label></td>
@@ -36,7 +36,7 @@
 							<?php endforeach; ?>
 						</select>
 					</td>
-					<td><spam id="alerta2" class="errores">Selecciona subcategoria</spam><br></td>
+					<td><span id="alerta2" class="errores">Selecciona subcategoria</span><br></td>
 				</tr>
 				<tr>
 					<td><label>División:</label></td>
@@ -51,7 +51,7 @@
 							<?php endforeach;?>
 						</select>
 					</td>
-					<td><spam id="alerta3" class="errores">Selecciona división</spam><br><td>
+					<td><span id="alerta3" class="errores">Selecciona división</span><br><td>
 				</tr>
 				<tr>
 					<td><label>Nombre :</label></td>
@@ -66,7 +66,7 @@
 							<?php endforeach;?>
 						</select>
 					</td>
-					<td><spam id="alerta4" class="errores">Selecciona nombre</spam><br></td>
+					<td><span id="alerta4" class="errores">Selecciona nombre</span><br></td>
 				</tr>
 				<tr>
 					<td><label>Tipo:</label>
@@ -81,7 +81,7 @@
 							<?php endforeach;?>		
 						</select>
 					</td>
-					<td><spam id="alerta5" class="errores">Selecciona tipo</spam><br></td>
+					<td><span id="alerta5" class="errores">Selecciona tipo</span><br></td>
 				</tr>
 				<tr>
 					<td><label>Marca :</label></td>
@@ -96,17 +96,17 @@
 							<?php endforeach;?>		
 						</select>
 					</td>
-					<td><spam id="alerta6" class="errores">Selecciona marca</spam><br></td>
+					<td><span id="alerta6" class="errores">Selecciona marca</span><br></td>
 				</tr>
 				<tr>
 					<td><label>Modelo :</label></td>
 					<td><input type="text" name="modelo" class="modelo"></td>
-					<td><spam id="alerta7" class="errores">Ingrese modelo</spam><br></td>
+					<td><span id="alerta7" class="errores">Ingrese modelo</span><br></td>
 				</tr>
 				<tr>
 					<td><label>Precio :</label></td>
 					<td><input type="text" name="precio" class="precio"><br></td>
-					<td><spam id="alerta8" class="errores">Ingrese precio</spam><br></td>
+					<td><span id="alerta8" class="errores">Ingrese precio</span><br></td>
 				</tr>
 				<tr>
 					<td><label> Moneda :</label></td>
@@ -134,13 +134,13 @@
 							<?php endforeach;?>
 						</select>
 					</td>
-					<td><spam id="alerta9" class="errores">Selecciona unidad</spam><br></td>
+					<td><span id="alerta9" class="errores">Selecciona unidad</span><br></td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<textarea name="descripcion" placeholder="Descripción del producto..." title="Descripción del producto" style="width:310px;height:90px;resize:none;" class="descripcion"></textarea>
 					</td>
-					<td><spam id="alerta10" class="errores">Ingresa la descripción</spam><br></td>
+					<td><span id="alerta10" class="errores">Ingresa la descripción</span><br></td>
 				</tr>
 			</table>
 			<div id="guardarProd"></div>
