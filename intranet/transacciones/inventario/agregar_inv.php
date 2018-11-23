@@ -7,7 +7,11 @@
 	$_SESSION["usuario"];
 	//termina inicio de sesion
 ?>
-<?php  include ("../../conexion.php");?>
+<?php 
+	require ('classInventario.php');
+	$funInv = new Inventario();
+?>
+
 <script type="text/javascript" src="../../js/configuracion.js"></script>
 <div>
 	<center>
@@ -33,14 +37,11 @@
 							<td>
 								<!-- PROVEEDOR -->
 								<select name="idProveedor" required>
+									<option value="" selected>Selecciona Proveedor</option>
 								<?php
-									$consulta=mysql_query("SELECT * FROM proveedores");
-									if($fila=mysql_fetch_array($consulta)){
-										echo'<option value="" selected>Selecciona Proveedor</option>';
-										do{
-											echo'<option value="'.$fila["id_proveedor"].'">'.$fila["nom_proveedor"].'</option>';
-										}
-										while($fila=mysql_fetch_array($consulta));
+									$proveedores = $funInv->getProveedores();
+									foreach ( $proveedores as $proveedor) {
+										echo'<option value="'.$proveedor["id_proveedor"].'">'.$proveedor["nom_proveedor"].'</option>';
 									}
 								?>		
 								</select>
@@ -48,11 +49,10 @@
 							<td>
 								<!-- STATUS -->
 								<?php
-									$consulta=mysql_query("SELECT * FROM status_inventario WHERE id_status=4");
-									$fila=mysql_fetch_array($consulta);
+									$status = $funInv->getStatus();
 								?>
-								<input type="hidden" name="idStatus" value="<?=$fila['id_status']?>" readonly>
-								<input type="text" value="<?=$fila['nombre_status']?>" readonly>					
+								<input type="hidden" name="idStatus" value="<?=$status['id_status']?>" readonly>
+								<input type="text" value="<?=$status['nombre_status']?>" readonly>					
 							</td>
 						</tr>
 						<tr> <td><hr></td> <td><hr></td> </tr>
@@ -67,17 +67,14 @@
 					  			<label> Categoría:</label>
 								<select id="categoria" required>
 									<option value="">Selecciona categoría</option>
-									<?php 
-										$query = "SELECT pro.id_categoria, cat.nombre_categoria 
-												  FROM categorias cat INNER JOIN productos pro ON cat.id_categoria=pro.id_categoria
-												  WHERE pro.descontinuado = 'No'
-												  GROUP BY cat.nombre_categoria;";
-										$result=mysql_query($query);
-										while($fila=mysql_fetch_array($result)){
-											echo "<option value='".$fila[0]."'>".$fila[1]."</option>";
+									
+									<?php
+										$categorias = $funInv->getCategoriasProd();
+										foreach ($categorias as $categoria) {
+											echo "<option id='cat' value='".$categoria['id_categoria']."'>".$categoria['nombre_categoria']."</option>";
 										}
 									?>
-								</select>
+								</select></div>
 							</td>
 							<td>	
 							  	<label> Subcategoría:</label>
@@ -203,12 +200,10 @@
 								<select name="idEstado" required>
 									<option value="" selected>Selecciona Estado</option>
 									<?php
-										$consulta=mysql_query("SELECT id_estado,nombre_estado FROM estados ORDER BY nombre_estado");
-										if($fila=mysql_fetch_array($consulta)){
-											do{
-												echo'<option value="'.$fila["id_estado"].'">'.$fila["nombre_estado"].'</option>';
-											}
-											while($fila=mysql_fetch_array($consulta));
+										$estados = $funInv->getEstado();
+
+										foreach ($estados as $estado) {
+											echo'<option value="'.$estado["id_estado"].'">'.$estado["nombre_estado"].'</option>';
 										}
 									?>
 								</select>
@@ -217,12 +212,10 @@
 								<select name="idUbicacion" required>
 									<option value="" selected>Selecciona Ubicación</option>
 									<?php
-										$consulta=mysql_query("SELECT id_ubicacion,nombre_ubicacion FROM ubicaciones ORDER BY nombre_ubicacion");
-										if($fila=mysql_fetch_array($consulta)){
-											do{
-												echo'<option value="'.$fila["id_ubicacion"].'">'.$fila["nombre_ubicacion"].'</option>';
-											}
-											while($fila=mysql_fetch_array($consulta));
+										$ubicaciones = $funInv->getUbicacion();
+
+										foreach ($ubicaciones as $ubicacion) {
+											echo'<option value="'.$ubicacion["id_ubicacion"].'">'.$ubicacion["nombre_ubicacion"].'</option>';
 										}
 									?>
 								</select>
@@ -247,11 +240,8 @@
 						<tr>
 							<th>Transacción
 								<?php 
-									$query = "SELECT id_transaccion FROM transacciones ORDER BY id_transaccion DESC LIMIT 1";
-									$result=mysql_query($query);
-										
-									$fila = mysql_fetch_array($result);
 									
+									$fila = $funInv->getFilaTransaccion();
 									if ($fila[0] == 0) {
 										$id_i = 1;	
 									}
@@ -272,13 +262,11 @@
 						<tr>
 							<td align="center">
 								<?php 
-									$query = "SELECT * FROM tipo_transaccion where id_tipo_transaccion=1";
-									$result=mysql_query($query);
-									$fila=mysql_fetch_array($result);
+									$tipoTra = $funInv->getTipoTransaccion(); 
 								?>
 					  			<label>Tipo transacción:</label><br>
-			    				<input type="hidden" name="idTipoTransaccion" value="<?=$fila[0]?>" readonly>
-			    				<input type="text" value="<?=$fila[1]?>" readonly>
+			    				<input type="hidden" name="idTipoTransaccion" value="<?=$tipoTra[0]?>" readonly>
+			    				<input type="text" value="<?=$tipoTra[1]?>" readonly>
 							</td>
 						</tr>
 						<tr>

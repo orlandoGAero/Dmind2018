@@ -1,26 +1,22 @@
 <?php
- if(isset($_POST["id_nombre"]))
- {
-    $opciones = '<option value="">Selecciona una marca</option>';
-    $conexion= new mysqli("localhost","root","","digitalm",3306);
-
-    $id_tipo="id_tipo";
-    $id_division="id_division";
-    $id_subcategoria="id_subcategoria";
-
-    $strConsulta = "SELECT DISTINCT P.id_marca, M.nombre_marca 
-                    FROM productos P INNER JOIN marca_productos M ON P.id_marca=M.id_marca 
-                    WHERE id_categoria = " . $_POST['id_categoria'] .   
-                    " AND id_subcategoria = " . $_POST['id_subcategoria'] . 
-                    " AND id_division = " . $_POST['id_division'] . 
-                    " AND id_nombre = " . $_POST['id_nombre'] . 
-                    " AND id_tipo = " . $_POST['id_tipo'] . "
-                     AND P.descontinuado = 'No';";
-    $result = $conexion->query($strConsulta);
-    while( $fila = $result->fetch_array() )
+    require_once('classInventario.php');
+    $Inv = new Inventario();
+    
+    if(isset($_POST["id_nombre"]))
     {
-       $opciones.='<option value="'.$fila["id_marca"].'">'.$fila["nombre_marca"].'</option>';
+        $opciones = '<option value="">Selecciona una marca</option>';
+
+        $cat = $_POST['id_categoria'];
+        $subCat = $_POST['id_subcategoria'];
+        $division = $_POST['id_division'];
+        $nombre = $_POST['id_nombre'];
+        $tipo = $_POST['id_tipo'];
+
+        $marcas = $Inv->getMarcasProd($cat, $subCat, $division, $nombre, $tipo);
+        
+        foreach ($marcas as $marca) {
+            $opciones.='<option value="'.$marca["id_marca"].'">'.$marca["nombre_marca"].'</option>';
+        }
+        echo $opciones;
     }
-     echo $opciones;
- }
 ?>

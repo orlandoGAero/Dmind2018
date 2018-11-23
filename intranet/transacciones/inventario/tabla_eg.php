@@ -3,15 +3,14 @@
     <!-- CSS --><link rel="stylesheet" type="text/css" href="../../libs/dataTables/css/datatables.css">
     <!-- JS --><script type="text/javascript" src="../../libs/dataTables/js/jquery.dataTables.js" ></script>
     <!-- JS Filtrar Columnas --><script type="text/javascript" src="../../libs/dataTables/js/dataTables.columnFilter.js" ></script>
-<?php  include ("../../conexion.php");?>
-<?php 
-	$sql = "SELECT fecha,rfc_emisor,razon_social_emisor,serie,no_folio
-FROM egresos";
-	$ejecutar = mysql_query($sql) or die(mysql_error());
-	$filas = mysql_num_rows($ejecutar);
+<?php
+	require ('classInventario.php');
+	$funInv = new Inventario();
+
+	$egresos = $funInv->getEgInv();
 ?>
 <h1>Egresos</h1>
-<?php if($filas >= 1): ?>
+<?php if($funInv->getEgInv()): ?>
 <table cellspacing="0" cellpadding="2" class="display" id="egre">
 	<thead>	
 		<tr>
@@ -24,7 +23,10 @@ FROM egresos";
 		</tr>
 	</thead>
 	<tbody>
-		<?php while($row=mysql_fetch_assoc($ejecutar)):?>
+		<?php 
+			foreach ($egresos as $row):
+			$id_eg = $row['idegresos'];
+		?>
 			<tr>
 				<td><?=$row['fecha']?></td>
 				<td><?=$row['rfc_emisor']?></td>
@@ -33,13 +35,14 @@ FROM egresos";
 				<td><?=$row['no_folio']?></td>
 				<td>
 					<form>
+						<input type="hidden" name="txt_ideg" id="eg" value="<?=$id_eg?>">
 						<input type="hidden" name="txt_serie" value="<?=$row['serie']?>">
 						<input type="hidden" name="txt_folio" value="<?=$row['no_folio']?>">
-						<button type="submit" class="btn-form"><img src="../../images/add2.png" alt="Obtener Datos" title="Obtener Datos"></button>
+						<button class="cargar-conceptos"><img src="../../images/open-eye.png"/></button>
 					</form>
 				</td>
 			</tr>
-		<?php endwhile; ?>
+		<?php endforeach; ?>
 	</tbody>
 	<tfoot style="display:table-header-group;">
 			<tr>
@@ -52,6 +55,8 @@ FROM egresos";
 			</tr>
 	</tfoot>
 </table>
+<div id="contenido" class="modal-c"></div>
+
 <?php else:?>
 	<div class="vacio">
 		<center>(Sin registros)</center>
@@ -59,14 +64,15 @@ FROM egresos";
 <?php endif; ?>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('.btn-form').bind('click',function(add){
-			add.preventDefault();
-			formCargar = this.form;
-			$('#cargar').load('cargar_val.php',$(formCargar).serialize());
-			$('#divTabla').hide();
-			$('#fade').hide();
-			return false;
-		});
+		// $('.btn-form').bind('click',function(add){
+		// 	add.preventDefault();
+		// 	formCargar = this.form;
+		// 	$('#cargar').load('cargar_val.php',$(formCargar).serialize());
+		// 	$('#divTabla').hide();
+		// 	$('#fade').hide();
+		// 	$("#contenido").hide();
+		// 	return false;
+		// });
 
 		// DataTable
 		jQuery('#egre').dataTable({ 
@@ -101,5 +107,27 @@ FROM egresos";
 	    		null
 	    	]
 	    });
+
+		$(".cargar-conceptos").click(function(e){
+			e.preventDefault();
+			$.ajax({
+				url: 'ver_conceptos.php',
+				data: {
+					id_egreso: e.currentTarget.form[0].value,
+					serie: e.currentTarget.form[1].value,
+					folio: e.currentTarget.form[2].value
+				},
+				success: function(res) {
+					let listaConceptos = $("#contenido");
+					listaConceptos.append(res);
+					listaConceptos.show();
+					$("#cerrar-contenido").click(function(){
+						listaConceptos.hide();
+						$('#divTabla').hide();
+						$('#fade').hide();
+					});
+				}
+			})
+		});
 	});
 </script>

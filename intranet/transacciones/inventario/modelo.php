@@ -1,24 +1,23 @@
 <?php
- if(isset($_POST["id_nombre"]))
- {
-    $opciones = '<option value="">Selecciona un modelo</option>';
-    $conexion= new mysqli("localhost","root","","digitalm",3306);
-    
-    $strConsulta = "SELECT id_producto,modelo FROM productos
-                    WHERE id_categoria = " . $_POST['id_categoria'] .
-                    " AND id_subcategoria = " . $_POST['id_subcategoria'] .
-                    " AND id_division = " . $_POST['id_division'] .                   
-                    " AND id_nombre = " . $_POST['id_nombre'] .                
-                    " AND id_tipo = " . $_POST['id_tipo'] .              
-                    " AND id_marca = " . $_POST['id_marca'] . "
-                     AND descontinuado = 'No';"; 
-    $result = $conexion->query($strConsulta);
-?>
-<?php
-    while( $fila = $result->fetch_array() )
+    require_once('classInventario.php');
+    $Inv = new Inventario();
+
+    if(isset($_POST["id_nombre"]))
     {
-       $opciones.='<option value="'.$fila["id_producto"].'">'.$fila["modelo"].'</option>';
+        $cat = $_POST['id_categoria'];
+        $subCat = $_POST['id_subcategoria'];
+        $division = $_POST['id_division'];
+        $nombre = $_POST['id_nombre'];
+        $tipo = $_POST['id_tipo'];
+        $marca = $_POST['id_marca'];
+
+        $opciones = '<option value="">Selecciona un modelo</option>';
+        
+        $modelo = $Inv->getModeloProd($cat, $subCat, $division, $nombre, $tipo, $marca);
+
+        foreach ($modelo as $mod) {
+            $opciones.='<option value="'.$mod["id_producto"].'">'.$mod["modelo"].'</option>';
+        }
+        echo $opciones;
     }
-     echo $opciones;
- }
 ?>

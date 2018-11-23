@@ -1,43 +1,10 @@
-<?php include ("../../conexion.php") ?>
-<?php require_once("../../libs/encrypt_decrypt_strings_urls.php") ?>
 <?php 
-  	$query="SELECT 
-			  inv.id_inventario,
-			  prov.nom_proveedor,
-			  nomProd.nombre,
-			  prod.modelo,
-			  tiProd.nombre_tipo,
-			  maProd.nombre_marca,
-			  inv.no_serie,
-			  inv.no_factura,
-			  estProd.nombre_estado,
-			  staInv.nombre_status,
-			  ubicInv.nombre_ubicacion,
-			  inv.id_producto
-			FROM
-			  inventario inv
-			 LEFT JOIN proveedores prov 
-			  ON inv.id_proveedor = prov.id_proveedor
-			 LEFT JOIN productos prod
-			  ON inv.id_producto = prod.id_producto
-			 INNER JOIN nombres nomProd
-			  ON nomProd.id_nombre = prod.id_nombre
-			 INNER JOIN tipos tiProd
-			  ON tiProd.id_tipo = prod.id_tipo
-			 INNER JOIN marca_productos maProd
-			  ON maProd.id_marca = prod.id_marca
-			 LEFT JOIN estados estProd
-			  ON inv.id_estado = estProd.id_estado
-			 LEFT JOIN status_inventario staInv
-			  ON inv.id_status = staInv.id_status
-			 LEFT JOIN ubicaciones ubicInv
-			  ON inv.id_ubicacion = ubicInv.id_ubicacion
-			ORDER BY inv.id_producto ASC;";
-  	$result=mysql_query($query);
-  	$row = mysql_num_rows($result);
-?>
+	require_once("../../libs/encrypt_decrypt_strings_urls.php");
+	require ('classInventario.php');
 
-<?php if($row >= 1) :?>
+	$funInv = new Inventario();
+	if ($DatosInv = $funInv->obtenerInventario()) :
+?>
 <table class="display" id="inv">
 	<thead>
 		<tr>
@@ -57,26 +24,26 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php while($fila=mysql_fetch_assoc($result)) :?>
+		<?php foreach ($DatosInv as $resultInv) :?>
 		<tr>
-			<td><?="00".$fila['id_inventario']?></td>
-			<td><?=$fila['nom_proveedor']?></td>
-			<td><?=$fila['nombre']."-".$fila['modelo']?></td>
-			<td><?=$fila['nombre_tipo']?></td>
-			<td><?=$fila['nombre_marca']?></td>
-			<td align="center"><?=$fila['no_serie']?></td>
-			<td align="center"><?=$fila['no_factura']?></td>
-			<td><?=$fila['nombre_estado']?></td>
-			<td><?=$fila['nombre_status']?></td>
-			<td align="center"><?=$fila['nombre_ubicacion']?></td>
+			<td><?="00".$resultInv['id_inventario']?></td>
+			<td><?=$resultInv['nom_proveedor']?></td>
+			<td><?=$resultInv['nombre']."-".$resultInv['modelo']?></td>
+			<td><?=$resultInv['nombre_tipo']?></td>
+			<td><?=$resultInv['nombre_marca']?></td>
+			<td align="center"><?=$resultInv['no_serie']?></td>
+			<td align="center"><?=$resultInv['no_factura']?></td>
+			<td><?=$resultInv['nombre_estado']?></td>
+			<td><?=$resultInv['nombre_status']?></td>
+			<td align="center"><?=$resultInv['nombre_ubicacion']?></td>
 			<td>
-				<?php $idInv = encrypt($fila['id_inventario'],"intranetdminventario") ?>
+				<?php $idInv = encrypt($resultInv['id_inventario'],"intranetdminventario") ?>
 				<a href="detalle.php?product=<?=$idInv?>">
 					<img src="../../images/detalle.png" title="Detalle" alt="Detalle">
 				</a>
 			</td>
 			<td>
-				<?php if($fila['nombre_status'] == "INVENTARIADO") :?>
+				<?php if($resultInv['nombre_status'] == "INVENTARIADO") :?>
 					<a href="editar.php?product=<?=$idInv?>">
 						<img src="../../images/editar.png" title="Editar" alt="Editar">
 					</a>
@@ -88,7 +55,7 @@
 				</a>
 			</td>
 		</tr>
-		<?php endwhile; ?>
+	<?php endforeach; ?>
 	</tbody>
 	<tfoot style="display:table-header-group;">
 		<tr>

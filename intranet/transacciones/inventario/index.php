@@ -55,12 +55,11 @@
 		<div id="tb_inv">
 			<?php if(isset($_GET['n']) && isset($_GET['m'])): ?>
 				<?php
-				require ('classInventario.php');
-				$funInv = new Inventario(); 
+					require ('classInventario.php');
+					$funInv = new Inventario(); 
 				?>
 				<?php include 'tabla_inv_filtrada.php'; ?>
 			<?php else: ?>
-				<?php include ("../../conexion.php") ?>
 				<?php include 'tabla_inv.php'; ?>
 			<?php endif; ?>
 		</div>

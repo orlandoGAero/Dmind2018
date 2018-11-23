@@ -1,8 +1,9 @@
 <?php
-	include ("../../conexion.php");
-	$query ="SELECT id_inventario FROM inventario ORDER BY id_inventario DESC LIMIT 1";
-	$result=mysql_query($query);
-	$fila=mysql_fetch_array($result);
+	require ('classInventario.php');
+	$funInv = new Inventario();
+
+	$fila = $funInv->getFilaInventario();
+
 	 if($fila[0]=="NULL"){
 	 	$IDinventario=1;
 	 }else{
@@ -23,55 +24,49 @@
 	$IDubicacion = $_REQUEST["idUbicacion"];
 	$color = $_REQUEST["color"];
 	$IDtransaccion = $_REQUEST["idTransaccion"];
-
+	
 	$flag = 0;
 
 	if ($flag == 0) {
-		$sql = "SELECT no_serie
-				FROM inventario
-				WHERE  no_serie = '".$NumSerie."' AND id_inventario !=" . $IDinventario;
-		$ejecutar = mysql_query($sql) or die(mysql_error());
-		$filas = mysql_num_rows($ejecutar);
+		$filas = $funInv->getNoSerieDuplicado($NumSerie, $IDinventario);
 	 	if($filas != 0) {
 			echo "<div class='errorAddInv'><h3>No. de Serie:" . $NumSerie . " duplicado, por favor ingresa otro.</h3></div>";
 			$flag = 1;
 		}
+
 	}
 
 	if ($flag == 0) {
-		$color = mb_strtoupper($color);
-		$descripcion = mb_strtoupper($descripcion);
-		$NumSerie = mb_strtoupper($NumSerie);
-		$PedidoDeImportacion = mb_strtoupper($PedidoDeImportacion);
-		$NumFactura = mb_strtoupper($NumFactura);
 
-		$sql="INSERT INTO inventario VALUES (".$IDinventario.",".$IDproveedor.",".$IDproducto.",'".$NumSerie."','".$PedidoDeImportacion."','".$NumFactura."',".$IDestado.",".$IDstatus.",".$IDubicacion.",'".$color."');";
-		$sql=mysql_query($sql);
+		if ($_REQUEST['txtCantidad'] == "" || $_REQUEST['txtCantidad'] == 0) {
 
-		$ejecutar="INSERT INTO transacciones VALUES (".$IDtransaccion.",'".$fechaTransacc."',".$IDinventario.",".$IDtipoTransacion.",'".$descripcion."')";
-		$ejecutar=mysql_query($ejecutar);
+			$color = mb_strtoupper($color);
+			$descripcion = mb_strtoupper($descripcion);
+			$NumSerie = mb_strtoupper($NumSerie);
+			$PedidoDeImportacion = mb_strtoupper($PedidoDeImportacion);
+			$NumFactura = mb_strtoupper($NumFactura);
+	
+			$funInv->saveInventario($IDinventario,$IDproveedor,$IDproducto,$NumSerie,$PedidoDeImportacion,
+									$NumFactura,$IDestado,$IDstatus,$IDubicacion,$color);
+			
+			$funInv->saveTransacciones($IDtransaccion,$fechaTransacc,$IDinventario,$IDtipoTransacion,$descripcion);
+	
+			$existencia = $funInv->getExistencias($IDproducto);
+	
+			$total = $existencia + 1;
+	
+			$funInv->setExistencia($total, $IDproducto);
+		}
 
-		$sql="SELECT exit_inventario FROM productos WHERE id_producto=$IDproducto";
-		$result=mysql_query($sql);
-		while($fila=mysql_fetch_array($result)){	
-		 	$tot=$fila[0];
-	 	}
-
-		$total=$tot+1;
-
-		$sent="UPDATE productos SET exit_inventario=$total WHERE id_producto=$IDproducto";
-		$sent=mysql_query($sent);
-		// Guardar mas de un registro.
 		if (isset($_REQUEST['txtCantidad'])) {
 			if ($_REQUEST['txtCantidad'] != "" || $_REQUEST['txtCantidad'] != 0) {
-				require 'classInventario.php';
-				$fnInventario = new Inventario();
 				$cantProd = $_REQUEST['txtCantidad'];
+				// Guardar mas de un registro.
 				for ($i=1; $i <= $cantProd; $i++) { 
-					$idInvent = $fnInventario -> incrementoInventario();
-					$IDtransaccion = $fnInventario -> incrementoTransaccion();
+					$idInvent = $funInv -> incrementoInventario();
+					$IDtransaccion = $funInv -> incrementoTransaccion();
 					$numSerieInt = $NumSerie.$i;
-					$fnInventario -> registrarInventario($idInvent,$IDproveedor,$IDproducto,$numSerieInt,$PedidoDeImportacion,$NumFactura,$IDestado,$IDstatus,$IDubicacion,$color,
+					$funInv -> registrarInventario($idInvent,$IDproveedor,$IDproducto,$numSerieInt,$PedidoDeImportacion,$NumFactura,$IDestado,$IDstatus,$IDubicacion,$color,
 														$IDtransaccion,$fechaTransacc,$IDtipoTransacion,$descripcion);
 				}
 			}

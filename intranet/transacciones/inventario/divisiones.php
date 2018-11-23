@@ -1,18 +1,19 @@
 <?php
- if(isset($_POST["id_subcategoria"]))
- {
-    $divis = '<option value="">Selecciona División</option>';
-    $conexion= new mysqli("localhost","root","","digitalm",3306);
+    require_once('classInventario.php');
+    $Inv = new Inventario();
 
-    $strConsulta = "SELECT DISTINCT P.id_division, D.nombre_division 
-                    FROM productos P INNER JOIN division D ON P.id_division=D.id_division
-                    WHERE id_categoria = " . $_POST["id_categoria"] . " AND P.id_subcategoria = " . $_POST["id_subcategoria"] . "
-                     AND P.descontinuado = 'No';";
-    $result = $conexion->query($strConsulta);
-    while( $fila = $result->fetch_array() )
+    if(isset($_POST["id_subcategoria"]))
     {
-       $divis.='<option value="'.$fila["id_division"].'">'.$fila["nombre_division"].'</option>';
+        $cat = $_POST['id_categoria'];
+        $subCat = $_POST['id_subcategoria'];
+        $divis = '<option value="">Selecciona División</option>';
+        
+        $divisiones = $Inv->getDivisionesProd($cat, $subCat);
+
+        foreach ($divisiones as $division)
+        {
+            $divis.='<option value="'.$division["id_division"].'">'.$division["nombre_division"].'</option>';
+        }
+        echo $divis;
     }
-     echo $divis;
- }
 ?>

@@ -101,7 +101,6 @@
 
 /*Estilos etiquetas de formulario*/
 
-}
 select {
   padding: initial;
 }
@@ -188,7 +187,7 @@ a.add_provee {
    left: 0;
    width: 100%;
    height: 100%;
-   background: #fdfdfd;
+   background: rgba(22, 85, 91);
    z-index:1001;
    opacity:.75;
    -moz-opacity: 0.75;
@@ -198,13 +197,14 @@ a.add_provee {
 .modal {
    display: none;
    position: fixed;
-   /*position: absolute;*/
-   top: 18%;
-   left: 25%;
-   width: 50%;
-   height: 418px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: auto;
+   height: auto;
+   max-height: 80%;
+   background: rgb(15, 32, 34);
    padding: 5px;
-   background: url(../images/bg.jpg);
    z-index:1002;
    overflow: auto;
    border-radius: 10px;
@@ -213,12 +213,12 @@ a.add_provee {
 .modal-egresos {
   display: none;
   position: fixed;
-  top: 25%;
-  left: 33%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: auto;
   height: auto;
   padding: 5px;
-  /* background: rgba(0, 0, 0, 0.466); */
   z-index:1002;
   overflow: auto;
   border-radius: 10px;
@@ -302,5 +302,68 @@ input[type=text]:-moz-read-only{
   color: #237e86;
 }
 /*
-  estilo guardar producto egresos
+  estilo cargar conceptos inventario
 */
+
+.tabla {
+  display: table;
+  background-color: #fdfdfd;
+  margin: 10% 5%;
+}
+
+.tittle {
+  display: table-caption;
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+  color: rgb(9, 87, 99);
+  padding: 5px;
+}
+
+.fila {
+  display: table-row;
+}
+
+.cabeceras {
+  display: table-row;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  background-color: #16555b;
+}
+
+.columna {
+  display: table-cell;
+  padding: 5px;
+  border: solid #16555b;
+  border-width: thin;
+}
+
+.modal-c {
+  display: none;
+  background-color: rgba(255, 255, 255, .9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  max-height: auto;
+  width: 100%;
+  overflow: auto;
+}
+
+.cerrar-modal {
+		position: absolute;
+		top: 1em;
+		right: 1em;
+		z-index: 100;
+		color: #fff;
+		font-weight: bold;
+		cursor: pointer;
+    background: tomato;
+    width: 25px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+}
+    
