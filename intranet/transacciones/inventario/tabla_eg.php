@@ -8,8 +8,9 @@
 	$funInv = new Inventario();
 
 	$egresos = $funInv->getEgInv();
+	
 ?>
-<h1>Egresos</h1>
+<h1>Egresos</h1><h3> (Facturas por Cargar)</h3>
 <?php if($funInv->getEgInv()): ?>
 <table cellspacing="0" cellpadding="2" class="display" id="egre">
 	<thead>	
@@ -19,13 +20,15 @@
 			<th>Razón Social Emisor</th>
 			<th>Serie</th>
 			<th>No.Folio</th>
-			<th>&nbsp;</th>
+			<th>Ver</th>
 		</tr>
 	</thead>
 	<tbody>
 		<?php 
 			foreach ($egresos as $row):
 			$id_eg = $row['idegresos'];
+			$rfcE = $row['rfc_emisor'];
+			$nomProv = $funInv->getNombreProv($rfcE);
 		?>
 			<tr>
 				<td><?=$row['fecha']?></td>
@@ -38,7 +41,11 @@
 						<input type="hidden" name="txt_ideg" id="eg" value="<?=$id_eg?>">
 						<input type="hidden" name="txt_serie" value="<?=$row['serie']?>">
 						<input type="hidden" name="txt_folio" value="<?=$row['no_folio']?>">
-						<button class="cargar-conceptos"><img src="../../images/open-eye.png"/></button>
+						<input type="hidden" name="txt_nomprov" value="<?=$nomProv['nom_proveedor']?>">
+						<input type="hidden" name="txt_idprov" value="<?=$nomProv['id_proveedor']?>">
+						<button class="cargar-conceptos centrar">
+							<img src="../../images/open-eye.png"/>
+						</button>
 					</form>
 				</td>
 			</tr>
@@ -64,16 +71,7 @@
 <?php endif; ?>
 <script type="text/javascript">
 	$(document).ready(function(){
-		// $('.btn-form').bind('click',function(add){
-		// 	add.preventDefault();
-		// 	formCargar = this.form;
-		// 	$('#cargar').load('cargar_val.php',$(formCargar).serialize());
-		// 	$('#divTabla').hide();
-		// 	$('#fade').hide();
-		// 	$("#contenido").hide();
-		// 	return false;
-		// });
-
+		
 		// DataTable
 		jQuery('#egre').dataTable({ 
 	        // Damos formato a la paginación(números).
@@ -115,7 +113,9 @@
 				data: {
 					id_egreso: e.currentTarget.form[0].value,
 					serie: e.currentTarget.form[1].value,
-					folio: e.currentTarget.form[2].value
+					folio: e.currentTarget.form[2].value,
+					nom_prov: e.currentTarget.form[3].value,
+					id_prov: e.currentTarget.form[4].value
 				},
 				success: function(res) {
 					let listaConceptos = $("#contenido");

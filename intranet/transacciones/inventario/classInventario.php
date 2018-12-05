@@ -486,5 +486,31 @@
 			return $datos;
 
 		}
+
+		public function getNombreProv($rfc) {
+			$Conexion = new dataBaseConn();
+			$sql = "SELECT prov.id_proveedor, prov.nom_proveedor
+					FROM proveedores prov
+					INNER JOIN proveedores_datos_fiscales provdt ON prov.id_proveedor = provdt.id_proveedor
+					WHERE provdt.rfc_prov = :Rfc";
+			$query = $Conexion->prepare($sql);
+			$query->bindParam(':Rfc', $rfc);
+			$query->execute();
+			$prov = $query->fetch(PDO::FETCH_ASSOC);
+			return $prov;
+		}
+		// tal vez borrar
+		// public function getNomProvEg($idEgreso) {
+		// 	$Conexion = new dataBaseConn();
+		// 	$sql = "SELECT rfc_emisor
+		// 			FROM egresos
+		// 			WHERE idegresos = :IdEgreso;";
+		// 	$query = $Conexion->prepare($sql);
+		// 	$query->bindParam(':IdEgreso', $idEgreso);
+		// 	$query->execute();
+		// 	$rfcE = $query->fetch(PDO::FETCH_ASSOC);
+		// 	return $rfcE;
+		// }
+
 	}
 ?>
