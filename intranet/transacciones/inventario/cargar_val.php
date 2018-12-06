@@ -30,7 +30,7 @@
 	$tiene = $_REQUEST['serie'];
 	
 	$cantSel = count($checkA);
-	
+
 	if (isset($serie) && isset($folio) && isset($proveedor) && isset($idprov) 
 		&& isset($idcat) && isset($categorias) && isset($idsub) && isset($subcategorias) 
 		&& isset($iddiv) && isset($divisiones) && isset($idnom) && isset($nombres) 
@@ -401,7 +401,7 @@
 								
 								<div class='productosC tabContenido' id='pestana${i}'>
 								
-									<p><b>PRODUCTO${i}</b></p>
+									<p><b>PRODUCTO</b></p>
 
 									<div class='alinearC'>
 										<label class='tamanioC'>Categoría:</label>
@@ -469,7 +469,7 @@
 											</select>
 										</div>
 									</div>
-
+									
 									<div class='alinearC'>
 										<label class='tamanioC'>No. Serie:</label>`;
 
@@ -487,10 +487,14 @@
 														<input type="text" name="noSerie[${i}]" maxlength="14" required class="inputOculto mSerie" id="serie${i}" />
 														<img src="../../images/barcode-32.png" title="Generar No. Serie Interno" id="bntInterno${i}" class="bntInterno pointer mt3"/>
 													</div>`;
-										} else {
-											html += `<div id="inputBoton${i}">
-														<input type="text" name="noSerie[${i}]" maxlength="14" required class="inputOculto mSerie" />
-													</div>`;
+										} else if( validarSerie(i-1) == 'Si') {
+											let cantP = cargarCantidad(i-1);
+											for(let j = 1; j <= cantP; j++) {
+
+												html += `<div id="inputBoton${i}">
+															<input type="text" name="noSerie[${j}]" placeholder="Número de Serie (${j})" maxlength="14" required style="margin-bottom: 2px;"  class="inputOculto mSerie" />
+														</div>`;
+											}
 										}
 							html += `</div>`;
 
@@ -498,9 +502,7 @@
 								html += `	
 										<div class='tamanioC'>
 											<div>
-												<a id="minCant" style="cursor:pointer;"><img src="../../images/blue_min.png" title="Menos" alt="Menos" style="vertical-align: middle;"></a>
-												<input type="text" name="txtCantidad[${i}]" id="cantidad" class="numbers" value="${cargarCantidad(i-1)}" min="0" max="999" maxlength="3" style="width:25px; height:16px; ">
-												<a id="maxCant" style="cursor:pointer;"><img src="../../images/blue_max.png" title="Más" alt="Más" style="vertical-align: middle;"></a>
+												<input type="text" name="txtCantidad[${i}]" id="cantidad" class="numbers" value="${cargarCantidad(i-1)}" min="0" max="999" maxlength="3" style="width:25px; height:16px; " readonly>
 											</div>
 										</div>`;
 							}
@@ -545,7 +547,6 @@
 												<option value="" selected>Selecciona Ubicación</option>`;
 												let ubicaciones = <?= $ubicaciones?>;
 												ubicaciones.forEach((data) => {
-													console.log(data);
 													let {id_ubicacion, nombre_ubicacion} = data;
 													html += `<option value='${id_ubicacion}'>${nombre_ubicacion}</option>`;
 												});

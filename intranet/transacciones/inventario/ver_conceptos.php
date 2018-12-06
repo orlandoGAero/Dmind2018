@@ -80,9 +80,7 @@
                     <input type="hidden" name="txt_idpro[<?=$i?>]" value="<?=$idpro?>" readonly>
                     <input type="hidden" name="txt_modelo[<?=$i?>]" value="<?=$concepto['modelo_concepto_e']?>" readonly>
                     <input style="margin-left: 0;margin-top: auto; width: auto" 
-                            type="checkbox" name="agregar[<?=$i?>]" id="agregar"
-                            
-                    >
+                            type="checkbox" name="agregar[<?=$i?>]">
                 </div>
             </div>
         <?php endforeach; ?>
@@ -101,11 +99,18 @@
 <script>
     $('.btn-form').bind('click',function(add){
 			add.preventDefault();
+
+            if(!$("input[type='checkbox']").is(':checked')) {
+                alert('Favor de seleccionar al menos un producto');
+            } else if(!$("input[type='radio']").is(':checked')){
+                alert('Favor de seleccionar si el producto tiene numero de serie');
+            } else {
 			formCargar = this.form;
 			$('#cargar').load('cargar_val.php',$(formCargar).serialize());
 			$('#divTabla').hide();
 			$('#fade').hide();
 			$("#contenido").hide();
+            }
             return false;
 		});
 </script>
