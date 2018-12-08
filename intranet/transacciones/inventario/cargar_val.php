@@ -6,6 +6,20 @@
 
 	$ubicaciones = json_encode($funInv->getUbicacion());
 
+	$status = json_encode($funInv->getStatus());
+
+	$fila = $funInv->getFilaTransaccion();
+	if ($fila[0] == 0) {
+		$id_i = 1;	
+	}
+	else{
+		$id_i = $fila[0]+1;
+	}
+	
+	date_default_timezone_set('America/Mexico_City');
+	
+	$tipoTra = json_encode($funInv->getTipoTransaccion());
+	
 	$serie = $_REQUEST['txt_serie'];
 	$folio = $_REQUEST['txt_folio'];
 	$idprov = $_REQUEST['txt_idprov'];
@@ -92,12 +106,6 @@
 
 					let numConceptos = <?=$cantSel?>;
 
-					$('#txt_f').val('<?=$_REQUEST['txt_serie'].$_REQUEST['txt_folio']?>');
-					
-					let prov = $('#proveedor');
-					prov.find('option').remove();
-					prov.append(`<option value='<?=$idprov?>' selected><?=$proveedor?></option>`);
-					
 					let cargarIdCats = (indice) => {
 
 						let check = <?= json_encode($checkA) ?>;
@@ -373,13 +381,50 @@
 						let html = '';
 
 						let numCon = <?=$cantSel?>;
-						
+
+						let status = <?=$status?>;
+						let {id_status, nombre_status} = status;
+
+						let tipoTrans = <?=$tipoTra?>;
+
+						html += `
+							<div class='remover'>
+								<form method="POST" id="formularioInv">
+									<div class='productosC'>
+										<div class='alinearC'>
+											<label class='tamanioC'>Proveedor:</label>
+											<label class='tamanioC'>Status:</label>
+										</div>
+
+										<div class='alinearC'>
+											<div class='tamanioC'>
+												<select name="idProvee" id="provee" required>
+													<option value='<?=$idprov?>' selected><?=$proveedor?></option>
+												</select>
+											</div>
+											<div class='tamanioC'>
+												<input type="hidden" name="txt_idStatus" value="${id_status}" readonly>
+												<input type="text" value="${nombre_status}" readonly>	
+											</div>
+										</div>
+
+										<div class='alinearC'>
+											<label class='tamanioC'>Número de Factura Compra:</label>
+										</div>
+
+										<div class='alinearC'>
+											<div class='tamanioC'>
+												<input type="text" name="txt_noFactura" id="txt_fac" value="<?=$serie.$folio?>" style="height:27px;" maxlength="12"/>
+											</div>
+										</div>
+										<hr>
+									</div>`;
 						if(numCon > 1) {
 
-							html = `<div class='remover'>
+							html += `
 								<p class='productosC'>Se agregaron <b>${ numCon }</b> Conceptos</p>`;
 						} else {
-							html = `<div class='remover'>
+							html += `
 								<p class='productosC'>Se agrego <b>${ numCon }</b> Concepto</p>`;
 						}
 
@@ -464,7 +509,7 @@
 
 									<div class='alinearC'>
 										<div class='tamanioC'>
-											<select id="modelos[${i}]" class="producto" name="idProducto" required>
+											<select id="modelos[${i}]" class="producto" name="datosInv[${i}][idProducto]" required>
 												<option value='${cargarIdPro(i-1)}'>${cargarMod(i-1)}</option>
 											</select>
 										</div>
@@ -484,7 +529,7 @@
 
 										if ( validarSerie(i-1) == 'No') {
 											html += `<div id="inputBoton${i}">
-														<input type="text" name="noSerie[${i}]" maxlength="14" required class="inputOculto mSerie" id="serie${i}" />
+														<input type="text" name="datosInv[${i}][noSerie]" maxlength="14" required class="inputOculto mSerie" id="serie${i}" />
 														<img src="../../images/barcode-32.png" title="Generar No. Serie Interno" id="bntInterno${i}" class="bntInterno pointer mt3"/>
 													</div>`;
 										} else if( validarSerie(i-1) == 'Si') {
@@ -492,7 +537,7 @@
 											for(let j = 1; j <= cantP; j++) {
 
 												html += `<div id="inputBoton${i}">
-															<input type="text" name="noSerie[${j}]" placeholder="Número de Serie (${j})" maxlength="14" required style="margin-bottom: 2px;"  class="inputOculto mSerie" />
+															<input type="text" name="datosInv[${i}][noSerie][${j}]" placeholder="Número de Serie (${j})" maxlength="14" required style="margin-bottom: 2px;"  class="inputOculto mSerie" />
 														</div>`;
 											}
 										}
@@ -502,7 +547,14 @@
 								html += `	
 										<div class='tamanioC'>
 											<div>
-												<input type="text" name="txtCantidad[${i}]" id="cantidad" class="numbers" value="${cargarCantidad(i-1)}" min="0" max="999" maxlength="3" style="width:25px; height:16px; " readonly>
+												<input type="text" name="datosInv[${i}][txt_Cantidad]" value="${cargarCantidad(i-1)}" style="width:25px; height:16px; " readonly>
+											</div>
+										</div>`;
+							} else if ( validarSerie(i-1) == 'Si') {
+								html += `	
+										<div class='tamanioC'>
+											<div>
+												<input type="hidden" name="datosInv[${i}][txt_Cantidad]" value="0" style="width:25px; height:16px; " readonly>
 											</div>
 										</div>`;
 							}
@@ -517,12 +569,12 @@
 									<div class='alinearC'>
 										<div class='tamanioC'>
 											<div id="inputBoton">
-												<input type="text" class="inputOculto mPImport" id="txt_pi${i}" name="pedidoImportacion[${i}]" maxlength="35" required/>
+												<input type="text" class="inputOculto mPImport" id="txt_pi${i}" name="datosInv[${i}][pedidoImportacion]" maxlength="35" required/>
 												<img src="../../images/notapplies-24.png" title="N/A" id="btnPedImport${i}" class="btnPedImport pointer mt6">
 											</div> 
 										</div>
 										<div class='tamanioC'>
-											<input type="text" name="color" style="height:27px;" />
+											<input type="text" name="datosInv[${i}][color]" style="height:27px;" />
 										</div>
 									</div>
 
@@ -533,7 +585,7 @@
 
 									<div class='alinearC'>
 										<div class='tamanioC'>
-											<select name="idEstado[${i}]" required>
+											<select name="datosInv[${i}][idEstado]" required>
 												<option value="" selected>Selecciona Estado</option>`;
 												let estados = <?= $estados ?>;
 												estados.forEach((data) => {
@@ -543,7 +595,7 @@
 							html += `		</select>
 										</div>
 										<div class='tamanioC'>
-											<select name="idUbicacion[${i}]" required>
+											<select name="datosInv[${i}][idUbicacion]" required>
 												<option value="" selected>Selecciona Ubicación</option>`;
 												let ubicaciones = <?= $ubicaciones?>;
 												ubicaciones.forEach((data) => {
@@ -558,7 +610,44 @@
 								
 						}
 						
-						html += '</div>';
+						html += `
+									<div class='productosC'>
+										<div class='alinearC'>
+											<label class='tamanioC'>Transacción:</label>
+											<label class='tamanioC'>Tipo transacción:</label>
+										</div>
+
+										<div class='alinearC'>
+											<div class='tamanioC'>
+												<input value='<?=$id_i?>' type='text' name='txt_idTransaccion' style='width:20px;' readonly />
+											</div>
+											<div class='tamanioC'>
+												<input type="hidden" name="txt_idTipoTransaccion" value="${tipoTrans[0]}" readonly>
+												<input type="text" value="${tipoTrans[1]}" readonly>
+											</div>
+										</div>
+
+										<div class='alinearC'>
+											<label class='tamanioC'>Fecha:</label>
+											<label class='tamanioC'>Descripción:</label>
+										</div>
+
+										<div class='alinearC'>
+											<div class='tamanioC'>
+												<input type="text" name="txt_fechaAlta" value="<?=date("d-m-Y H:i:s");?>" readonly style="width:auto;">
+											</div>
+											<div class='tamanioC'>
+												<textarea name="descrip" cols="60" rows="3" style="resize:none;" class="textarea"></textarea>
+											</div>
+										</div>
+
+										<div>
+											<div id="cargar"></div>
+											<button type="submit" class="btn primary">Guardar</button>
+										</div>
+									</div>
+								</form>		
+							</div>`;
 
 						return html;	
 
@@ -581,6 +670,7 @@
 
 						document.getElementById(conceptoNom).style.display = "block";
 						evt.currentTarget.className += " active";
+						
 
 					}
 					
@@ -601,6 +691,12 @@
 							$(`#txt_pi${i}`).val('N/A');
 						});
 					}
+
+					$('#formularioInv').submit(function(guardar) {
+						$('#cargar').html('<div><img src="../../images/loader_blue.gif"/></div>');
+						guardar.preventDefault();
+						$("#guardarInv").load("guardar_varios.php?" + $("#formularioInv").serialize());
+					});
 
 				});
 				</script>
