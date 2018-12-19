@@ -34,8 +34,11 @@
 	<?php
 		$xmlEgresos = $classEgresos -> datosEgresosXML;
 		foreach ($xmlEgresos['conceptosComprobanteE'] as $key => $value) {
-			$conceptosXmlEgresos[] = array_merge($xmlEgresos['conceptosComprobanteE'][$key], $xmlEgresos['impuestosConceptosComprobanteE'][$key]);
+			$conceptosXmlEgresos[] = array_merge($xmlEgresos['conceptosComprobanteE'][$key], 
+												 $xmlEgresos['impuestosConceptosComprobanteE'][$key]/*,
+		$xmlEgresos['aduaneraE'][$key]*/);
 		}
+												// print_r($conceptosXmlEgresos)."\n";
 		$i = 0;
 		foreach ($conceptosXmlEgresos as $conceptosComprobante) {
 			// echo"<pre>";print_r($conceptosComprobante)."</pre>"."\n";

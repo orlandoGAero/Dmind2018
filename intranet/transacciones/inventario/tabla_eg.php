@@ -12,58 +12,59 @@
 ?>
 <h1>Egresos</h1><h3> (Facturas por Cargar)</h3>
 <?php if($funInv->getEgInv()): ?>
-<table cellspacing="0" cellpadding="2" class="display" id="egre">
-	<thead>	
-		<tr>
-			<th>Fecha</th>
-			<th>RFC Emisor</th>
-			<th>Razón Social Emisor</th>
-			<th>Serie</th>
-			<th>No.Folio</th>
-			<th>Ver</th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php 
-			foreach ($egresos as $row):
-			$id_eg = $row['idegresos'];
-			$rfcE = $row['rfc_emisor'];
-			$nomProv = $funInv->getNombreProv($rfcE);
-		?>
-			<tr>
-				<td><?=$row['fecha']?></td>
-				<td><?=$row['rfc_emisor']?></td>
-				<td><?=$row['razon_social_emisor']?></td>
-				<td><?=$row['serie']?></td>
-				<td><?=$row['no_folio']?></td>
-				<td>
-					<form>
-						<input type="hidden" name="txt_ideg" id="eg" value="<?=$id_eg?>">
-						<input type="hidden" name="txt_serie" value="<?=$row['serie']?>">
-						<input type="hidden" name="txt_folio" value="<?=$row['no_folio']?>">
-						<input type="hidden" name="txt_nomprov" value="<?=$nomProv['nom_proveedor']?>">
-						<input type="hidden" name="txt_idprov" value="<?=$nomProv['id_proveedor']?>">
-						<button class="cargar-conceptos centrar">
-							<img src="../../images/open-eye.png"/>
-						</button>
-					</form>
-				</td>
-			</tr>
-		<?php endforeach; ?>
-	</tbody>
-	<tfoot style="display:table-header-group;">
-			<tr>
-				<th class="search">Fecha</th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-			</tr>
-	</tfoot>
-</table>
-<div id="contenido" class="modal-c"></div>
-
+	<div id="status_inv">
+		<table cellspacing="0" cellpadding="2" class="display" id="egre">
+			<thead>	
+				<tr>
+					<th>Fecha</th>
+					<th>RFC Emisor</th>
+					<th>Razón Social Emisor</th>
+					<th>Serie</th>
+					<th>No.Folio</th>
+					<th>Ver</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php 
+					foreach ($egresos as $row):
+					$id_eg = $row['idegresos'];
+					$rfcE = $row['rfc_emisor'];
+					$nomProv = $funInv->getNombreProv($rfcE);
+				?>
+					<tr>
+						<td><?=$row['fecha']?></td>
+						<td><?=$row['rfc_emisor']?></td>
+						<td><?=$row['razon_social_emisor']?></td>
+						<td><?=$row['serie']?></td>
+						<td><?=$row['no_folio']?></td>
+						<td>
+							<form>
+								<input type="hidden" name="txt_ideg" id="eg" value="<?=$id_eg?>">
+								<input type="hidden" name="txt_serie" value="<?=$row['serie']?>">
+								<input type="hidden" name="txt_folio" value="<?=$row['no_folio']?>">
+								<input type="hidden" name="txt_nomprov" value="<?=$nomProv['nom_proveedor']?>">
+								<input type="hidden" name="txt_idprov" value="<?=$nomProv['id_proveedor']?>">
+								<button class="cargar-conceptos centrar">
+									<img src="../../images/open-eye.png"/>
+								</button>
+							</form>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+			<tfoot style="display:table-header-group;">
+					<tr>
+						<th class="search">Fecha</th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+					</tr>
+			</tfoot>
+		</table>
+		<div id="contenido" class="modal-c"></div>
+	</div>
 <?php else:?>
 	<div class="vacio">
 		<center>(Sin registros)</center>

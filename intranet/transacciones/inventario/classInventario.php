@@ -444,7 +444,10 @@
 		public function getEgInv() {
 			$Conexion = new dataBaseConn();
 			$query = $Conexion->prepare('SELECT idegresos,fecha,rfc_emisor,razon_social_emisor,serie,no_folio
-										FROM egresos');
+										FROM egresos
+										WHERE status_factura = :StatusInv;');
+			$status = 'Sin Capturar';
+			$query->bindParam(':StatusInv', $status);
 			$query->execute();
 			$eg = $query->fetchAll(PDO::FETCH_ASSOC);
 			return $eg;

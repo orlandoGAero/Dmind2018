@@ -7,7 +7,7 @@
 		// Obtener los egresos registrados.
 		public function listarEgresos() {
 			$Conexion = new dataBaseConn();
-			$query = $Conexion -> prepare("SELECT 
+			$query = $Conexion -> prepare("SELECT
 											eg.idegresos,
 											eg.fecha,
 											eg.rfc_emisor,
@@ -69,9 +69,9 @@
 						// t es una abreviación de: tfd
 						$xml -> registerXPathNamespace('t',$nodos['tfd']);
 					}
-					
+
 					if ($version == "3.2") { // Factura VERSIÓN 3.2
-						foreach ($xml -> xpath('//c:Comprobante') as $comprobante) {					
+						foreach ($xml -> xpath('//c:Comprobante') as $comprobante) {
 							$versionComprobante = trim($comprobante['version']);
 							$NumSerie = trim(mb_strtoupper($comprobante['serie']));
 							$NumFolio = trim($comprobante['folio']);
@@ -124,7 +124,7 @@
 																'modeloConceptoE'=>trim($concepto['noIdentificacion']),
 																'valorUnitarioConceptoE'=>trim($concepto['valorUnitario']),
 																'importeConceptoE'=>trim($concepto['importe'])
-															);				
+															);
 							$impuestosConceptosComprobante[] = array(
 																		'baseConceptoE'=>'',
 																		'impuestoConceptoE'=>'',
@@ -132,6 +132,7 @@
 																		'tasaCuotaConceptoE'=>'',
 																		'importeImpuestoConceptoE'=>''
 																	);
+							$infoAduanera[] = array('numeroPedimento' => '');
 						}
 
 						foreach ($xml -> xpath('//c:Comprobante//c:Impuestos') as $impuestos) {
@@ -154,7 +155,7 @@
 						}
 					} // Termina VERSIÓN 3.2
 					else if($version == "3.3") { // Factura VERSIÓN 3.3
-						foreach ($xml -> xpath('//c:Comprobante') as $comprobante) {					
+						foreach ($xml -> xpath('//c:Comprobante') as $comprobante) {
 							$versionComprobante = trim($comprobante['Version']);
 							$NumSerie = trim(mb_strtoupper($comprobante['Serie']));
 							$NumFolio = trim($comprobante['Folio']);
@@ -219,7 +220,9 @@
 																'modeloConceptoE'=>trim($concepto['NoIdentificacion']),
 																'valorUnitarioConceptoE'=>trim($concepto['ValorUnitario']),
 																'importeConceptoE'=>trim($concepto['Importe'])
-															);				
+
+															);
+
 						}
 
 						foreach ($xml -> xpath('//c:Comprobante//c:Conceptos//c:Concepto//c:Impuestos//c:Traslados//c:Traslado') as $impuestosConceptos) {
@@ -232,6 +235,8 @@
 																	);
 						}
 
+
+
 						foreach ($xml -> xpath('//c:Comprobante//c:Impuestos') as $impuestos) {
 							$totalDeImpuestos = trim($impuestos['TotalImpuestosTrasladados']);
 						}
@@ -242,6 +247,7 @@
 							$tasaCuotaImpuesto = trim($impuestosTranslados['TasaOCuota']);
 							$importeImpuesto = trim($impuestosTranslados['Importe']);
 						}
+
 
 						foreach ($xml -> xpath('//t:TimbreFiscalDigital') as $timbreFiscal) {
 							$FolioFiscal = trim($timbreFiscal['UUID']);
@@ -267,7 +273,7 @@
 					$this -> msjErr = "El archivo '".$nombreArchivo."', no cumple con el formato requerido.";
 					// Borrar el archivo cargado, si no cumple con el formato requerido
 					unlink($ruta);
-				}				
+				}
 			}
 
 			if ($band == 0) {
@@ -301,8 +307,9 @@
 							  	'rfcReceptorE'=>$rfcReceptor,
 							  	'nombreReceptorE'=>$nombreReceptor,
 							  	'usoCfdiReceptorE'=>$usoCfdiReceptor,
-							  	'conceptosComprobanteE'=>$conceptosComprobante,
-							  	'impuestosConceptosComprobanteE'=>$impuestosConceptosComprobante,
+								'conceptosComprobanteE'=>$conceptosComprobante,
+								'impuestosConceptosComprobanteE'=>$impuestosConceptosComprobante,
+								// 'aduaneraE'=>$infoAduanera,
 							  	'tipoImpuestoE'=>$tipoImpuesto,
 							  	'totalImpuestosE'=>$totalDeImpuestos,
 							  	'tipoFactorImpuestoE'=>$tipoFactorImpuesto,
@@ -320,7 +327,7 @@
 
 			// 	if($ejecutarConsulta){
 			// 		// $dir = explode("/", $ruta);
-			// 		// $dir1 = $dir[0]."/";					
+			// 		// $dir1 = $dir[0]."/";
 			// 		// $nuevoNombreArchivo = $dir1.$NumSerie."_".$NumFolio."_".$rfcEmisor.".xml";
 			// 		// $nuevoNombre = $NumSerie."_".$NumFolio."_".$rfcEmisor.".xml";
 			// 		// rename($ruta, $nuevoNombreArchivo);
@@ -369,7 +376,7 @@
 		// Detalle de Egresos.
 		public function detalleEgresos($idEgreso) {
 			$Conexion = new dataBaseConn();
-			$query = $Conexion -> prepare("SELECT 
+			$query = $Conexion -> prepare("SELECT
 											eg.idegresos,
 											eg.efecto_comprobante,
 											eg.tipo_comprobante,
@@ -414,11 +421,11 @@
 											eg.estado_comprobante,
 											eg.fecha_cancelacion,
 											eg.folio_fiscal,
-											eg.fecha_timbrado, 
+											eg.fecha_timbrado,
 											eg.sello_comprobante,
-											eg.rfc_proveedor 
+											eg.rfc_proveedor
 										   FROM
-											 egresos eg 
+											 egresos eg
 											 LEFT JOIN egresos_direcciones edir ON eg.idegresos = edir.id_egresos
 										   WHERE eg.idegresos = :IDegreso;");
 			$query -> bindParam(':IDegreso', $idEgreso);
@@ -429,7 +436,7 @@
 		//Conceptos Detalle Egresos.
 		public function conceptosDetalleEgresos($idEgreso) {
 			$Conexion = new dataBaseConn();
-			$query = $Conexion -> prepare("SELECT 
+			$query = $Conexion -> prepare("SELECT
 											egcon.id_egresos_conceptos,
 											egcon.clave_concepto_e,
 											egcon.cantidad_concepto_e,
@@ -444,7 +451,7 @@
 											egcon.tasacuota_impuesto_concepto_e,
 											egcon.importe_impuesto_concepto_e
 										   FROM
-										 	   egresos_conceptos egcon 
+										 	   egresos_conceptos egcon
 											    LEFT JOIN egresos eg ON eg.idegresos = egcon.id_egresos
 										   WHERE egcon.id_egresos = :IDegreso;");
 			$query -> bindParam(':IDegreso', $idEgreso);
@@ -486,7 +493,7 @@
 											WHERE epp.id_egresos = :IDegr;');
 			$query -> bindParam(':IDegr', $idEgreso);
 			$query -> execute();
-			$pagosPar = $query -> fetchAll(); 
+			$pagosPar = $query -> fetchAll();
 			return $pagosPar;
 		} // Fin función pagosParciales.
 		// Obtiene el Id del Saldo en los pagos completos del egreso.
@@ -520,7 +527,7 @@
 										   WHERE epc.id_egreso = :IDegr;');
 			$query -> bindParam(':IDegr', $idEgreso);
 			$query -> execute();
-			$pagosCom = $query -> fetchAll(); 
+			$pagosCom = $query -> fetchAll();
 			return $pagosCom;
 		} // Fin función pagosCompletos.
 		#INICIO de Funciones para Obtener de la BD Información que llena las Listas Desplegables.
@@ -808,7 +815,8 @@
 									 								fecha_timbrado,
 									 								sello_comprobante,
 									 								rfc_proveedor,
-									 								guardar_prov
+									 								guardar_prov,
+																	status_factura
 								 						 		)
 						 								VALUES (
 																:IDegreso,
@@ -850,7 +858,8 @@
 																:fechaTimbE,
 																:selloComp,
 																:rfcProv,
-																:regProv
+																:regProv,
+																:statusFac
 							 								);');
 				$consultaRegEgr -> bindParam(':IDegreso', $idEgreso);
 				$consultaRegEgr -> bindParam(':efectoCompE', $EfectoComprobante);
@@ -892,6 +901,8 @@
 				$consultaRegEgr -> bindParam(':selloComp', $SelloComprobante);
 				$consultaRegEgr -> bindParam(':rfcProv', $rfcProveedor);
 				$consultaRegEgr -> bindParam(':regProv', $guardarProv);
+				$facturaStatus = 'Sin capturar';
+				$consultaRegEgr -> bindParam(':statusFac', $facturaStatus);
 				$resultRegEgre = $consultaRegEgr -> execute();
 				// Registrar Conceptos de los egresos.
 				foreach ($ConceptosComprobante as $conceptosComp) {
@@ -918,7 +929,8 @@
 																tipofactor_impuesto_concepto_e,
 																tasacuota_impuesto_concepto_e,
 																importe_impuesto_concepto_e,
-																id_egresos
+																id_egresos,
+																inventariado
 															)
 													VALUES (
 																:clavConcepto,
@@ -934,7 +946,8 @@
 																:tipFactImpConc,
 																:tasaCuotaImpConc,
 																:importImpConc,
-																:IDegr
+																:IDegr,
+																:Inventariado
 															);");
 					$query -> bindParam(':clavConcepto', trim($conceptosComp['claveC']));
 					$query -> bindParam(':cantConcepto', trim($conceptosComp['cantidadC']));
@@ -950,10 +963,12 @@
 					$query -> bindParam(':tasaCuotaImpConc', trim($conceptosComp['tasaCuotaImpuestoC']));
 					$query -> bindParam(':importImpConc', trim($conceptosComp['importeImpuestoC']));
 					$query -> bindParam(':IDegr', $idEgreso);
+					$inventariado = 'No';
+					$query -> bindParam(':Inventariado', $inventariado);
 					$resultQuery = $query -> execute();
-					
+
 				}
-				
+
 				if($DatosProducto) {
 					foreach($DatosProducto as $datoProd) {
 						$query = "INSERT INTO productos (id_categoria,
@@ -968,7 +983,7 @@
 														id_unidad,
 														descripcion,
 														exit_inventario,
-														descontinuado) 
+														descontinuado)
 								VALUES (:IDcategoria,:IDsubcategoria,:IDdivision,:IDnombre,:IDtipo,
 														:IDmarca,:Modelo,:Precio,:Moneda,:IDunidad,:Descripcion,:Exist,:Descon)";
 						$sql = $Conexion->prepare($query);
@@ -989,7 +1004,7 @@
 						$sql->bindParam(':Exist',$existencias);
 						$sql->bindParam(':Descon',$descontinuado);
 						$result = $sql->execute();
-					} 
+					}
 				}
 
 				// Registrar dirección del Emisor, en caso de que exista.
@@ -1175,7 +1190,7 @@
 		// Datos de Egreso.
 		public function datosEditarEgreso($idEgreso) {
 			$Conexion = new dataBaseConn();
-			$query = $Conexion -> prepare("SELECT 
+			$query = $Conexion -> prepare("SELECT
 										  	eg.idegresos,
 											eg.efecto_comprobante,
 											eg.tipo_comprobante,
@@ -1222,11 +1237,11 @@
 											eg.estado_comprobante,
 											eg.fecha_cancelacion,
 											eg.folio_fiscal,
-											eg.fecha_timbrado, 
+											eg.fecha_timbrado,
 											eg.sello_comprobante,
-											eg.rfc_proveedor 
+											eg.rfc_proveedor
 										   FROM
-											 egresos eg 
+											 egresos eg
 											 LEFT JOIN egresos_direcciones edir ON eg.idegresos = edir.id_egresos
 										   WHERE eg.idegresos = :IDegreso;");
 			$query -> bindParam(':IDegreso', $idEgreso);
