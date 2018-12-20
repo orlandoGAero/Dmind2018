@@ -13,7 +13,7 @@ $valido=true;
         $host="localhost";
          $usuario="root";
          $contra="";
-         $db="dmind";
+         $db="digitalm";
         
         
          //establecer la conexion

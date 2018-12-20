@@ -9,8 +9,10 @@
 			try{
 				//conexion servidor
 				// parent::__construct('mysql:host=localhost;dbname=digitalm','desarrollo','entraradmin');
-				//conexion local
-				parent::__construct('mysql:host=localhost;dbname=dmind','root','');
+				//conexion local ubuntu
+				//parent::__construct('mysql:host=localhost;dbname=dmind','root','');
+                //conexion local win7
+                parent::__construct('mysql:host=localhost;dbname=digitalm','root','');
 				parent::setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 				parent::query('SET NAMES utf8');
 			}catch(Exception $ex){
