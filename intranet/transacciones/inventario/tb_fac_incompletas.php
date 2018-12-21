@@ -1,24 +1,12 @@
-<div id="FactSin">;
-	<link rel="stylesheet" type="text/css" href="../../css/busqueda.css">
-<!-- DataTables -->
-    <!-- CSS --><link rel="stylesheet" type="text/css" href="../../libs/dataTables/css/datatables.css">
-    <!-- JS --><script type="text/javascript" src="../../libs/dataTables/js/jquery.dataTables.js" ></script>
-    <!-- JS Filtrar Columnas --><script type="text/javascript" src="../../libs/dataTables/js/dataTables.columnFilter.js" ></script>
 <?php
 	require ('classInventario.php');
 	$funInv = new Inventario();
 
-	$egresos = $funInv->getEgInv();
+	$egresos = $funInv->getEgInvIncomp();
 	
 ?>
-<h1>Egresos</h1>
-<div class="botones">
-    <button id="facSinCap" class="btnSinCap">Facturas Por Capturar</button>
-    <button id="facIn" class="btnInc">Facturas Incompletas</button>
-    <button id="facCap" class="btnCap">Facturas Capturadas</button>
-</div>
 <div id="divFacturas">
-    <?php if($funInv->getEgInv()): ?>
+    <?php if($funInv->getEgInvIncomp()): ?>
         <div id="status_inv">
             <table cellspacing="0" cellpadding="2" class="display" id="egre">
                 <thead>	
@@ -74,10 +62,12 @@
         </div>
     <?php else:?>
         <div class="vacio">
-            <center>(No existen Facturas por capturar)</center>
+            <center>(No existen Facturas Incompletas)</center>
         </div>
     <?php endif; ?>
 </div>
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -114,8 +104,8 @@
 	    		null
 	    	]
 	    });
-
-		$(".cargar-conceptos").click(function(e){
+        
+        $(".cargar-conceptos").click(function(e){
 			e.preventDefault();
 			$.ajax({
 				url: 'ver_conceptos.php',
@@ -138,39 +128,5 @@
 				}
 			})
 		});
-        
-        $("#facIn").click(function(){
-            
-            $.ajax({
-                url : "tb_fac_incompletas.php",
-                method : "post"
-            })
-            .done(function(html){
-                $("#divFacturas").html(html)
-            });
-        });
-        
-        $("#facSinCap").click(function(){
-            
-            $.ajax({
-                url : "tabla_eg.php",
-                method : "post"
-            })
-            .done(function(html){
-                $("#FactSin").html(html)
-            });
-        });
-        
-        $("#facCap").click(function(){
-            
-            $.ajax({
-                url : "tb_fac_capturadas.php",
-                method : "post"
-            })
-            .done(function(html){
-                $("#divFacturas").html(html)
-            });
-        });
-	});
+    });
 </script>
-</div>

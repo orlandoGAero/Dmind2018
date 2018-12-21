@@ -2,7 +2,8 @@
 
     require ('classInventario.php');
     $funInv = new Inventario();
-
+    
+    $idEg = $_REQUEST['txt_idEg'];
     $IDproveedor = $_REQUEST["idProvee"];
     $IDstatus = $_REQUEST["txt_idStatus"];
     $NumFactura = trim($_REQUEST["txt_noFactura"]);
@@ -43,17 +44,19 @@
                                                     $fechaTransacc,
                                                     $IDtipoTransacion,
                                                     $descripcion);
-
+                        $funInv -> setInventariado($datos['txtIdCon']);
+                        
                     }
                 } else if ($datos['txt_Cantidad'] == 0) {
                     //crear array
-                    print count($datos['noSerie']);
+                    
                     $cantidadSerie =  count($datos['noSerie']);
                     for ($i = 1; $i <= $cantidadSerie; $i++) {
                         $idInvent = $funInv -> incrementoInventario();
                         $IDtransaccion = $funInv -> incrementoTransaccion();
 
                         $nuevoArray = array( 
+                            "idConcepto" => $datos['txtIdCon'],
                             "idProd" => $datos['idProducto'],
                             "serie" => $datos['noSerie'][$i],
                             "importacion" => $datos['pedidoImportacion'],
@@ -75,11 +78,30 @@
                                                     $fechaTransacc,
                                                     $IDtipoTransacion,
                                                     $descripcion);
+                        $funInv -> setInventariado($nuevoArray['idConcepto']);
+                        
                     }
                 }
             }
         }
+        
+        $cantidades = $funInv->getCantidadesConceptosEg($idEg);
+        $productosInv = $funInv->getProductosInv($NumFactura);
 
+        $sumaCant = 0;
+        
+        foreach($cantidades as $cantidad) {
+            $cant = $cantidad['cantidad_concepto_e'];
+            $sumaCant += $cant;
+        }
+        
+        $NumProdInv = count($productosInv);
+        
+        if($sumaCant === $NumProdInv) {
+            $funInv->setStatusInvCap($idEg);
+        } else {
+            $funInv->setStatusInvIncom($idEg);
+        }
     }
 
 

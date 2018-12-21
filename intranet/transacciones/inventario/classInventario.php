@@ -452,18 +452,99 @@
 			$eg = $query->fetchAll(PDO::FETCH_ASSOC);
 			return $eg;
 		}
+        
+        public function getEgInvIncomp() {
+			$Conexion = new dataBaseConn();
+			$query = $Conexion->prepare('SELECT idegresos,fecha,rfc_emisor,razon_social_emisor,serie,no_folio
+										FROM egresos
+										WHERE status_factura = :StatusInv;');
+			$status = 'Incompleto';
+			$query->bindParam(':StatusInv', $status);
+			$query->execute();
+			$eg = $query->fetchAll(PDO::FETCH_ASSOC);
+			return $eg;
+		}
+        
+        public function getEgInvComp() {
+			$Conexion = new dataBaseConn();
+			$query = $Conexion->prepare('SELECT idegresos,fecha,rfc_emisor,razon_social_emisor,serie,no_folio
+										FROM egresos
+										WHERE status_factura = :StatusInv;');
+			$status = 'Capturada';
+			$query->bindParam(':StatusInv', $status);
+			$query->execute();
+			$eg = $query->fetchAll(PDO::FETCH_ASSOC);
+			return $eg;
+		}
 		
 		public function getConceptosEg($id_egreso) {
 			$Conexion = new dataBaseConn();
-			$query = $Conexion->prepare('SELECT econ.descripcion_concepto_e, econ.modelo_concepto_e, econ.cantidad_concepto_e 
+			$query = $Conexion->prepare('SELECT econ.id_egresos_conceptos,econ.descripcion_concepto_e, econ.modelo_concepto_e, econ.cantidad_concepto_e 
 										FROM egresos_conceptos econ
 										INNER JOIN egresos eg ON eg.idegresos=econ.id_egresos
-										WHERE eg.idegresos = :IdEgreso ');
-			$query->bindParam(':IdEgreso', $id_egreso);
+										WHERE eg.idegresos = :IdEgreso AND inventariado = :Inv;');
+			$inventariado = 'No';
+            $query->bindParam(':IdEgreso', $id_egreso);
+            $query->bindParam(':Inv', $inventariado);
 			$query->execute();
 			$conceptos = $query->fetchAll(PDO::FETCH_ASSOC);
 			return $conceptos;
 			
+		}
+        
+        public function getCantidadesConceptosEg($id_egreso) {
+			$Conexion = new dataBaseConn();
+			$query = $Conexion->prepare('SELECT econ.cantidad_concepto_e
+										FROM egresos_conceptos econ
+										INNER JOIN egresos eg ON eg.idegresos=econ.id_egresos
+										WHERE eg.idegresos = :IdEgreso;');
+            $query->bindParam(':IdEgreso', $id_egreso);
+			$query->execute();
+			$conceptos = $query->fetchAll(PDO::FETCH_ASSOC);
+			return $conceptos;
+			
+		}
+        
+        public function getProductosInv($noFactura) {
+            $Conexion = new dataBaseConn();
+            $query = $Conexion->prepare('SELECT * 
+                                        FROM inventario
+                                        WHERE no_factura = :NoFact;');
+            $query->bindParam(':NoFact', $noFactura);
+			$query->execute();
+			$prodInv = $query->fetchAll(PDO::FETCH_ASSOC);
+			return $prodInv;
+            
+        }
+        
+        public function setInventariado($idEConcepto) {
+			// Actualizar producto si esta inventariado.
+			$Conexion = new dataBaseConn();
+			$queryUp = $Conexion -> prepare("UPDATE egresos_conceptos
+                                            SET inventariado = 'Si'
+                                            WHERE id_egresos_conceptos = :IdConcepto;");
+			$queryUp -> bindParam(':IdConcepto', $idEConcepto);
+			$queryUp -> execute();
+		}
+        
+        public function setStatusInvCap($idEgr) {
+			// Actualizar status inventario Capturada.
+			$Conexion = new dataBaseConn();
+			$queryUp = $Conexion -> prepare("UPDATE egresos
+                                            SET status_factura = 'Capturada'
+                                            WHERE idegresos = :IdEg;");
+			$queryUp -> bindParam(':IdEg', $idEgr);
+			$queryUp -> execute();
+		}
+        
+        public function setStatusInvIncom($idEgr) {
+			// Actualizar status inventario Incompleto.
+			$Conexion = new dataBaseConn();
+			$queryUp = $Conexion -> prepare("UPDATE egresos
+                                            SET status_factura = 'Incompleto'
+                                            WHERE idegresos = :IdEg;");
+			$queryUp -> bindParam(':IdEg', $idEgr);
+			$queryUp -> execute();
 		}
 
 		public function getDatosProd($modelo) {

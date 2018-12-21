@@ -28,3 +28,33 @@
 	height: 15px;
 	margin: 5px 1px 10px 1px;
 }
+
+/*Botones de Facturas*/
+
+.botones {
+    padding: 1rem;
+}
+
+.btnCap {
+    background-color: rgba(83, 216, 89, 0.9);
+    padding: 5px;
+    color: #000;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.btnInc {
+    background-color: #e88d3e;
+    padding: 5px;
+    color: #000;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.btnSinCap {
+    background-color: #e25055;
+    padding: 5px;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 600;
+}

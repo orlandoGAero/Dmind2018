@@ -9,17 +9,18 @@
     $idprov = $_REQUEST['id_prov'];
 
     $conceptos = $funInv->getConceptosEg($idegreso);
-    $cantidaConceptos = count($conceptos);
+    
 ?>
 <form>              
     <input type="hidden" name="txt_serie" value="<?=$serie?>" readonly>
+    <input type="hidden" name="txt_idEgreso" value="<?=$idegreso?>" readonly>
     <input type="hidden" name="txt_folio" value="<?=$folio?>" readonly>
     <input type="hidden" name="txt_idprov" value="<?=$idprov?>" readonly>
     <input type="hidden" name="txt_nomprov" value="<?=$nomprov?>" readonly>
 
     <div class="tabla">
         <div class="tittle">
-            Conceptos
+            Conceptos por Capturar
         </div>
         <div class="cabeceras">
             <div class="columna">Descripción</div>
@@ -64,6 +65,7 @@
                             type="radio" name="serie[<?=$i?>]" value="No">
                 </div>
                 <div class="columna">
+                    <input type="hidden" name="txt_idConcepto[<?=$i?>]" value="<?=$concepto['id_egresos_conceptos']?>" readonly>
                     <input type="hidden" name="txt_categoria[<?=$i?>]" value="<?=$categoria?>" readonly>
                     <input type="hidden" name="txt_idcat[<?=$i?>]" value="<?=$idcat?>" readonly>
                     <input type="hidden" name="txt_subcategoria[<?=$i?>]" value="<?=$subcategoria?>" readonly>

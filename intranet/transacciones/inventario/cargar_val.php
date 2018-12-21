@@ -2,6 +2,8 @@
 	require ('classInventario.php');
 	$funInv = new Inventario();
 
+    $idEgreso = $_REQUEST['txt_idEgreso'];
+
 	$estados = json_encode($funInv->getEstado());
 
 	$ubicaciones = json_encode($funInv->getUbicacion());
@@ -24,7 +26,8 @@
 	$folio = $_REQUEST['txt_folio'];
 	$idprov = $_REQUEST['txt_idprov'];
 	$proveedor = $_REQUEST['txt_nomprov'];
-
+    
+    $idConcepto = $_REQUEST['txt_idConcepto'];
 	$idcat = $_REQUEST['txt_idcat'];
 	$categorias = $_REQUEST['txt_categoria'];
 	$idsub = $_REQUEST['txt_idsubcat']; 
@@ -50,7 +53,7 @@
 		&& isset($iddiv) && isset($divisiones) && isset($idnom) && isset($nombres) 
 		&& isset($idtip) && isset($tipos) && isset($idmar) && isset($marcas)
 		&& isset($idpro) && isset($modelos) && isset($cantidad) 
-		&& isset($checkA) && isset($tiene)
+		&& isset($checkA) && isset($tiene) && isset($idConcepto)
 	) : ?>
 	<style>
 		.productosC {
@@ -105,7 +108,24 @@
 				$(document).ready(function(){
 
 					let numConceptos = <?=$cantSel?>;
+                    
+                    let cargarIdConcepto = (indice) => {
 
+						let check = <?= json_encode($checkA) ?>;
+						let idsCon = <?= json_encode($idConcepto) ?>;
+				        			
+						let id_con = '';
+						Object.keys(check).map((key) => {
+							id_con += `${idsCon[key]},`;
+						});
+
+						divIdCon = id_con.split(',');
+						divIdCon.pop();
+
+						return divIdCon[indice];
+
+					}
+                    
 					let cargarIdCats = (indice) => {
 
 						let check = <?= json_encode($checkA) ?>;
@@ -390,6 +410,7 @@
 						html += `
 							<div class='remover'>
 								<form method="POST" id="formularioInv">
+                                    <input type="hidden" name="txt_idEg" value="<?=$idEgreso?>" readonly/>
 									<div class='productosC'>
 										<div class='alinearC'>
 											<label class='tamanioC'>Proveedor:</label>
@@ -447,6 +468,8 @@
 								<div class='productosC tabContenido' id='pestana${i}'>
 								
 									<p><b>PRODUCTO</b></p>
+
+                                    <input type="hidden" name="datosInv[${i}][txtIdCon]" value='${cargarIdConcepto(i-1)}'/>
 
 									<div class='alinearC'>
 										<label class='tamanioC'>Categoría:</label>
