@@ -9,7 +9,6 @@
 		echo"<div class='error position-error'><h3>".$classEgresos -> msjErr."</h3></div>";
         echo "<script>
                 $('#check{$index}').removeAttr('checked');
-                document.getElementById(`boton-ag{$index}`).style.display='none';
             </script>";
 	}
 ?>

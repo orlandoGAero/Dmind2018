@@ -299,7 +299,8 @@ input[type=text]:-moz-read-only{
 .msj-egresos {
   margin-left: 2%;
   font-size: 13px;
-  color: #237e86;
+  font-weight:  bold;
+  color: #0d820c;
 }
 /*
   estilo cargar conceptos inventario

@@ -61,7 +61,12 @@
 							<span style='color: #000;'>Guardar en productos<span> 
 							<input type='checkbox' id='check{$i}' onclick='validar(this,{$i});' style='vertical-align: middle;'/>
 						</div>
-						<div class='msj-egresos' id='mensaje{$i}'></div>
+                        
+						<div class='msj-egresos' id='mensaje{$i}'>
+                            <p id='texto{$i}' style='color: #f00; font-weight:bold'>
+                                Datos NO agregados
+                            </p>
+                        </div>
 						
 					</div>
 				</li>
@@ -241,6 +246,10 @@
 			let men = `#texto${index}`;
 			$(idcon).remove();
 			$(men).remove();
+            let msjText = document.getElementById(`mensaje${index}`);
+            msjText.innerHTML = `<p id='texto${index}' style='color: #f00; font-weight:bold'>
+                                Datos NO agregados
+                            </p>`;
 		}
 	}
 
