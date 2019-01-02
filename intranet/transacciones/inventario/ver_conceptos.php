@@ -8,9 +8,14 @@
     $nomprov = $_REQUEST['nom_prov'];
     $idprov = $_REQUEST['id_prov'];
 
-    $conceptos = $funInv->getConceptosEg($idegreso);
+    //$conceptos = $funInv->getConceptosEg($idegreso);
     
+    $prodConceptos = $funInv->getProductosEg($idegreso);
+    //print_r($prodConceptos);
+    
+    if($prodConceptos != null) :
 ?>
+
 <form>              
     <input type="hidden" name="txt_serie" value="<?=$serie?>" readonly>
     <input type="hidden" name="txt_idEgreso" value="<?=$idegreso?>" readonly>
@@ -32,12 +37,12 @@
         
         <?php 
             $i = 0;
-            foreach ($conceptos as $concepto):
-                $modelo = $concepto['modelo_concepto_e'];
+            foreach ($prodConceptos as $concepto):
+                $i += 1; 
+                $modelo = $concepto['modelo'];
                 $datos = $funInv->getDatosProd($modelo);
     
                 foreach ($datos as $dato) {
-                        $i += 1; 
 
                     $idpro = $dato['id_producto'];
                     $categoria = $dato['nombre_categoria'];
@@ -55,8 +60,8 @@
                 }
         ?>
             <div class="fila">
-                <div class="columna"><?=$concepto['descripcion_concepto_e']?></div>
-                <div class="columna"><?=$concepto['modelo_concepto_e']?></div>
+                <div class="columna"><?=$concepto['descripcion']?></div>
+                <div class="columna"><?=$concepto['modelo']?></div>
                 <div class="columna"><?=$concepto['cantidad_concepto_e']?></div>
                 <div class="columna" >
                     Si <input style="margin-left: 0;margin-top: auto; width: auto" 
@@ -80,7 +85,7 @@
                     <input type="hidden" name="txt_marca[<?=$i?>]" value="<?=$marca?>" readonly>
                     <input type="hidden" name="txt_idmar[<?=$i?>]" value="<?=$idmar?>" readonly>
                     <input type="hidden" name="txt_idpro[<?=$i?>]" value="<?=$idpro?>" readonly>
-                    <input type="hidden" name="txt_modelo[<?=$i?>]" value="<?=$concepto['modelo_concepto_e']?>" readonly>
+                    <input type="hidden" name="txt_modelo[<?=$i?>]" value="<?=$concepto['modelo']?>" readonly>
                     <input style="margin-left: 0;margin-top: auto; width: auto" 
                             type="checkbox" name="agregar[<?=$i?>]">
                 </div>
@@ -116,3 +121,8 @@
             return false;
 		});
 </script>
+<?php else:?>
+   <p class="title2">
+        No has agregado todos los conceptos de esta factura a productos para permitir capturarlos en inventario
+   </p>
+<?php endif;?>

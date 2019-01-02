@@ -321,6 +321,14 @@ input[type=text]:-moz-read-only{
   padding: 5px;
 }
 
+.title2 {
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+  color: rgb(9, 87, 99);
+  padding: 25% 0; 
+}
+
 .fila {
   display: table-row;
 }

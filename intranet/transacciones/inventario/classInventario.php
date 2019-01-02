@@ -492,6 +492,22 @@
 			
 		}
         
+        public function getProductosEg($ideg) {
+            $Conexion = new dataBaseConn();
+            $sql = "SELECT econ.id_egresos_conceptos, pr.descripcion, pr.modelo, econ.cantidad_concepto_e
+                    FROM conceptos_productos cp
+                    INNER JOIN productos pr ON pr.id_producto = cp.id_prod
+                    INNER JOIN egresos_conceptos econ ON econ.id_egresos_conceptos = cp.id_eg_con
+                    WHERE econ.id_egresos = :IdEgreso AND econ.inventariado = :Inv;";
+            $query = $Conexion->prepare($sql);
+            $inventariado = 'No';
+            $query->bindParam(':IdEgreso', $ideg);
+            $query->bindParam(':Inv', $inventariado);
+            $query->execute();
+			$conceptos = $query->fetchAll(PDO::FETCH_ASSOC);
+			return $conceptos;
+        }
+        
         public function getCantidadesConceptosEg($id_egreso) {
 			$Conexion = new dataBaseConn();
 			$query = $Conexion->prepare('SELECT econ.cantidad_concepto_e

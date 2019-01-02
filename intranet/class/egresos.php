@@ -5,6 +5,43 @@
 	require'dataBaseConn.php';
 	class egresos {
 		// Obtener los egresos registrados.
+        public function getIdCon($modelo) {
+			$Conexion = new dataBaseConn();
+			$sql = "SELECT id_egresos_conceptos
+                    FROM egresos_conceptos
+                    WHERE modelo_concepto_e = :Modelo;";
+            $query =  $Conexion->prepare($sql);
+			$query->bindParam(':Modelo', $modelo);
+			$query->execute();
+			$datos = $query->fetch(PDO::FETCH_ASSOC);
+			return $datos;
+		}
+        
+        public function getFilaProd() {
+			$Conexion = new dataBaseConn();
+			$query = $Conexion->query('SELECT id_producto FROM productos ORDER BY id_producto DESC LIMIT 1;');
+			$fila = $query->fetch(PDO::FETCH_NUM);
+			return $fila;
+		}
+        
+        public function guardarRelEgProd($idegcon,$idproducto) {
+            
+            try {
+                    $Conexion = new dataBaseConn();
+                    $sql = "INSERT INTO conceptos_productos(id_eg_con,id_prod)
+                            VALUES (:IdEgCon,:IdProd);";
+                    $query = $Conexion->prepare($sql);
+                    $query->bindParam(':IdEgCon',$idegcon);
+                    $query->bindParam(':IdProd',$idproducto);
+                    $resultlt = $query->execute();
+            } catch(PDOException $e) {
+                $code = $e->getCode();
+                $mensaje = $e->getMessage();
+                print $mensaje;
+                print $code;
+            }
+        }
+        
 		public function listarEgresos() {
 			$Conexion = new dataBaseConn();
 			$query = $Conexion -> prepare("SELECT
@@ -966,7 +1003,7 @@
 					$inventariado = 'No';
 					$query -> bindParam(':Inventariado', $inventariado);
 					$resultQuery = $query -> execute();
-
+                    
 				}
 
 				if($DatosProducto) {
@@ -1004,7 +1041,20 @@
 						$sql->bindParam(':Exist',$existencias);
 						$sql->bindParam(':Descon',$descontinuado);
 						$result = $sql->execute();
+                        
+                        // Insertar en tabla que relaciona conceptos con productos
+                        $fila = $this->getFilaProd();
+                        $id_producto = $fila[0];
+
+                        $idEgCon = $this->getIdCon($datoProd['mod']);
+                        $id_eg_con = $idEgCon['id_egresos_conceptos'];
+
+                        //print "prod: ".$id_producto."\n";
+                        //print "eg: ".$id_eg_con."\n";
+
+                        $this->guardarRelEgProd($id_eg_con,$id_producto);
 					}
+                    
 				}
 
 				// Registrar dirección del Emisor, en caso de que exista.
