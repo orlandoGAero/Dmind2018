@@ -42,6 +42,21 @@
             }
         }
         
+        public function obtenerEgProd($idEgr,$idEgCon) {
+            $Conexion = new dataBaseConn();
+            $sql = "SELECT econ.id_egresos_conceptos, cp.id_prod, pr.descripcion, pr.modelo
+                    FROM conceptos_productos cp
+                    INNER JOIN productos pr ON pr.id_producto = cp.id_prod
+                    INNER JOIN egresos_conceptos econ ON econ.id_egresos_conceptos = cp.id_eg_con
+                    WHERE econ.id_egresos = :IdEg AND cp.id_eg_con = :IdEgCon;";
+            $query = $Conexion->prepare($sql);
+            $query->bindParam(':IdEg', $idEgr);
+            $query->bindParam('IdEgCon', $idEgCon);
+            $query->execute();
+            $fila = $query->rowCount();
+            return $fila;
+        }
+        
 		public function listarEgresos() {
 			$Conexion = new dataBaseConn();
 			$query = $Conexion -> prepare("SELECT
@@ -480,6 +495,7 @@
 											egcon.clave_unidad_concepto_e,
 											egcon.unidad_concepto_e,
 											egcon.descripcion_concepto_e,
+                                            egcon.modelo_concepto_e,
 											egcon.valor_unitario_concepto_e,
 											egcon.importe_concepto_e,
 											egcon.base_impuesto_concepto_e,
@@ -1300,7 +1316,7 @@
 			return $datosEgreso;
 		} // Fin datos de egreso.
 		// Modificar Egresos.
-		public function modificarEgresos($idEgreso, $EfectoComprobante, $VersionComprobante, $TipoComprobante, $LugarExpedicionComprobante, $Fecha, $Hora, $rfcEmisor, $nombreEmisor, $guardarProv, $provGuardado, $idEgrDir, $paisEmisor, $estadoEmisor, $municipioEmisor, $coloniaEmisor, $numExtEmisor, $numIntEmisor, $calleEmisor, $cpEmisor, $rfcReceptor, $nombreReceptor, $usoCFDIComprobante, $NumSerie, $NumFolio, $ConceptosComprobante, $Descuento, $SubTotal, $IVA, $Total, $MonedaComprobante, $MetodoPago, $CondicionesPagoComprobante, $FormaPagoComprobante, $FechaHoraPago, $NombreImpuesto, $TotalImpuesto, $TipoFactorImpuesto, $TasaImpuesto, $NumCuenta, $Concepto, $Clasificacion, $Estado, $Origen, $Destino, $EstadoComprobante, $FechaHoraCancel, $RegimenFiscalEmisor, $FolioFiscal, $FechaTimbrado, $HoraTimbrado, $SelloComprobante, $rfcProveedor) {
+		public function modificarEgresos($idEgreso, $EfectoComprobante, $VersionComprobante, $TipoComprobante, $LugarExpedicionComprobante, $Fecha, $Hora, $rfcEmisor, $nombreEmisor, $guardarProv, $provGuardado, $idEgrDir, $paisEmisor, $estadoEmisor, $municipioEmisor, $coloniaEmisor, $numExtEmisor, $numIntEmisor, $calleEmisor, $cpEmisor, $rfcReceptor, $nombreReceptor, $usoCFDIComprobante, $NumSerie, $NumFolio, $ConceptosComprobante, $Descuento, $SubTotal, $IVA, $Total, $MonedaComprobante, $MetodoPago, $CondicionesPagoComprobante, $FormaPagoComprobante, $FechaHoraPago, $NombreImpuesto, $TotalImpuesto, $TipoFactorImpuesto, $TasaImpuesto, $NumCuenta, $Concepto, $Clasificacion, $Estado, $Origen, $Destino, $EstadoComprobante, $FechaHoraCancel, $RegimenFiscalEmisor, $FolioFiscal, $FechaTimbrado, $HoraTimbrado, $SelloComprobante, $rfcProveedor, $DatosProducto) {
 			$Conexion = new dataBaseConn();
 			$band = 0;
 			if ($idEgreso != "" && $EfectoComprobante != "" && $VersionComprobante != "" && $TipoComprobante != "" && $LugarExpedicionComprobante != "" && $Fecha != "" && $EfectoComprobante != "" && $Hora != "" && $rfcEmisor != "" && $nombreEmisor != "" && $rfcReceptor != "" && $nombreReceptor != "" && $NumSerie != "" && $NumFolio != "" && $SubTotal != "" && $IVA != "" && $Total != "" && $MonedaComprobante != "" && $MetodoPago != "" && $FormaPagoComprobante != "" && $NombreImpuesto != "" && $TotalImpuesto != "" && $TasaImpuesto != "" && $FolioFiscal != "" && $FechaTimbrado != "" && $HoraTimbrado != "" && $SelloComprobante != "") {
@@ -1666,6 +1682,57 @@
 							$queryDetProvDir -> execute();
 						}
 					} // Guardar como proveedor.
+				}
+                
+                if($DatosProducto) {
+					foreach($DatosProducto as $datoProd) {
+						$query = "INSERT INTO productos (id_categoria,
+														id_subcategoria,
+														id_division,
+														id_nombre,
+														id_tipo,
+														id_marca,
+														modelo,
+														precio,
+														id_moneda,
+														id_unidad,
+														descripcion,
+														exit_inventario,
+														descontinuado)
+								VALUES (:IDcategoria,:IDsubcategoria,:IDdivision,:IDnombre,:IDtipo,
+														:IDmarca,:Modelo,:Precio,:Moneda,:IDunidad,:Descripcion,:Exist,:Descon)";
+						$sql = $Conexion->prepare($query);
+						$existencias = '0';
+						$descontinuado = 'No';
+						$borrar = 1;
+						$sql->bindParam(':IDcategoria',$datoProd['cat']);
+						$sql->bindParam(':IDsubcategoria',$datoProd['sub']);
+						$sql->bindParam(':IDdivision',$datoProd['div']);
+						$sql->bindParam(':IDnombre',$datoProd['nom']);
+						$sql->bindParam(':IDtipo',$datoProd['tip']);
+						$sql->bindParam(':IDmarca',$datoProd['mar']);
+						$sql->bindParam(':Modelo',$datoProd['mod']);
+						$sql->bindParam(':Precio',$datoProd['pre']);
+						$sql->bindParam(':Moneda',$datoProd['mon']);
+						$sql->bindParam(':IDunidad',$borrar);
+						$sql->bindParam(':Descripcion',$datoProd['des']);
+						$sql->bindParam(':Exist',$existencias);
+						$sql->bindParam(':Descon',$descontinuado);
+						$result = $sql->execute();
+                        
+                        // Insertar en tabla que relaciona conceptos con productos
+                        $fila = $this->getFilaProd();
+                        $id_producto = $fila[0];
+
+                        $idEgCon = $this->getIdCon($datoProd['mod']);
+                        $id_eg_con = $idEgCon['id_egresos_conceptos'];
+
+                        //print "prod: ".$id_producto."\n";
+                        //print "eg: ".$id_eg_con."\n";
+
+                        $this->guardarRelEgProd($id_eg_con,$id_producto);
+					}
+                    
 				}
 				if($resultRegEgre == TRUE){
 					header("Location: listar_egresos.php");
