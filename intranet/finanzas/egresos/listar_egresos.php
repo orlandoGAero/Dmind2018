@@ -59,6 +59,11 @@
     <center>
     	<section id="botones">
     		<b><a href="registrar_egresos.php" class="nuevos egresosAdd">Nuevo</a></b>
+    		<b>
+				<a href="cargar_varios.php" class="nuevos cargarVarios">
+					Cargar Varios XML
+				</a>
+			</b>
     	</section>
     	 
     	<div id="lista_egresos">
@@ -87,6 +92,15 @@ egresos(document).ready(function(){
 		'transitionIn':'none',
 		'transitionOut':'none',
 		'width':700,
+		'height':600,
+		'type':'ajax'
+	});
+	egresos('.cargarVarios').fancybox({
+		'scrolling':'auto',
+		'autoSize':false,
+		'transitionIn':'none',
+		'transitionOut':'none',
+		'width':800,
 		'height':600,
 		'type':'ajax'
 	});

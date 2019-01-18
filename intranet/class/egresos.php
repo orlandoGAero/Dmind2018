@@ -82,7 +82,9 @@
 		} // Fin obtener los egresos registrados.
 		// Extraer datos del archivo XML.
 		public function obtenerDatosXML($nombreArchivo, $nombreArchivoTemporal, $tipo){
-			define('DIR_BASE', dirname(__FILE__).'/');
+			dirname(__FILE__).'/';
+			
+			// define('DIR_BASE', dirname(__FILE__).'/');
 			$band = 0;
 
 			if (isset($nombreArchivo)) {

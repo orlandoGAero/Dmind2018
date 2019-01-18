@@ -86,7 +86,7 @@
 
 	echo "
 		<script type='text/javascript'>
-
+			let $ = jQuery.noConflict();
 			$( function() {
 				var flag = ".$band.";
 				if (flag == 0) {
