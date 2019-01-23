@@ -382,4 +382,93 @@ input[type=text]:-moz-read-only{
   margin-right:auto;
 }
 
+/* estilo cargar varios archivos xml */
+
+.contenido-cargar-v {
+  background-color: #fff; 
+  padding: 20px; 
+  min-height: 100vh; 
+  height: auto;
+  margin-top: 53px;
+  /*margin-bottom: 49.5;*/
+}
+
+.form-varios form {
+    display: flex;
+    background-color: #0ac3e0;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 790px;
+}
+
+.form-varios input {
+  margin-left: 10px;
+}
+
+.datosCargados {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.botones-cargar {
+  padding: 5px;
+  background-color: #0ac3e0;
+  position: fixed;
+  width: 780px;
+  left: 50%;
+  bottom: 5.3%;
+  transform: translate(-50.7%, 0);
+  -webkit-transform: translate(-50.7%, 0);
+}
+
+.textoArchivos {
+  margin-left: 5px;
+  color: #000;
+  font-weight: 800;
+}
+
+.formFact {
+  margin: 30px auto;
+  width: 330px;
+}
+
+.subir{
+    margin-bottom: .9em;
+    padding: 5px 10px;
+    background: #16555b;
+    color:#fff;
+    border:0px solid #fff;
+}
+ 
+.subir:hover{
+    color:#fff;
+    background: #19848e;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.cargando {
+  position: fixed;
+  width: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+}
+
+.nomFact {
+    display: block;
+    background-color: #a9f3ff;
+    width: 320px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.nomFact p {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+
     

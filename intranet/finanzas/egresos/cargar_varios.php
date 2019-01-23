@@ -1,15 +1,23 @@
-<div style="background-color: #fff; padding: 5px; min-height: 100vh; height: auto">
-	<div>
-		<form action="cargar_varios.php" method="post" id="formXML" enctype="multipart/form-data">
-			<input type="file" name="facturas[]" required multiple />
-			<input type="submit" class="btn primary" value="Cargar archivos XML">
-		</form>
-	</div>
-	<div class="datosXML" style="margin-top: 10px; padding: 10px;"></div>
+
+<div class="form-varios">
+	<form action="cargar_varios.php" method="post" id="formXML" enctype="multipart/form-data">
+		<label for="file-upload" class="subir">
+		     Elegir archivos
+		</label>
+		<input type="file" id="file-upload" name="facturas[]" onchange='cambiar()' required multiple style="display: none" />
+		<div id="info" class="textoArchivos"></div>
+		<input type="submit" class="btn primary" value="Cargar archivos XML">
+	</form>
 </div>
+<div class="contenido-cargar-v">
+	<div class="datosXML datosCargados"></div>
+	<div id="cargar" class="cargando"></div>
+</div>
+
 <script>
 	let $ = jQuery.noConflict();
 	$("#formXML").submit(function(e) {
+		$('#cargar').html('<div id="imagenCargar"><img src="../../images/cargando.gif"/></div>');
 		e.preventDefault();
 
 		let datosForm = new FormData(document.getElementById("formXML"));
@@ -24,8 +32,14 @@
 			processData: false
 		})
 			.done(function(result){
+				$("#imagenCargar").remove();
 				$(".datosXML").html(result);
 			});
 	});
+
+	function cambiar(){
+	    var pdrs = `${document.getElementById('file-upload').files.length} archivos agregados`;
+	    document.getElementById('info').innerHTML = pdrs;
+	}
 
 </script>

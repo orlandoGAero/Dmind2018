@@ -189,15 +189,28 @@
 							$infoAduanera[] = array('numeroPedimento' => '');
 						}
 
-						foreach ($xml -> xpath('//c:Comprobante//c:Impuestos') as $impuestos) {
-							$totalDeImpuestos = trim($impuestos['totalImpuestosTrasladados']);
+						if ($xml -> xpath('//c:Comprobante//c:Impuestos')) {
+							foreach ($xml -> xpath('//c:Comprobante//c:Impuestos') as $impuestos) {
+								$totalDeImpuestos = trim($impuestos['totalImpuestosTrasladados']);
+							}
+						} else {
+							$totalDeImpuestos = '';
 						}
 
-						foreach ($xml -> xpath('//c:Comprobante//c:Impuestos//c:Traslados//c:Traslado') as $impuestosTranslados) {
-							$tipoImpuesto = trim(mb_strtoupper($impuestosTranslados['impuesto']));
-							$tipoFactorImpuesto = "";
-							$tasaCuotaImpuesto = trim($impuestosTranslados['tasa']);
-							$importeImpuesto = trim($impuestosTranslados['importe']);
+						if ($xml -> xpath('//c:Comprobante//c:Impuestos//c:Traslados//c:Traslado')) {
+							
+							foreach ($xml -> xpath('//c:Comprobante//c:Impuestos//c:Traslados//c:Traslado') as $impuestosTranslados) {
+								$tipoImpuesto = trim(mb_strtoupper($impuestosTranslados['impuesto']));
+								$tipoFactorImpuesto = "";
+								$tasaCuotaImpuesto = trim($impuestosTranslados['tasa']);
+								$importeImpuesto = trim($impuestosTranslados['importe']);
+							}
+
+						} else { 
+							$tipoImpuesto = '';
+							$tipoFactorImpuesto = '';
+							$tasaCuotaImpuesto = '';
+							$importeImpuesto  = '';
 						}
 
 						foreach ($xml -> xpath('//t:TimbreFiscalDigital') as $timbreFiscal) {
@@ -279,27 +292,42 @@
 
 						}
 
-						foreach ($xml -> xpath('//c:Comprobante//c:Conceptos//c:Concepto//c:Impuestos//c:Traslados//c:Traslado') as $impuestosConceptos) {
-							$impuestosConceptosComprobante[] = array(
-																		'baseConceptoE'=>trim($impuestosConceptos['Base']),
-																		'impuestoConceptoE'=>trim($impuestosConceptos['Impuesto']),
-																		'tipoFactorConceptoE'=>trim($impuestosConceptos['TipoFactor']),
-																		'tasaCuotaConceptoE'=>trim($impuestosConceptos['TasaOCuota']),
-																		'importeImpuestoConceptoE'=>trim($impuestosConceptos['Importe'])
-																	);
+						if ($xml -> xpath('//c:Comprobante//c:Conceptos//c:Concepto//c:Impuestos')) {
+
+							foreach ($xml -> xpath('//c:Comprobante//c:Conceptos//c:Concepto//c:Impuestos//c:Traslados//c:Traslado') as $impuestosConceptos) {
+								$impuestosConceptosComprobante[] = array(
+																			'baseConceptoE'=>trim($impuestosConceptos['Base']),
+																			'impuestoConceptoE'=>trim($impuestosConceptos['Impuesto']),
+																			'tipoFactorConceptoE'=>trim($impuestosConceptos['TipoFactor']),
+																			'tasaCuotaConceptoE'=>trim($impuestosConceptos['TasaOCuota']),
+																			'importeImpuestoConceptoE'=>trim($impuestosConceptos['Importe'])
+																		);
+							}
+						} else {
+							$impuestosConceptosComprobante = array ();
 						}
 
-
-
-						foreach ($xml -> xpath('//c:Comprobante//c:Impuestos') as $impuestos) {
-							$totalDeImpuestos = trim($impuestos['TotalImpuestosTrasladados']);
+						if ($xml -> xpath('//c:Comprobante//c:Impuestos')) {
+							foreach ($xml -> xpath('//c:Comprobante//c:Impuestos') as $impuestos) {
+								$totalDeImpuestos = trim($impuestos['TotalImpuestosTrasladados']);
+							}
+						} else {
+							$totalDeImpuestos = '';
 						}
 
-						foreach ($xml -> xpath('//c:Comprobante//c:Impuestos//c:Traslados//c:Traslado') as $impuestosTranslados) {
-							$tipoImpuesto = trim(mb_strtoupper($impuestosTranslados['Impuesto']));
-							$tipoFactorImpuesto = trim(mb_strtoupper($impuestosTranslados['TipoFactor']));
-							$tasaCuotaImpuesto = trim($impuestosTranslados['TasaOCuota']);
-							$importeImpuesto = trim($impuestosTranslados['Importe']);
+						if ($xml -> xpath('//c:Comprobante//c:Impuestos//c:Traslados//c:Traslado')) {
+						
+							foreach ($xml -> xpath('//c:Comprobante//c:Impuestos//c:Traslados//c:Traslado') as $impuestosTranslados) {
+								$tipoImpuesto = trim(mb_strtoupper($impuestosTranslados['Impuesto']));
+								$tipoFactorImpuesto = trim(mb_strtoupper($impuestosTranslados['TipoFactor']));
+								$tasaCuotaImpuesto = trim($impuestosTranslados['TasaOCuota']);
+								$importeImpuesto = trim($impuestosTranslados['Importe']);
+							}
+						} else { 
+							$tipoImpuesto = '';
+							$tipoFactorImpuesto = '';
+							$tasaCuotaImpuesto = '';
+							$importeImpuesto  = '';
 						}
 
 
@@ -363,7 +391,6 @@
 							  	'usoCfdiReceptorE'=>$usoCfdiReceptor,
 								'conceptosComprobanteE'=>$conceptosComprobante,
 								'impuestosConceptosComprobanteE'=>$impuestosConceptosComprobante,
-								// 'aduaneraE'=>$infoAduanera,
 							  	'tipoImpuestoE'=>$tipoImpuesto,
 							  	'totalImpuestosE'=>$totalDeImpuestos,
 							  	'tipoFactorImpuestoE'=>$tipoFactorImpuesto,
@@ -707,7 +734,7 @@
 		public function registrarEgresos($EfectoComprobante, $VersionComprobante, $TipoComprobante, $LugarExpedicionComprobante, $Fecha, $Hora, $rfcEmisor, $nombreEmisor, $guardarProv, $paisEmisor, $estadoEmisor, $municipioEmisor, $coloniaEmisor, $numExtEmisor, $numIntEmisor, $calleEmisor, $cpEmisor, $rfcReceptor, $nombreReceptor, $usoCFDIComprobante, $NumSerie, $NumFolio, $ConceptosComprobante, $DatosProducto, $Descuento, $SubTotal, $IVA, $Total, $MonedaComprobante, $MetodoPago, $CondicionesPagoComprobante, $FormaPagoComprobante, $FechaHoraPago, $NombreImpuesto, $TotalImpuesto, $TipoFactorImpuesto, $TasaImpuesto, $NumCuenta, $Concepto, $Clasificacion, $Estado, $Origen, $Destino, $EstadoComprobante, $FechaHoraCancel, $RegimenFiscalEmisor, $FolioFiscal, $FechaTimbrado, $HoraTimbrado, $SelloComprobante, $rfcProveedor) {
 			$Conexion = new dataBaseConn();
 			$band = 0;
-			if ($EfectoComprobante != "" && $VersionComprobante != "" && $TipoComprobante != "" && $LugarExpedicionComprobante != "" && $Fecha != "" && $EfectoComprobante != "" && $Hora != "" && $rfcEmisor != "" && $nombreEmisor != "" && $rfcReceptor != "" && $nombreReceptor != "" && $NumSerie != "" && $NumFolio != "" && $SubTotal != "" && $IVA != "" && $Total != "" && $MonedaComprobante != "" && $MetodoPago != "" && $FormaPagoComprobante != "" && $NombreImpuesto != "" && $TotalImpuesto != "" && $TasaImpuesto != "" && $FolioFiscal != "" && $FechaTimbrado != "" && $HoraTimbrado != "" && $SelloComprobante != "") {
+			if ($EfectoComprobante != "" && $VersionComprobante != "" && $TipoComprobante != "" && $LugarExpedicionComprobante != "" && $Fecha != "" && $EfectoComprobante != "" && $Hora != "" && $rfcEmisor != "" && $nombreEmisor != "" && $rfcReceptor != "" && $nombreReceptor != "" && $NumSerie !== "" && $NumFolio !== "" && $SubTotal != "" && $IVA !== "" && $Total != "" && $MonedaComprobante != "" && $MetodoPago !== "" && $FormaPagoComprobante !== "" && $NombreImpuesto !== "" && $TotalImpuesto !== "" && $TasaImpuesto !== "" && $FolioFiscal != "" && $FechaTimbrado != "" && $HoraTimbrado != "" && $SelloComprobante != "") {
 					// Fecha del Comprobante.
 					$Fecha = date_format(date_create($Fecha), 'Y-m-d');
 					$FechaEgreso = $Fecha." ".$Hora;
@@ -737,7 +764,7 @@
 				$query -> execute();
 				$rows = $query -> rowCount();
 				if($rows != 0){
-					$this -> msjErr = "Ya se encuentra guardado el registro con el folio fiscal: ".$FolioFiscal.".";
+					$this -> msjErr = "Ya se encuentra guardado el registro con el folio fiscal: <br>".$FolioFiscal.".";
 					$band = 1;
 				}
 			}

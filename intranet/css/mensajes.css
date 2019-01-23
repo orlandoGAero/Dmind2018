@@ -4,14 +4,16 @@
 	letter-spacing: 1.1px;
 	border-radius: 6px;
 	background: rgba(223,0,0,0.9);
-	position: absolute;
-	top: 40%;
-	left: 25%;
+	position: fixed;
+    top: 50%;
+    left: 50%;
 	width: 50%;
-	text-align: left;
 	font-family: Helvetica, sans-serif;
 	font-size: medium;
-	color: #000;
+	text-align: center;
+	color: #fff;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
 }
 
 .position-error h3 {
@@ -58,14 +60,15 @@
 	letter-spacing: 1.3px;
 	border-radius: 6px;
 	background: rgba(245,245,3,0.9);
-	position: absolute;
+	position: fixed;
 	top:50%;
-	left: 30%;
-	width: 40%;
-	text-align: left;
+	left: 50%;
+	width: max-content;
 	font-family: Helvetica, sans-serif;
 	font-size: large;
 	color: #000;
+	transform: translate(-50%, 60%);
+    -webkit-transform: translate(-50%, 60%);
 }
 
 .caption2 h3{
@@ -90,14 +93,15 @@
 	letter-spacing: 1.1px;
 	border-radius: 6px;
 	background: rgba(14,222,23,0.9);
-	position: absolute;
-	top: 40%;
-	left: 25%;
-	width: 50%;
-	text-align: left;
+	width: max-content;
 	font-family: Helvetica, sans-serif;
 	font-size: medium;
 	color: #000;
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
 }
 
 .errorConfig h3{

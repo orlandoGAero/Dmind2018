@@ -56,22 +56,31 @@
 				<div class="success"><h3><?=$classEgresos -> msjOk?></h3></div>
 
 				<div class=''>
-					<h2 style='color:#0c0;'>Registrar Egresos</h2>
+					<h2 style='color:#16555B;'>Facturas Cargadas</h2>
 				</div>
-				<form action="" method="post" name="form" id="formEg" target="_self">
-			<?php
-					// array para unir conceptos e impuestos de la factura
-				$conceptosXmlEgresos = array();
 
+				<div class="formFact">
+					<form action="" method="post" name="form" id="formEg" target="_self">
+			<?php
+				// array para unir conceptos e impuestos de la factura
+				$conceptosXmlEgresos = array();
+				// echo "<pre>";print_r($xmlEgresos);echo "</pre>";
 				$i = 0;
 				// foreach por cada archivo
 				foreach ($xmlEgresos as $egreso) { 
+					// contar array de impuestos
+					$cantidadArrIm = count($xmlEgresos[$i]['impuestosConceptosComprobanteE']);
+					
 					// ciclo por cada concepto 
 					for ($idx=0; $idx < count($xmlEgresos[$i]['conceptosComprobanteE']) ; $idx++) { 
-					
-						$conceptosXmlEgresos[$i][] = array_merge($xmlEgresos[$i]['conceptosComprobanteE'][$idx], 
-																 $xmlEgresos[$i]['impuestosConceptosComprobanteE'][$idx]);
 
+						if ($cantidadArrIm !== 0) {
+							
+							$conceptosXmlEgresos[$i][] = array_merge($xmlEgresos[$i]['conceptosComprobanteE'][$idx], 
+																	 $xmlEgresos[$i]['impuestosConceptosComprobanteE'][$idx]);
+						} else {
+							$conceptosXmlEgresos[$i][] = array_merge($xmlEgresos[$i]['conceptosComprobanteE'][$idx]);
+						}
 
 					} // fin for
 
@@ -80,14 +89,18 @@
 					$i++;
 				
 				}
+				// echo "<pre>";print_r($conceptosXmlEgresos);echo "</pre>";
 
 			?>
-				 <div class="">
-					<input type="submit" name="btnRegistrarEgreso" id="btnRegistrar" value="Registrar" class="btn primary" />
-					<!-- <input type="button" value="Limpiar" id="btn_limpiar" class="btn" /> -->
-					<input type="button" name="btnCancelarEgreso" id="btnCancelarE" value="Cancelar" class="btneliminar" />
-				</div>
-			</form>
+					<div id="guardarVa" class="cargando"></div>	
+					 <div class="botones-cargar">
+						<div style="width: max-content; margin: 0 auto; max-width: 166px">
+							<input type="submit" name="btnRegistrarEgreso" id="btnRegistrar" value="Registrar" class="btn primary" />
+							<input type="button" name="btnCancelarEgreso" id="btnCancelarE" value="Cancelar" class="btneliminar" />
+						</div>
+					</div>
+				</form>
+			</div>
 
 			<div id="registrarEg"></div>
 		<?php endif; ?>
@@ -226,6 +239,7 @@
 		} //fin for in
 
 		$("#formEg").submit(function(e) {
+			$('#guardarVa').html('<div id="imagenGuardar"><img src="../../images/loader_blue.gif"/></div>');
 			e.preventDefault();
 
 			let datosForm = $("#formEg").serialize();
@@ -237,8 +251,9 @@
 				
 			})
 			.done(function(result){
+				$("#imagenGuardar").remove();
 				$("#registrarEg").html(result);
-				console.log(result);
+				// console.log(result);
 			});
 		});
 

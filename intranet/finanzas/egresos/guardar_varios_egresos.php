@@ -16,8 +16,49 @@
 		$datosEgresos = diverse_array($_REQUEST);
 
 		$band = 0;
+		// echo "<pre>";print_r($datosEgresos);echo "</pre>";
 		foreach ($datosEgresos as $datoEg) {
-			
+
+			if ($datoEg['txtSerie'] != "")
+				$numeroSerie = $datoEg['txtSerie'];
+			else
+				$numeroSerie = 'Sin Serie';
+
+			if ($datoEg['txtFolio'] != "")
+				$noFolio = $datoEg['txtFolio'];
+			else
+				$noFolio = 0;
+
+			if ($datoEg['txtIva'] != "")
+				$iva = $datoEg['txtIva'];
+			else
+				$iva = 0;
+
+			if ($datoEg['txtNombreImpuesto'] != "")
+				$nomImp = $datoEg['txtNombreImpuesto'];
+			else
+				$nomImp = 'N/A';
+
+			if ($datoEg['txtTotalImpuesto'] != "")
+				$totalImp = $datoEg['txtTotalImpuesto'];
+			else
+				$totalImp = 0;
+
+			if ($datoEg['txtTasaImpuesto'] != "")
+				$tasaImp = $datoEg['txtTasaImpuesto'];
+			else
+				$tasaImp = 0;
+
+			if ($datoEg['txtMetodoPago'] != "")
+				$metodoPago = $datoEg['txtMetodoPago'];
+			else
+				$metodoPago = 'N/A';
+
+			if ($datoEg['txtFormaPago'] != "")
+				$formaPago = $datoEg['txtFormaPago'];
+			else
+				$formaPago = 'N/A';
+
 			if( $classEgresos -> registrarEgresos($datoEg['txtEfectCompr'],
 													$datoEg['txtVersion'],
 													$datoEg['txtTipoCompr'],
@@ -38,23 +79,23 @@
 													$datoEg['txtRfcReceptor'],
 													$datoEg['txtNombreReceptor'],
 													$datoEg['txtusoCFDI'],
-													$datoEg['txtSerie'],
-													$datoEg['txtFolio'],
+													$numeroSerie,
+													$noFolio,
 													$datoEg['conceptosFactura'],
 													null,
 													$datoEg['txtDescuento'],
 													$datoEg['txtSubtotal'],
-													$datoEg['txtIva'],
+													$iva,
 													$datoEg['txtTotal'],
 													$datoEg['txtMoneda'],
-													$datoEg['txtMetodoPago'],
+													$metodoPago,
 													$datoEg['txtCondicionPago'],
-													$datoEg['txtFormaPago'],
+													$formaPago,
 													$datoEg['txtFechaHoraPago'],
-													$datoEg['txtNombreImpuesto'],
-													$datoEg['txtTotalImpuesto'],
+													$nomImp,
+													$totalImp,
 													$datoEg['txtTipoFactorImpuesto'],
-													$datoEg['txtTasaImpuesto'],
+													$tasaImp,
 													$datoEg['txtNumCuenta'],
 													$datoEg['sltConcepto'],
 													$datoEg['sltClasificacion'],
@@ -75,8 +116,6 @@
 				if(isset($classEgresos -> msjCap)) echo"<div class='caption'><h3>".$classEgresos -> msjCap."</h3></div>";
 				$band = 1;
 			}
-
-			// print "----bandera-------".$band;
 
 			echo "
 				<script type='text/javascript'>
