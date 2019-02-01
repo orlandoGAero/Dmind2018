@@ -131,7 +131,7 @@
 							<td>
 								<!-- STATUS -->
 								<?php
-									$consulta=mysql_query("SELECT nombre_status FROM status_inventario where id_status=4");
+									$consulta=mysql_query("SELECT nombre_status FROM status_inventario where nombre_status = 'inventariado'");
 									$fila=mysql_fetch_array($consulta);
 								?>
 								<input type="text" value="<?=$fila['nombre_status']?>" readonly>					
@@ -327,7 +327,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td align="center"><b>Descripción:</b><br>
+							<td align="center"><b>Nota:</b><br>
 								<textarea name="descripcion" cols="60" rows="5" style="resize:none;"><?php echo $desc; ?></textarea>
 							</td>
 						</tr>

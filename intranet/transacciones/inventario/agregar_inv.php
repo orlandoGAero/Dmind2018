@@ -281,7 +281,7 @@
 									</tr>
 									<tr>
 										<td align="center">
-											<b>Descripción:</b><br>
+											<b>Nota:</b><br>
 											<!-- <textarea name="descripcion" onclick="javascript:storeCaret(this);" cols="60" rows="3" style="resize:none;" class="textarea"></textarea> -->
 											<textarea name="descripcion" cols="60" rows="3" style="resize:none;" class="textarea"></textarea>
 										</td>

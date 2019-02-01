@@ -35,29 +35,32 @@
 			    	<td class="center"><?=$producto['nombre_tipo']?></td>
 			    	<td class="center"><?=$producto['nombre_marca']?></td>
 			    	<td class="center"><?=$producto['modelo']?></td>
-			 		<!-- Si la MONEDA es PESOS MEXICANOS, el precio de todos los PRODUCTOS se muestra en
-			 		 la MONEDA mencionada. -->
-			    	<?php if($nameMoneda == "pesoMx") :?>
+			    	<td align="center">
+			 			<!-- Si la MONEDA es PESOS MEXICANOS, el precio de todos los PRODUCTOS se muestra en la MONEDA mencionada. -->
+			    		<?php if($nameMoneda == "pesoMx") :?>
+			    		<b>$</b>
 				    	<!-- 1 = Dólares Americanos -->
-				    	<?php if($producto['id_moneda'] == 1) :?>
+				    	<?php if($producto['nombre_moneda'] == 'DOLAR') :?>
 				    		<!-- Si el PRECIO del PRODUCTO se encuentra en DÓLARES AMERICANOS se convierte a PESOS MEXICANOS. -->
-				    		<td align="center"><b>$</b><?=$fnProductos -> pesosMexicanos($producto['precio'])?></td>
+				    		<?=$fnProductos -> pesosMexicanos($producto['precio'])?>
 				    	<!-- 2 = Pesos Mexicanos -->
-				    	<?php elseif($producto['id_moneda'] == 2) :?>
-				    		<td align="center"><b>$</b><?=number_format($producto['precio'],2,'.',',')?></td>
+				    	<?php elseif($producto['nombre_moneda'] == 'PESO') :?>
+				    		<?=number_format($producto['precio'],2,'.',',')?>
 				    	<?php endif; ?>
 					<!-- Si la MONEDA es DÓLARES AMERICANOS, el precio de todos los PRODUCTOS se muestra en 
 					 la MONEDA mencionada. -->
 				    <?php elseif($nameMoneda == "dolarAm") :?>
+				    	<b>US$</b>
 						<!-- 1 = Dólares Americanos -->
-				    	<?php if($producto['id_moneda'] == 1) :?>
-				    		<td align="center"><b>US$</b><?=number_format($producto['precio'],2,'.',',')?></td>
+				    	<?php if($producto['nombre_moneda'] == 'DOLAR') :?>
+				    		<?=number_format($producto['precio'],2,'.',',')?>
 				    	<!-- 2 = Pesos Mexicanos -->
-				    	<?php elseif($producto['id_moneda'] == 2) :?>
+				    	<?php elseif($producto['nombre_moneda'] == 'PESO') :?>
 				    		<!-- Si el PRECIO del PRODUCTO se encuentra en PESOS MEXICANOS se convierte a DÓLARES AMERICANOS. -->
-				    		<td align="center"><b>US$</b><?=$fnProductos -> dolaresAmericanos($producto['precio'])?></td>
+				    		<?=$fnProductos -> dolaresAmericanos($producto['precio'])?>
 				    	<?php endif; ?>
 				    <?php endif; ?>
+					</td>
 			    	<?php 
 			    		$nomP = $producto['nombre'];
 			    		$modP = $producto['modelo'];

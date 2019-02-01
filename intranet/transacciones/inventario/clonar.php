@@ -160,7 +160,7 @@
 				<td>
 					<!-- STATUS -->
 					<?php
-						$consulta = "SELECT id_status,nombre_status FROM status_inventario WHERE id_status = 4;";
+						$consulta = "SELECT * FROM status_inventario WHERE nombre_status = 'inventariado';";
 						$resultado = mysql_query($consulta);
 						while ($fila = mysql_fetch_array($resultado)) {
 							$idStatusInv = $fila['id_status'];
@@ -458,7 +458,7 @@
 				<td>	
 					</tr>
 					<tr>
-						<td align="center"><b>Descripción:</b><br>
+						<td align="center"><b>Nota:</b><br>
 						<textarea name="descripcion" cols="60" rows="5" style="resize:none;"><?=$desc?></textarea>
 						</td>
 					</tr>

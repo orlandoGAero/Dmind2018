@@ -354,10 +354,9 @@ input[type=text]:-moz-read-only{
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
-  max-height: auto;
+  height: 1250px; /*resolver*/
   width: 100%;
-  overflow: auto;
+  /*overflow: auto;*/
 }
 
 .cerrar-modal {

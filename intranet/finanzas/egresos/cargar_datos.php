@@ -1,5 +1,5 @@
 <?php
-   require('../../class/classProductos.php');
+   require_once('../../class/classProductosEg.php');
     $productos = new Productos();
 ?>
 <!DOCTYPE html>

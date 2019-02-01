@@ -187,9 +187,9 @@
 
 		public function getStatus() {
 			$Conexion = new dataBaseConn();
-			$query = $Conexion->prepare("SELECT * FROM status_inventario WHERE id_status = :ID_sta");
-			$id_status = 4;
-			$query->bindParam(':ID_sta', $id_status);
+			$query = $Conexion->prepare("SELECT * FROM status_inventario WHERE nombre_status = :NOM_sta");
+			$nom_status = 'inventariado';
+			$query->bindParam(':NOM_sta', $nom_status);
 			$query->execute();
 			$status = $query->fetch(PDO::FETCH_ASSOC);
 			return $status;

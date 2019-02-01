@@ -47,7 +47,7 @@
 											  P.modelo,
 											  P.precio,
 											  P.exit_inventario,
-											  P.id_moneda 
+											  mon.nombre_moneda 
 											FROM
 											  productos P 
 											  LEFT JOIN categorias 
@@ -61,13 +61,15 @@
 											  LEFT JOIN nombres 
 											    ON P.id_nombre = nombres.id_nombre 
 											  LEFT JOIN tipos 
-											    ON P.id_tipo = tipos.id_tipo 
+											    ON P.id_tipo = tipos.id_tipo
+					    					  LEFT JOIN moneda mon
+												ON mon.id_moneda = P.id_moneda 
 											WHERE P.descontinuado = :valDescontinuado
 											ORDER BY P.id_producto ASC;');
 			$prodDescontinuado = 'No';
 			$query -> bindParam(':valDescontinuado', $prodDescontinuado);
 			$query -> execute();
-			$Productos = $query -> fetchAll();
+			$Productos = $query -> fetchAll(PDO::FETCH_ASSOC);
 			return $Productos;
 		}
 

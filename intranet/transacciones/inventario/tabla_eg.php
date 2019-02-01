@@ -79,10 +79,35 @@
     <?php endif; ?>
 </div>
 <script type="text/javascript">
-	$(document).ready(function(){
-		
+    var $ = jQuery.noConflict();
+
+    $(".cargar-conceptos").click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: 'ver_conceptos.php',
+            data: {
+                id_egreso: e.currentTarget.form[0].value,
+                serie: e.currentTarget.form[1].value,
+                folio: e.currentTarget.form[2].value,
+                nom_prov: e.currentTarget.form[3].value,
+                id_prov: e.currentTarget.form[4].value
+            },
+            success: function(res) {
+                let listaConceptos = $("#contenido");
+                listaConceptos.append(res);
+                listaConceptos.show();
+                $("#cerrar-contenido").click(function(){
+                    listaConceptos.hide();
+                    $('#divTabla').hide();
+                    $('#fade').hide();
+                });
+            }
+        })
+    });
+
+    $(document).ready(function(){
 		// DataTable
-		jQuery('#egre').dataTable({ 
+		$('#egre').dataTable({ 
 	        // Damos formato a la paginación(números).
 	        "sPaginationType": "full_numbers",
 	        // Desactiva el filtrado de datos.
@@ -91,8 +116,8 @@
 	        aaSorting: [[0,"asc"]],
 	        // Muestra el número de filas en una sola página.
 	        iDisplayLength: 5,
-	        /* Configura el menú que se utiliza para seleccionar 
-	        	el número de filas en una sola página. */
+	         // Configura el menú que se utiliza para seleccionar 
+	        	// el número de filas en una sola página. 
 	        aLengthMenu: [[5, 10, 20], [5, 10, 20]],
 	        // Desactivar la ordenación de una columna.
 	        aoColumnDefs:[{
@@ -114,30 +139,6 @@
 	    		null
 	    	]
 	    });
-
-		$(".cargar-conceptos").click(function(e){
-			e.preventDefault();
-			$.ajax({
-				url: 'ver_conceptos.php',
-				data: {
-					id_egreso: e.currentTarget.form[0].value,
-					serie: e.currentTarget.form[1].value,
-					folio: e.currentTarget.form[2].value,
-					nom_prov: e.currentTarget.form[3].value,
-					id_prov: e.currentTarget.form[4].value
-				},
-				success: function(res) {
-					let listaConceptos = $("#contenido");
-					listaConceptos.append(res);
-					listaConceptos.show();
-					$("#cerrar-contenido").click(function(){
-						listaConceptos.hide();
-						$('#divTabla').hide();
-						$('#fade').hide();
-					});
-				}
-			})
-		});
         
         $("#facIn").click(function(){
             
