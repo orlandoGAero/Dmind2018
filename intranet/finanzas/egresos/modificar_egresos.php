@@ -723,7 +723,7 @@
             document.getElementById('modal').style.display='none';
             document.getElementById('fade').style.display='none';
         });
-        
+
 		$('#guardarProv').click(function() {
 			if ( $('#guardarProv').is(':checked') ) {
 				var rfcEmi = $('#RfcEmisor');
@@ -954,3 +954,4 @@
 		return false;
 	}
 </script>
+<script src="js/ventanasDatos.js"></script>

@@ -1,6 +1,6 @@
 <?php
-   require_once('../../class/classProductosEg.php');
-    $productos = new Productos();
+   // include_once('../../class/classProductosEg.php');
+   // $productos = new Productos();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,12 +12,35 @@
     <link rel="stylesheet" href="../../css/estilos.css">
 </head>
     <body>
+        <!-- divs nuevos datos -->
+        <div id="nuevaCat" class="modal-egresos"></div>
+        <div id='ventanaFondoCat' class='overlay-nuevo' onclick="cerrarCat()"></div>
+
+        <div id="nuevaSub" class="modal-egresos"></div>
+        <div id='ventanaFondoSub' class='overlay-nuevo' onclick="cerrarSub()"></div>
+
+        <div id="nuevaDiv" class="modal-egresos"></div>
+        <div id='ventanaFondoDiv' class='overlay-nuevo' onclick="cerrarDiv()"></div>
+
+        <div id="nuevaNom" class="modal-egresos"></div>
+        <div id='ventanaFondoNom' class='overlay-nuevo' onclick="cerrarNom()"></div>
+
+        <div id="nuevaTip" class="modal-egresos"></div>
+        <div id='ventanaFondoTip' class='overlay-nuevo' onclick="cerrarTip()"></div>
+
+        <div id="nuevaMar" class="modal-egresos"></div>
+        <div id='ventanaFondoMar' class='overlay-nuevo' onclick="cerrarMar()"></div>
+
+
+        <!-- FIN divs nuevos datos -->
+    
         <form action="" method="post" name="formulario" onsubmit="return false;">
             <!-- <h2 style="box-shadow:0px -1px 1px;width:400px;background:#16555B; color:white;border-top-right-radius:10px;border-top-left-radius:10px;">Agregar datos Producto</h2> -->
-            <div style="width:400px;background:#fff; text-align:left;padding:20px 20px 1px 25px;">
+            <div style="width:600px;background:#fff; text-align:left;padding:20px 20px 1px 25px;">
+                
                 <table style="width: auto;"> 
                     <tr>
-                        <td colspan="2"><h3 style='color:#000;text-align:center;'>Agregar Datos</h3></td>
+                        <td colspan="3"><h3 style='color:#000;text-align:center;'>Agregar Datos</h3></td>
                     <tr>
                     <tr>
                         <?php
@@ -29,16 +52,16 @@
                     <tr>
                         <td><label>Categoría:</label></td>
                         <td>
-                            <select name="categoria" style="line-height: 0px;" id="selcategoria">
-                                <option value="0">Elige</option>		
+                            <div id="selectCat">
                                 <?php 
-                                $categorias = $productos->getCategorias();
-                                    foreach($categorias as $categoria) :
+                                    include_once('datosSelCat.php');
                                 ?>
-                                        <option value='<?=$categoria['id_categoria']?>'><?=$categoria['nombre_categoria']?></option>
-                                
-                                <?php endforeach; ?>
-                            </select>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="botonesDatos" onclick="nuevaCat()">
+                                Nueva Categoria
+                            </button>
                         </td>
                         <td><span id="alerta1" class="errores-e">Elige categoria</span></td>
                     </tr>
@@ -48,75 +71,70 @@
                     <tr>
                         <td><label>Subcategoría:</label></td>
                         <td>
-                            <select name="id_subcategoria" style="line-height: 0px;" id="selsubcategoria">
-                                <option value="0">Elige</option>		
-                                <?php
-                                    $subcategorias = $productos->getSubCategorias();
-                                    foreach($subcategorias as $subcategoria) :
-                                ?>
-                                        <option value='<?=$subcategoria['id_subcategoria']?>'><?=$subcategoria['nombre_subcategoria']?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <div id="selectSub">
+                                <?php include_once 'datosSelSub.php'; ?>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="botonesDatos" onclick="nuevaSubCat()">
+                                Nueva Subcategoria
+                            </button>
                         </td>
                         <td><span id="alerta2" class="errores-e">Elige subcategoria</span><br></td>
                     </tr>
                     <tr>
                         <td><label>División:</label></td>
                         <td>
-                            <select name="id_division" style="line-height: 0px;" id="seldivision">
-                                <option value="0">Elige</option>		
-                                <?php
-                                        $divisiones = $productos->getDivisiones();
-                                        foreach($divisiones as $division) :
-                                ?>
-                                        <option value='<?=$division['id_division']?>'><?=$division['nombre_division']?></option>		
-                                <?php endforeach;?>
-                            </select>
+                            <div id="selectDiv">
+                                <?php include_once 'datosSelDiv.php'; ?>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="botonesDatos" onclick="nuevaDiv()">
+                                Nueva División
+                            </button>
                         </td>
                         <td><span id="alerta3" class="errores-e">Elige división</span><br><td>
                     </tr>
                     <tr>
                         <td><label>Nombre :</label></td>
                         <td>
-                            <select name="id_nombre" style="line-height: 0px;" id="selnombre">
-                                <option value="0">Elige</option>		
-                                <?php
-                                        $nombres = $productos->getNombres();
-                                        foreach($nombres as $nombre) :
-                                ?>
-                                        <option value='<?=$nombre['id_nombre']?>'><?=$nombre['nombre']?></option>		
-                                <?php endforeach;?>
-                            </select>
+                            <div id="selectNom">
+                                <?php include_once 'datosSelNom.php' ?>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="botonesDatos" onclick="nuevoNom()">
+                                Nuevo Nombre
+                            </button>
                         </td>
                         <td><span id="alerta4" class="errores-e">Elige nombre</span><br></td>
                     </tr>
                     <tr>
                         <td><label>Tipo:</label>
                         <td>
-                            <select name="id_tipo" style="line-height: 0px;" id="seltipo">
-                                <option value="0">Elige</option>		
-                                <?php
-                                        $tipos = $productos->getTipos();
-                                        foreach($tipos as $tipo) :
-                                ?>
-                                        <option value='<?=$tipo['id_tipo']?>'><?=$tipo['nombre_tipo']?></option>		
-                                <?php endforeach;?>		
-                            </select>
+                            <div id="selectTip">
+                                <?php include_once 'datosSelTip.php'; ?>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="botonesDatos" onclick="nuevoTip()">
+                                Nuevo Tipo
+                            </button>
                         </td>
                         <td><span id="alerta5" class="errores-e">Elige tipo</span><br></td>
                     </tr>
                     <tr>
                         <td><label>Marca :</label></td>
                         <td>
-                            <select name="id_marca" style="line-height: 0px;" id="selmarca">
-                                <option value="0">Elige</option>		
-                                <?php
-                                        $marcas = $productos->getMarcas();
-                                        foreach($marcas as $marca) :
-                                ?>
-                                        <option value='<?=$marca['id_marca']?>'><?=$marca['nombre_marca']?></option>		
-                                <?php endforeach;?>		
-                            </select>
+                            <div id="selectMar">
+                                <?php include_once 'datosSelMar.php'; ?>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="botonesDatos" onclick="nuevaMar()">
+                                Nueva Marca
+                            </button>
                         </td>
                         <td><span id="alerta6" class="errores-e">Elige marca</span><br></td>
                     </tr>

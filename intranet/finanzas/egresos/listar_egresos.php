@@ -106,3 +106,4 @@ egresos(document).ready(function(){
 	});
 });
 </script>
+<script src="js/ventanasDatos.js"></script>
