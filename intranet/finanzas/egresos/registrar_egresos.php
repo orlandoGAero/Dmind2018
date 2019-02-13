@@ -206,53 +206,48 @@
 						</li>
 						<li>
 							<label>Concepto:</label>
-							<?php $datosConceptos = $classEgresos -> listaConceptos() ?>
-							<select name="sltConcepto">
-								<option value="" selected>Elige</option>
-								<?php foreach($datosConceptos as $concepto) :?>
-									<option value="<?=$concepto['nom_concepto']?>"><?=$concepto['nom_concepto']?></option>
-								<?php endforeach ?>
-							</select>
+							<div id="selectCon" style="display: inline-block;">
+								<?php include_once 'datosSelConReg.php'; ?>
+							</div>
+							<button type="button" id="btnCon" name="btnConceptoR" class="botonesDatos" onclick="nuevoCon()">
+                                	Nuevo Concepto
+                            	</button>
 						</li>
 						<li>
 							<label>Clasificación:</label>
-							<?php $datosClasif = $classEgresos -> listaClasificaciones() ?>
-							<select name="sltClasificacion">
-								<option value="" selected>Elige</option>
-								<?php foreach($datosClasif as $clasif) :?>
-									<option value="<?=$clasif['nom_clasifi']?>"><?=$clasif['nom_clasifi']?></option>
-								<?php endforeach; ?>
-							</select>
+							<div id="selectCla" style="display: inline-block;">
+								<?php include_once 'datosSelClaReg.php'; ?>
+							</div>
+							<button type="button" id="btnCla" name="btnClasificacionR" class="botonesDatos" onclick="nuevaCla()">
+                                	Nueva Clasificación
+                            	</button>
 						</li>
 						<li>
 							<label>Status:</label>
-							<?php $datosStatus = $classEgresos -> listaStatus() ?>
-							<select name="sltStatus" id="statusEgreso">
-								<option value="" selected>Elige</option>
-								<?php foreach($datosStatus as $status) :?>
-									<option value="<?=$status['nom_status']?>"><?=$status['nom_status']?></option>
-								<?php endforeach; ?>
-							</select>
+							<div id="selectSta" style="display: inline-block;">
+								<?php include_once 'datosSelStaReg.php'; ?>
+							</div>
+							<button type="button" id="btnSta" name="btnStatusR" class="botonesDatos" onclick="nuevoSta()">
+                                	Nuevo Status
+                            	</button>
 						</li>
 						<li>
 							<label>Origen:</label>
-							<?php $datosOrigen = $classEgresos -> listaOrigenes() ?>
-							<select name="sltOrigen" id="">
-								<option value="" selected>Elige</option>
-								<?php foreach($datosOrigen as $origen) :?>
-									<option value="<?=$origen['nom_origen']?>"><?=$origen['nom_origen']?></option>
-								<?php endforeach; ?>
-							</select>
+							<div id="selectOri" style="display: inline-block;">
+								<?php include_once 'datosSelOriReg.php'; ?>
+							</div>
+							<button type="button" id="btnOri" name="btnOrigenR" class="botonesDatos" onclick="nuevoOri()">
+                                	Nuevo Origen
+                            	</button>
 						</li>
 						<li>
 							<label>Destino:</label>
-							<?php $datosDestino = $classEgresos -> listaDestinos() ?>
-							<select name="sltDestino" id="">
-								<option value="" selected>Elige</option>
-								<?php foreach($datosDestino as $destino) :?>
-									<option value="<?=$destino['nom_destino']?>"><?=$destino['nom_destino']?></option>
-								<?php endforeach; ?>
-							</select>
+							<div id="selectDes" style="display: inline-block;">
+								<?php include_once 'datosSelDesReg.php'; ?>
+							</div>
+							<button type="button" id="btnDes" name="btnDestinoR" class="botonesDatos" onclick="nuevoDes()">
+                                	Nuevo Destino
+                            	</button>
 						</li>
 						<li>
 							<label>Estado del Comprobante:</label>
@@ -301,6 +296,22 @@
 		</center>
 	</section>
 </center>
+
+<!-- Div para agregar nuevos datos de egresos -->
+    <div id="nuevoCon" class="modal-egresos"></div>
+    <div id="fondoCon" class="overlay-egresos" onclick="cerrarCon()"></div>
+
+    <div id="nuevoCla" class="modal-egresos"></div>
+    <div id="fondoCla" class="overlay-egresos" onclick="cerrarCla()"></div>
+
+    <div id="nuevoSta" class="modal-egresos"></div>
+    <div id="fondoSta" class="overlay-egresos" onclick="cerrarSta()"></div>
+
+    <div id="nuevoOri" class="modal-egresos"></div>
+    <div id="fondoOri" class="overlay-egresos" onclick="cerrarOri()"></div>
+
+    <div id="nuevoDes" class="modal-egresos"></div>
+    <div id="fondoDes" class="overlay-egresos" onclick="cerrarDes()"></div>
 
 <script type="text/javascript">
 var $ = jQuery.noConflict();

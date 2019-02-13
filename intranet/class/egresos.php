@@ -898,7 +898,8 @@
 									 								sello_comprobante,
 									 								rfc_proveedor,
 									 								guardar_prov,
-																	status_factura
+																	status_factura,
+																	inventariar
 								 						 		)
 						 								VALUES (
 																:IDegreso,
@@ -941,7 +942,8 @@
 																:selloComp,
 																:rfcProv,
 																:regProv,
-																:statusFac
+																:statusFac,
+																:inventariarE
 							 								);');
 				$consultaRegEgr -> bindParam(':IDegreso', $idEgreso);
 				$consultaRegEgr -> bindParam(':efectoCompE', $EfectoComprobante);
@@ -985,6 +987,8 @@
 				$consultaRegEgr -> bindParam(':regProv', $guardarProv);
 				$facturaStatus = 'Sin capturar';
 				$consultaRegEgr -> bindParam(':statusFac', $facturaStatus);
+				$inventariaEg = 'No';
+				$consultaRegEgr -> bindParam(':inventariarE', $inventariaEg);
 				$resultRegEgre = $consultaRegEgr -> execute();
 				// Registrar Conceptos de los egresos.
 				foreach ($ConceptosComprobante as $conceptosComp) {
@@ -1769,5 +1773,35 @@
 				}
 			}
 		} // Fin modificar egresos.
+
+		// Obtener si se inventaria egresos o no
+		public function getInventariar($idEg) {
+			$Conexion = new dataBaseConn();
+			$query = $Conexion->prepare('SELECT inventariar
+										FROM egresos
+										WHERE idegresos = :IdEg;');
+			$query->bindParam(':IdEg', $idEg);
+			$query->execute();
+			$inv = $query->fetch(PDO::FETCH_ASSOC);
+			return $inv;
+		}
+
+		public function setInvSi($idEg) {
+			// Actualizar existencia del Producto.
+			$Conexion = new dataBaseConn();
+			$queryUp = $Conexion -> prepare("UPDATE egresos SET inventariar = 'Si'
+											WHERE idegresos = :IdEg;");
+			$queryUp -> bindParam(':IdEg', $idEg);
+			$queryUp -> execute();
+		}
+
+		public function setInvNo($idEg) {
+			// Actualizar existencia del Producto.
+			$Conexion = new dataBaseConn();
+			$queryUp = $Conexion -> prepare("UPDATE egresos SET inventariar = 'No'
+											WHERE idegresos = :IdEg;");
+			$queryUp -> bindParam(':IdEg', $idEg);
+			$queryUp -> execute();
+		}
 	} // Fin clase Egresos.
 ?>

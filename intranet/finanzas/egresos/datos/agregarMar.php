@@ -1,5 +1,5 @@
 <div id="resultMar"></div>
-<form action="" id="formMar" method="POST" target="_self" onsubmit="return false;">
+<form action="" id="formMar" method="POST" target="_self">
 	<h2 class="formarriba">Nueva Marca</h2>
 	<center>
 		<div class="camps"><br>
@@ -9,7 +9,7 @@
 	</center>
 	<center>
 		<div style="background:#16555B;" class="formabajo"><br>
-			<input type="submit" value="Registrar" class="btn primary" onclick="guardarMar()" />
+			<input type="button" value="Registrar" class="btn primary" onclick="guardarMar()" />
 			<input type="reset" value="Limpiar" class="btn" />
 		</div>
 	</center>

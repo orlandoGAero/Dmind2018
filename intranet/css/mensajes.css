@@ -100,6 +100,7 @@
 	position: fixed;
     top: 50%;
     left: 50%;
+	width: 50%;
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
 }
@@ -111,11 +112,13 @@
 	border-radius: 4px;
 	background: rgba(223,0,0,0.9);
 	position: relative;
-	width: auto;
-	text-align: left;
+	width: 330px;
+	text-align: center;
+	margin-bottom: 10px; 
 	font-family: Helvetica, sans-serif;
-	font-size: 10.5px;
+	font-size: .9rem;
 }
+
 .captionConfig h3{
 	/*top-bottom -- left-right*/
 	padding: 4px 8px;
@@ -123,10 +126,11 @@
 	border-radius: 4px;
 	background: rgba(245,245,3,0.9);
 	position: relative;
-	width: auto;
-	text-align: left;
+	width: 330px;
+	text-align: center;
+	margin-bottom: 10px; 
 	font-family: Helvetica, sans-serif;
-	font-size: 10.5px;
+	font-size: .9rem;
 	color: #000;
 }
 .errorDeleteConfig h3{

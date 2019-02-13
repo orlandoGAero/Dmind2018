@@ -62,8 +62,8 @@
                 <tfoot style="display:table-header-group;">
                         <tr>
                             <th class="search">Fecha</th>
-                            <th></th>
-                            <th></th>
+                            <th class="search2">RFC</th>
+                            <th class="search2">Razón Social</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -132,8 +132,8 @@
 	    .columnFilter({
 	    	aoColumns: [
 	    		{type:"date_range"},
-	    		null,
-	    		null,
+	    		{type:"text"},
+	    		{type:"text"},
 	    		null,
 	    		null,
 	    		null

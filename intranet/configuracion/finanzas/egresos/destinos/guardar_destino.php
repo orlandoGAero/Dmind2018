@@ -15,8 +15,8 @@
 		$band = 0;
 	}
 	else {
-		if(isset($class_eg -> msjErr)) echo"<div class='error'><h3>".$class_eg -> msjErr."</h3></div>";
-		if(isset($class_eg -> msjCap)) echo"<div class='caption'><h3>".$class_eg -> msjCap."</h3></div>";
+		if(isset($class_eg -> msjErr)) echo"<div class='errorConfig'><h3>".$class_eg -> msjErr."</h3></div>";
+		if(isset($class_eg -> msjCap)) echo"<div class='captionConfig'><h3>".$class_eg -> msjCap."</h3></div>";
 		$band = 1;
 	}
 

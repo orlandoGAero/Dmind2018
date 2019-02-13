@@ -62,6 +62,27 @@
 									<img src="../../images/eliminar.png">
 								</button>
 							</form>
+							<?php $staInv = $classEgresos -> getInventariar($idEgreso); ?>
+							<form action="" method="post" name="formInv" >
+								<input type="hidden" name="idEg" readonly value="<?=$idEgreso?>" />
+							<?php
+								if($staInv['inventariar'] === 'No') :
+							 ?>
+									<button type="button" name="btnCambiar" data-cambiar="no" class="cambiarInv" title="Removido de inventario">
+										<img src="../../images/store-no.svg" width="16" height="16">
+									</button>
+							<?php 
+								endif; 
+								
+								if($staInv['inventariar'] === 'Si') :
+							?>
+									<button type="button" name="btnCambiar" data-cambiar="si" class="cambiarInv" title="Agregado a inventario">
+										<img src="../../images/store-si.svg" width="16" height="16">
+									</button>
+							<?php endif; ?>
+							</form>
+
+
 						</center>
 					</td>
 				</tr>
@@ -100,6 +121,16 @@
 				formDelE = this.form;
 				egresos('#lista_egresos').load('eliminar_egresos.php',egresos(formDelE).serialize());
 			}
+		});
+
+		egresos('.cambiarInv').click(function() {
+			let idEgre = this.form["idEg"].value;
+			let valorBtn = this.form["btnCambiar"].getAttribute("data-cambiar");
+			
+			egresos.get('cambiar_inv.php',{idEg: idEgre, valorBoton: valorBtn}, function(dochtml) {
+				egresos('#lista_egresos').html(dochtml)
+			});
+			
 		});
 
 		// DataTable

@@ -7,7 +7,7 @@
 	$_SESSION["usuario"];
 	// Termina inicio de sesión
 
-	require('../../class/egresos.php');
+	include_once('../../class/egresos.php');
 	$classEgresos = new egresos();
 ?>
 

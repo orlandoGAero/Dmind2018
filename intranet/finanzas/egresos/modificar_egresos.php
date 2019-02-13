@@ -532,103 +532,48 @@
 							</li>
 							<li>
 								<label>Concepto:</label>
-								<select name="sltConcepto">
-									<?php if($ModE['concepto'] == "") :?>
-										<option value="" selected="">Elige</option>
-										<!-- Todos los conceptos registrados -->
-										<?php $datosConceptos = $classEgresos -> listaConceptos() ?>
-										<?php foreach($datosConceptos as $concepto) :?>
-											<option value="<?=$concepto['nom_concepto']?>"><?=$concepto['nom_concepto']?></option>
-										<?php endforeach ?>
-									<?php else :?>
-										<option value="<?=$ModE['concepto']?>"><?=$ModE['concepto']?></option>
-										<!-- Conceptos Diferentes al Seleccionado -->
-										<?php $DiffDatosConceptos = $classEgresos -> listaConceptosDiff($ModE['concepto']) ?>
-										<?php foreach($DiffDatosConceptos as $Diffconcepto) :?>
-											<option value="<?=$Diffconcepto['nom_concepto']?>"><?=$Diffconcepto['nom_concepto']?></option>
-										<?php endforeach ?>
-									<?php endif; ?>
-								</select>
+									<div id="selectCon" style="display: inline-block;">
+										<?php include_once 'datosSelCon.php'; ?>
+									</div>
+								<button type="button" id="btnCon" name="btnConcepto" value="<?=$idEgre?>" class="botonesDatos" onclick="nuevoCon()">
+                                	Nuevo Concepto
+                            	</button>
 							</li>
 							<li>
 							<label>Clasificación:</label>
-								<select name="sltClasificacion">
-									<?php if($ModE['clasificacion'] == "") :?>
-										<option value="" selected="">Elige</option>
-										<!-- Todas las clasificaciones registradas -->
-										<?php $datosClasif = $classEgresos -> listaClasificaciones() ?>
-										<?php foreach($datosClasif as $clasif) :?>
-											<option value="<?=$clasif['nom_clasifi']?>"><?=$clasif['nom_clasifi']?></option>
-										<?php endforeach ?>
-									<?php else :?>
-										<option value="<?=$ModE['clasificacion']?>"><?=$ModE['clasificacion']?></option>
-										<!-- Clasificaciones Diferentes a la Seleccionada -->
-										<?php $DiffDatosClasif = $classEgresos -> listaClasificacionesDiff($ModE['clasificacion']) ?>
-										<?php foreach($DiffDatosClasif as $DiffClasif) :?>
-											<option value="<?=$DiffClasif['nom_clasifi']?>"><?=$DiffClasif['nom_clasifi']?></option>
-										<?php endforeach; ?>
-									<?php endif; ?>
-								</select>
+								<div id="selectCla" style="display: inline-block;">
+									<?php include_once 'datosSelCla.php'; ?>
+								</div>
+								<button type="button" id="btnCla" name="btnClasificacion" value="<?=$idEgre?>" class="botonesDatos" onclick="nuevaCla()">
+                                	Nuevo Clasificación
+                            	</button>
 							</li>
 							<li>
 								<label>Status:</label>
-								<select name="sltStatus" id="statusEgreso">
-									<?php if($ModE['estado'] == "") :?>
-										<option value="" selected="">Elige</option>
-										<!-- Todos los status registrados -->
-										<?php $datosStatus = $classEgresos -> listaStatus() ?>
-										<?php foreach($datosStatus as $status) :?>
-											<option value="<?=$status['nom_status']?>"><?=$status['nom_status']?></option>
-										<?php endforeach; ?>
-									<?php else :?>
-										<option value="<?=$ModE['estado']?>"><?=$ModE['estado']?></option>
-										<!-- Status Diferentes al Seleccionado -->
-										<?php $DiffDatosStatus = $classEgresos -> listaStatusDiff($ModE['estado']) ?>
-										<?php foreach($DiffDatosStatus as $DiffStatus) :?>
-											<option value="<?=$DiffStatus['nom_status']?>"><?=$DiffStatus['nom_status']?></option>
-										<?php endforeach; ?>
-									<?php endif; ?>
-								</select>
+								<div id="selectSta" style="display: inline-block;">
+									<?php include_once 'datosSelSta.php'; ?>
+								</div>
+								<button type="button" id="btnSta" name="btnStatus" value="<?=$idEgre?>" class="botonesDatos" onclick="nuevoSta()">
+                                	Nuevo Status
+                            	</button>
 							</li>
 							<li>
 								<label>Origen: </label>
-								<select name="sltOrigen">
-									<?php if($ModE['origen'] == "") :?>
-										<option value="" selected="">Elige</option>
-										<!-- Todos los origenes registrados -->
-										<?php $datosOrigen = $classEgresos -> listaOrigenes() ?>
-										<?php foreach($datosOrigen as $origen) :?>
-											<option value="<?=$origen['nom_origen']?>"><?=$origen['nom_origen']?></option>
-										<?php endforeach; ?>
-									<?php else :?>
-										<option value="<?=$ModE['origen']?>"><?=$ModE['origen']?></option>
-										<!-- Origenes Diferentes al Seleccionado -->
-										<?php $DiffDatosOrigen = $classEgresos -> listaOrigenesDiff($ModE['origen']) ?>
-										<?php foreach($DiffDatosOrigen as $DiffOrigen) :?>
-											<option value="<?=$DiffOrigen['nom_origen']?>"><?=$DiffOrigen['nom_origen']?></option>
-										<?php endforeach; ?>
-									<?php endif; ?>
-								</select>
+								<div id="selectOri" style="display: inline-block;">
+									<?php include_once 'datosSelOri.php'; ?>
+								</div>
+								<button type="button" id="btnOri" name="btnOrigen" value="<?=$idEgre?>" class="botonesDatos" onclick="nuevoOri()">
+                                	Nuevo Origen
+                            	</button>
 							</li>
 							<li>
 								<label>Destino:</label>
-								<select name="sltDestino">
-									<?php if($ModE['destino'] == "") :?>
-										<option value="" selected="">Elige</option>
-										<!-- Todos los destinos registrados -->
-										<?php $datosDestino = $classEgresos -> listaDestinos() ?>
-										<?php foreach($datosDestino as $destino) :?>
-											<option value="<?=$destino['nom_destino']?>"><?=$destino['nom_destino']?></option>
-										<?php endforeach; ?>
-									<?php else :?>
-										<option value="<?=$ModE['destino']?>"><?=$ModE['destino']?></option>
-										<!-- Destinos Diferentes al Seleccionado -->
-										<?php $DiffDatosDestino = $classEgresos -> listaDestinosDiff($ModE['destino']) ?>
-										<?php foreach($DiffDatosDestino as $DiffDestino) :?>
-											<option value="<?=$DiffDestino['nom_destino']?>"><?=$DiffDestino['nom_destino']?></option>
-										<?php endforeach; ?>
-									<?php endif; ?>
-								</select>
+								<div id="selectDes" style="display: inline-block;">
+									<?php include_once 'datosSelDes.php'; ?>
+								</div>
+								<button type="button" id="btnDes" name="btnOrigen" value="<?=$idEgre?>" class="botonesDatos" onclick="nuevoDes()">
+                                	Nuevo Destino
+                            	</button>
 							</li>
 							<li>
 								<label>Estado del Comprobante:</label>
@@ -695,6 +640,22 @@
     <div id='modal' class='modal-egresos'></div>
     <div id="registrarProd"></div>
     <div id="rfcProv">&nbsp;</div>
+
+    <!-- Div para agregar nuevos datos de egresos -->
+    <div id="nuevoCon" class="modal-egresos"></div>
+    <div id="fondoCon" class="overlay-egresos" onclick="cerrarCon()"></div>
+
+    <div id="nuevoCla" class="modal-egresos"></div>
+    <div id="fondoCla" class="overlay-egresos" onclick="cerrarCla()"></div>
+
+    <div id="nuevoSta" class="modal-egresos"></div>
+    <div id="fondoSta" class="overlay-egresos" onclick="cerrarSta()"></div>
+
+    <div id="nuevoOri" class="modal-egresos"></div>
+    <div id="fondoOri" class="overlay-egresos" onclick="cerrarOri()"></div>
+
+    <div id="nuevoDes" class="modal-egresos"></div>
+    <div id="fondoDes" class="overlay-egresos" onclick="cerrarDes()"></div>
     <!-- Jquery UI -->
 	<script type="text/javascript" src="../../libs/jQueryUI/js/jquery-ui.js"></script><!-- JS -->
 	<!-- DataTables -->
