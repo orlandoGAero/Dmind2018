@@ -306,6 +306,7 @@ input[type=text]:-moz-read-only{
 .div-save {
   display: flex;
   flex-wrap: nowrap;
+  margin: 20px 0;
 }
 
 .div-btn {

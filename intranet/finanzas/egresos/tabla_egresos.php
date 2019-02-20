@@ -69,7 +69,7 @@
 								if($staInv['inventariar'] === 'No') :
 							 ?>
 									<button type="button" name="btnCambiar" data-cambiar="no" class="cambiarInv" title="Removido de inventario">
-										<img src="../../images/store-no.svg" width="16" height="16">
+										<img src="../../images/store-no.svg" width="20" height="20">
 									</button>
 							<?php 
 								endif; 
@@ -77,7 +77,7 @@
 								if($staInv['inventariar'] === 'Si') :
 							?>
 									<button type="button" name="btnCambiar" data-cambiar="si" class="cambiarInv" title="Agregado a inventario">
-										<img src="../../images/store-si.svg" width="16" height="16">
+										<img src="../../images/store-si.svg" width="20" height="20">
 									</button>
 							<?php endif; ?>
 							</form>

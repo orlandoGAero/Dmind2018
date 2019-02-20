@@ -59,5 +59,6 @@
 			});
 		});
 	</script>
+	<script src="../js/nuevosDatosProv.js"></script>
 </body>
 </html>

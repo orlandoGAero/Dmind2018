@@ -122,16 +122,16 @@
 			  ON inv.id_status = staInv.id_status
 			 LEFT JOIN ubicaciones ubicInv
 			  ON inv.id_ubicacion = ubicInv.id_ubicacion
-			 WHERE nomProd.nombre = :nombreInv AND prod.modelo = :modeloInv AND (inv.id_status = :idStatusInv OR inv.id_status = :idStatusXVender)
+			 WHERE nomProd.nombre = :nombreInv AND prod.modelo = :modeloInv AND (staInv.nombre_status = :NomStatusInv OR staInv.nombre_status = :NomStatusXVender)
 			ORDER BY inv.id_producto ASC;');
 			$query -> bindParam(':nombreInv', $NomI);
 			$query -> bindParam(':modeloInv', $ModI);
-			// id_status: 4 = INVENTARIADO
-			$IDstatusInv = 4;
-			$query -> bindParam(':idStatusInv', $IDstatusInv);
-			// id_status: 7 = POR VENDERSE
-			$IDstatusXVender = 7;
-			$query -> bindParam(':idStatusXVender', $IDstatusXVender);
+			// nombre_status: = INVENTARIADO
+			$nomStatusInv = 'inventariado';
+			$query -> bindParam(':NomStatusInv', $nomStatusInv);
+			// nombre_status: = POR VENDERSE
+			$nomstatusXVender = 'por venderse';
+			$query -> bindParam(':NomStatusXVender', $nomstatusXVender);
 			$query -> execute();
 			$inventario = $query -> fetchAll();
 			return $inventario;
@@ -445,9 +445,12 @@
 			$Conexion = new dataBaseConn();
 			$query = $Conexion->prepare('SELECT idegresos,fecha,rfc_emisor,razon_social_emisor,serie,no_folio
 										FROM egresos
-										WHERE status_factura = :StatusInv;');
+										WHERE status_factura = :StatusInv
+										AND inventariar = :Inventariar;');
 			$status = 'Sin Capturar';
+			$inventariar = 'Si';
 			$query->bindParam(':StatusInv', $status);
+			$query->bindParam(':Inventariar', $inventariar);
 			$query->execute();
 			$eg = $query->fetchAll(PDO::FETCH_ASSOC);
 			return $eg;
@@ -498,23 +501,31 @@
                     FROM conceptos_productos cp
                     INNER JOIN productos pr ON pr.id_producto = cp.id_prod
                     INNER JOIN egresos_conceptos econ ON econ.id_egresos_conceptos = cp.id_eg_con
-                    WHERE econ.id_egresos = :IdEgreso AND econ.inventariado = :Inv;";
+                    WHERE econ.id_egresos = :IdEgreso 
+                    AND econ.inventariado = :Inv
+                    AND econ.agregar_inv = :addInv;";
             $query = $Conexion->prepare($sql);
-            $inventariado = 'No';
             $query->bindParam(':IdEgreso', $ideg);
+            $inventariado = 'No';
             $query->bindParam(':Inv', $inventariado);
+            $agregarInv = 'Si';
+            $query->bindParam(':addInv', $agregarInv);
             $query->execute();
 			$conceptos = $query->fetchAll(PDO::FETCH_ASSOC);
 			return $conceptos;
         }
         
+        // modificar funcion 14 feb 2019
         public function getCantidadesConceptosEg($id_egreso) {
 			$Conexion = new dataBaseConn();
 			$query = $Conexion->prepare('SELECT econ.cantidad_concepto_e
 										FROM egresos_conceptos econ
 										INNER JOIN egresos eg ON eg.idegresos=econ.id_egresos
-										WHERE eg.idegresos = :IdEgreso;');
+										WHERE eg.idegresos = :IdEgreso
+										AND econ.agregar_inv = :AddInv;');
             $query->bindParam(':IdEgreso', $id_egreso);
+            $addInv = 'Si';
+            $query->bindParam(':AddInv', $addInv);
 			$query->execute();
 			$conceptos = $query->fetchAll(PDO::FETCH_ASSOC);
 			return $conceptos;

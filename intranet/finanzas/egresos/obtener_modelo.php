@@ -6,7 +6,7 @@
     
     $classEgresos -> obtenerModelo($modeloC);
 	if(isset($classEgresos -> msjErr)){
-		echo"<div class='error position-error'><h3>".$classEgresos -> msjErr."</h3></div>";
+		echo"<div class='error'><h3>".$classEgresos -> msjErr."</h3></div>";
         echo "<script>
                 $('#check{$index}').removeAttr('checked');
             </script>";

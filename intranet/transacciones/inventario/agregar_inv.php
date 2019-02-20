@@ -298,6 +298,10 @@
 		<!-- <div class="contbarra"></div> -->
 	<center>
 </div>
+            <div id="contenido" class="modal-c"></div>
+
+            <div id="errorContenido"></div>
+
 <script type="text/javascript">
 	var inv = jQuery.noConflict();
 	inv(document).ready(function(){

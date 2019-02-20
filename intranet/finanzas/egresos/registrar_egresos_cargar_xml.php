@@ -136,11 +136,11 @@
 			// Convierte un array PHP a un array JS.
 			var conceptosComprobanteJS = <?=json_encode($arrayConceptosComprobante)?>;
 			// Lee los datos del array JS.
+			$('#conceptos-comprobante').append("<hr class='linea-azul'>");
 			for (var i = 0; i < conceptosComprobanteJS.length; i++) {
 				// Agregar los input text en el div con id conceptos-comprobante.
 				$('#conceptos-comprobante').append(conceptosComprobanteJS[i]);
 			}
-			$('#conceptos-comprobante').append("<hr class='linea-azul'>");
 			// La información extraida del XML se agrega en los input text correspondientes.
 			$('#Version').val('<?=$xmlEgresos['versionE']?>');
 			$('#TipoComprobante').val('<?=$xmlEgresos['tipoComprobanteE']?>');

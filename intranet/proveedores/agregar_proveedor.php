@@ -40,12 +40,12 @@
 						</li>
 						<li>
 							<label>Categoría:</label>
-							<select name="sltCatP">
-								<option value="">Elige</option>
-								<?php foreach ($fnProv -> categoriasProveedor() as $categoriaP) : ?>
-									<option value="<?=$categoriaP['id_cat_prov']?>"><?=$categoriaP['nombre_cat_prov']?></option>
-								<?php endforeach; ?>
-							</select>
+							<div id="selectCatPv" style="display: inline-block;">
+								<?php include_once 'datosSelCatPvReg.php'; ?>
+							</div>
+							<button type="button" id="btnCatProv" name="btnCatProvReg" class="botonesDatos" onclick="nuevaCatProv()">
+                                	Nueva Categoría
+                            	</button>
 						</li>
 						<li>&nbsp;</li>
 						<li><span class="azul">Datos Fiscales</span></li>
@@ -170,6 +170,11 @@
 		</center>
 	</section>
 </center>
+
+<!-- Div para agregar nuevos datos de egresos -->
+    <div id="nuevoCatProv" class="modal-egresos"></div>
+    <div id="fondoCatProv" class="overlay-egresos" onclick="cerrarCatProv()"></div>
+
 <script type="text/javascript" src="../js/direccion_proveedor.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -211,4 +216,5 @@
 			});
 		});
 	});
+
 </script>

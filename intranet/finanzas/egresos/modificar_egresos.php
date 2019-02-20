@@ -319,108 +319,7 @@
 								<label>Serie:<span>&nbsp;*</span></label>
 								<input type="text" name="txtSerie" value="<?=$ModE['serie']?>" maxlength="50" autocomplete="off" required>
 							</li>
-							<!-- Conceptos de Egresos -->
-							<?php if ($conceptosEgresos = $classEgresos -> conceptosDetalleEgresos($idEgre)) : ?>
-								<?php $i = 0; ?>
-								<?php foreach ($conceptosEgresos as $conceptoE) : ?>
-									<?php $i += 1; ?>
-                                    <li>
-									    <div class='div-save'>
-                                            <span class='azul'><b> - Concepto <?=$i?> -</b></span>
-                                                
-                                            <?php
-                                                $idEgConcepto = $conceptoE['id_egresos_conceptos'];
-                                                $fila = $classEgresos->obtenerEgProd($idEgre,$idEgConcepto);
-                                                if ($fila === 1):
-                                            ?>
-                                            <div style='margin-left: 15px;'>
-                                                <span style='color: #197b53;'>Ya ha sido guardado en Productos</span>
-                                           </div>
-                                            <?php else: ?>   
-                                            <div class='div-btn'>
-                                                <button value='<?=$i?>' style='display:none;' class='agregar-datos' type='submit' id='boton-ag<?=$i?>' name='boton-a'>
-                                                    <img src='../../images/if_save.png' alt='Cargar Datos'/>
-                                                </button>
-                                            </div>
-                                            
-                                            <div>
-                                                <span style='color: #000;'>Guardar en productos</span> 
-                                                <input type='checkbox' id='check<?=$i?>' onclick='validar(this,<?=$i?>)' style='vertical-align: middle;'/>
-                                            </div>
-
-                                            <div class='msj-egresos' id='mensaje<?=$i?>'>
-                                                <p id='texto<?=$i?>' style='color: #f00; font-weight:bold'>
-                                                    Datos NO agregados
-                                                </p>
-                                            </div>
-                                            
-                                            <div id='fade' class='overlay-egresos cerrarDatos'></div>
-                                            
-                                            <div id='datos<?=$i?>'></div>
-                                            <?php endif; ?>
-                                        </div> 
-                                           
-                                    </li>
-
-																		<!-- Id concepto egreso -->
-									<li>
-										<input type='hidden' name='conceptosFactura[<?=$i?>][idCoEg]' maxlength='6' value="<?=$conceptoE['id_egresos_conceptos']?>" autocomplete='off' readonly>
-									</li>
-									<li>
-										<label>Clave Concepto <?=$i?>:</label>
-										<input type='text' name='conceptosFactura[<?=$i?>][claveC]' maxlength='20' value="<?=$conceptoE['clave_concepto_e']?>" autocomplete='off'>
-									</li>
-									<li>
-										<label>Cantidad Concepto <?=$i?>:</label>
-										<input type='text' name='conceptosFactura[<?=$i?>][cantidadC]' maxlength='7' value="<?=$conceptoE['cantidad_concepto_e']?>" autocomplete='off'>
-									</li>
-									<li>
-										<label>Clave Unidad <?=$i?>:</label>
-										<input type='text' name='conceptosFactura[<?=$i?>][claveUnidadC]' maxlength='10' value="<?=$conceptoE['clave_unidad_concepto_e']?>" autocomplete='off'>
-									</li>
-									<li>
-										<label>Unidad Concepto <?=$i?>:</label>
-										<input type='text' name='conceptosFactura[<?=$i?>][unidadC]' maxlength='5' value="<?=$conceptoE['unidad_concepto_e']?>" autocomplete='off'>
-									</li>
-									<li>
-										<label>Descripción <?=$i?>:</label>
-										<input type='text' id='desc<?=$i?>' name='conceptosFactura[<?=$i?>][descripcionC]' maxlength='255' value="<?=$conceptoE['descripcion_concepto_e']?>" autocomplete='off'>
-									</li>
-									<li>
-                                        <label>Modelo <?=$i?>:</label>
-                                        <input type='text' id='model<?=$i?>' name='conceptosFactura[<?=$i?>][modeloC]' maxlength='20' value='<?=$conceptoE['modelo_concepto_e']?>' autocomplete='off'>
-                                    </li>
-									<li>
-										<label>Valor Unitario <?=$i?>:</label>
-										<input type='text' id='price<?=$i?>' name='conceptosFactura[<?=$i?>][valorUnitarioC]' maxlength='10' value="<?=$conceptoE['valor_unitario_concepto_e']?>" autocomplete='off'>
-									</li>
-									<li>
-										<label>Importe Concepto <?=$i?>:</label>
-										<input type='text' name='conceptosFactura[<?=$i?>][importeC]' maxlength='10' value="<?=$conceptoE['importe_concepto_e']?>" autocomplete='off'>
-									</li>
-									<li>
-										<label>Base Impuesto Concepto <?=$i?>:</label>
-										<input type='text' name='conceptosFactura[<?=$i?>][baseImpuestoC]' maxlength='10' value="<?=$conceptoE['base_impuesto_concepto_e']?>" autocomplete='off'>
-									</li>
-									<li>
-										<label>Impuesto del Concepto <?=$i?>:</label>
-										<input type='text' name='conceptosFactura[<?=$i?>][impuestoC]' maxlength='20' value="<?=$conceptoE['impuesto_concepto_e']?>" autocomplete='off'>
-									</li>
-									<li>
-										<label>Tipo Factor del Impuesto Concepto <?=$i?>:</label>
-										<input type='text' name='conceptosFactura[<?=$i?>][tipoFactorImpuestoC]' maxlength='20' value="<?=$conceptoE['tipofactor_impuesto_concepto_e']?>" autocomplete='off'>
-									</li>
-									<li>
-										<label>Tasa/Cuota del Impuesto Concepto <?=$i?>:</label>
-										<input type='text' name='conceptosFactura[<?=$i?>][tasaCuotaImpuestoC]' maxlength='10' value="<?=$conceptoE['tasacuota_impuesto_concepto_e']?>" autocomplete='off'>
-									</li>
-									<li>
-										<label>Importe del Impuesto Concepto <?=$i?>:</label>
-										<input type='text' name='conceptosFactura[<?=$i?>][importeImpuestoC]' maxlength='10' value="<?=$conceptoE['importe_impuesto_concepto_e']?>" autocomplete='off'>
-									</li>
-								<?php endforeach; ?>
-								<hr class='linea-azul'>
-							<?php endif; ?>
+							
 							<li>
 								<label>No. Folio:<span>&nbsp;*</span></label>
 								<input type="text" name="txtFolio" value="<?=$ModE['no_folio']?>" maxlength="10" autocomplete="off" required>
@@ -624,6 +523,137 @@
 								<label>RFC Proveedor:</label>
 								<input type="text" name="txtRFCprov" value="<?=$ModE['rfc_proveedor']?>" maxlength="13" autocomplete="off">
 							</li>
+							<hr class='linea-azul'>
+
+							<!-- Conceptos de Egresos -->
+							<?php if ($conceptosEgresos = $classEgresos -> conceptosDetalleEgresos($idEgre)) : ?>
+								<?php $i = 0; ?>
+								<?php foreach ($conceptosEgresos as $conceptoE) : ?>
+									<?php $i += 1; ?>
+                                    <li>
+									    <div class='div-save'>
+                                            <span class='azul'><b> - Concepto <?=$i?> -</b></span>
+
+                                            <div id="div-add-inv<?=$i?>">
+	                                            <?php $addInv = $conceptoE['agregar_inv']; ?>
+
+	                                            <button type="button" name="btnCambiarInv" 
+	                                            		class="cambiarAddInv"
+	                                            		data-cambiar="<?php
+	                                            					if($addInv === 'Si') 
+	                                            						echo 'si';
+	                                            					elseif($addInv === 'No')
+	                                            						echo 'no';
+	                                            					?>" 
+	                                            		data-idecon="<?=$conceptoE['id_egresos_conceptos']?>"
+	                                            		data-item="<?=$i?>"
+	                                            		style="margin-left: 25px;"
+	                                            		title="<?php
+	                                            					if($addInv === 'Si') 
+	                                            						echo 'Concepto agregado al inventario';
+	                                            					elseif($addInv === 'No')
+	                                            						echo 'Concepto removido del inventario';
+	                                            					?>">
+													<?php if ($addInv === 'Si'): ?>
+														<img src="../../images/checked.svg" width="32" height="32" />
+													<?php elseif ($addInv === 'No'): ?>
+														<img src="../../images/cancel.svg" width="32" height="32" />
+													<?php endif; ?>
+												</button>
+                                            </div>
+
+                                            <?php
+                                                $idEgConcepto = $conceptoE['id_egresos_conceptos'];
+                                                $fila = $classEgresos->obtenerEgProd($idEgre,$idEgConcepto);
+                                                if ($fila === 1):
+                                            ?>
+                                            <div style='margin-left: 15px;'>
+                                                <span style='color: #197b53;'>Ya ha sido guardado en Productos</span>
+                                           </div>
+                                            <?php else: ?>   
+                                            <div class='div-btn'>
+                                                <button value='<?=$i?>' style='display:none;' class='agregar-datos' type='submit' id='boton-ag<?=$i?>' name='boton-a'>
+                                                    <img src='../../images/if_save.png' alt='Cargar Datos'/>
+                                                </button>
+                                            </div>
+                                            
+                                            <div>
+                                                <span style='color: #000;'>Guardar en productos</span> 
+                                                <input type='checkbox' id='check<?=$i?>' onclick='validar(this,<?=$i?>)' style='vertical-align: middle;'/>
+                                            </div>
+
+                                            <div class='msj-egresos' id='mensaje<?=$i?>'>
+                                                <p id='texto<?=$i?>' style='color: #f00; font-weight:bold'>
+                                                    Datos NO agregados
+                                                </p>
+                                            </div>
+                                            
+                                            <div id='fade' class='overlay-egresos cerrarDatos'></div>
+                                            
+                                            <div id='datos<?=$i?>'></div>
+                                            <?php endif; ?>
+                                        </div> 
+                                           
+                                    </li>
+
+																		<!-- Id concepto egreso -->
+									<li>
+										<input type='hidden' name='conceptosFactura[<?=$i?>][idCoEg]' maxlength='6' value="<?=$conceptoE['id_egresos_conceptos']?>" autocomplete='off' readonly>
+									</li>
+									<li>
+										<label>Clave Concepto <?=$i?>:</label>
+										<input type='text' name='conceptosFactura[<?=$i?>][claveC]' maxlength='20' value="<?=$conceptoE['clave_concepto_e']?>" autocomplete='off'>
+									</li>
+									<li>
+										<label>Cantidad Concepto <?=$i?>:</label>
+										<input type='text' name='conceptosFactura[<?=$i?>][cantidadC]' maxlength='7' value="<?=$conceptoE['cantidad_concepto_e']?>" autocomplete='off'>
+									</li>
+									<li>
+										<label>Clave Unidad <?=$i?>:</label>
+										<input type='text' name='conceptosFactura[<?=$i?>][claveUnidadC]' maxlength='10' value="<?=$conceptoE['clave_unidad_concepto_e']?>" autocomplete='off'>
+									</li>
+									<li>
+										<label>Unidad Concepto <?=$i?>:</label>
+										<input type='text' name='conceptosFactura[<?=$i?>][unidadC]' maxlength='5' value="<?=$conceptoE['unidad_concepto_e']?>" autocomplete='off'>
+									</li>
+									<li>
+										<label>Descripción <?=$i?>:</label>
+										<input type='text' id='desc<?=$i?>' name='conceptosFactura[<?=$i?>][descripcionC]' maxlength='255' value="<?=$conceptoE['descripcion_concepto_e']?>" autocomplete='off'>
+									</li>
+									<li>
+                                        <label>Modelo <?=$i?>:</label>
+                                        <input type='text' id='model<?=$i?>' name='conceptosFactura[<?=$i?>][modeloC]' maxlength='20' value='<?=$conceptoE['modelo_concepto_e']?>' autocomplete='off'>
+                                    </li>
+									<li>
+										<label>Valor Unitario <?=$i?>:</label>
+										<input type='text' id='price<?=$i?>' name='conceptosFactura[<?=$i?>][valorUnitarioC]' maxlength='10' value="<?=$conceptoE['valor_unitario_concepto_e']?>" autocomplete='off'>
+									</li>
+									<li>
+										<label>Importe Concepto <?=$i?>:</label>
+										<input type='text' name='conceptosFactura[<?=$i?>][importeC]' maxlength='10' value="<?=$conceptoE['importe_concepto_e']?>" autocomplete='off'>
+									</li>
+									<li>
+										<label>Base Impuesto Concepto <?=$i?>:</label>
+										<input type='text' name='conceptosFactura[<?=$i?>][baseImpuestoC]' maxlength='10' value="<?=$conceptoE['base_impuesto_concepto_e']?>" autocomplete='off'>
+									</li>
+									<li>
+										<label>Impuesto del Concepto <?=$i?>:</label>
+										<input type='text' name='conceptosFactura[<?=$i?>][impuestoC]' maxlength='20' value="<?=$conceptoE['impuesto_concepto_e']?>" autocomplete='off'>
+									</li>
+									<li>
+										<label>Tipo Factor del Impuesto Concepto <?=$i?>:</label>
+										<input type='text' name='conceptosFactura[<?=$i?>][tipoFactorImpuestoC]' maxlength='20' value="<?=$conceptoE['tipofactor_impuesto_concepto_e']?>" autocomplete='off'>
+									</li>
+									<li>
+										<label>Tasa/Cuota del Impuesto Concepto <?=$i?>:</label>
+										<input type='text' name='conceptosFactura[<?=$i?>][tasaCuotaImpuestoC]' maxlength='10' value="<?=$conceptoE['tasacuota_impuesto_concepto_e']?>" autocomplete='off'>
+									</li>
+									<li>
+										<label>Importe del Impuesto Concepto <?=$i?>:</label>
+										<input type='text' name='conceptosFactura[<?=$i?>][importeImpuestoC]' maxlength='10' value="<?=$conceptoE['importe_impuesto_concepto_e']?>" autocomplete='off'>
+									</li>
+								<?php endforeach; ?>
+							<?php endif; ?>
 							<p>&nbsp;</p>
 							<div id="opcionesCargoSaldo" title="Agregar Cargo de Saldo"></div>
 						</ul>
@@ -678,6 +708,21 @@
             });
             document.getElementById('modal').style.display='block';
             document.getElementById('fade').style.display='block';
+        });
+
+        // para cambiar si el concepto se inventaria o no
+        $(".cambiarAddInv").click(function(e) {
+        	
+        	let idEcon = e.currentTarget.getAttribute("data-idecon");
+        	let numCon = e.currentTarget.getAttribute("data-item");
+        	let valorBtn = e.currentTarget.getAttribute("data-cambiar");
+
+        	$.post('conceptos_a_inv.php', 
+        		{idEgCon: idEcon, item: numCon, btnCambiar: valorBtn}, 
+        		function(data) {
+        			$(`#div-add-inv${numCon}`).html(data);
+        		}
+        	);
         });
     
         $(".cerrarDatos").click(function(){

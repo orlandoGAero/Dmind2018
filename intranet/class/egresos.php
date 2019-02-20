@@ -531,14 +531,15 @@
 											egcon.impuesto_concepto_e,
 											egcon.tipofactor_impuesto_concepto_e,
 											egcon.tasacuota_impuesto_concepto_e,
-											egcon.importe_impuesto_concepto_e
+											egcon.importe_impuesto_concepto_e,
+											egcon.agregar_inv
 										   FROM
 										 	   egresos_conceptos egcon
 											    LEFT JOIN egresos eg ON eg.idegresos = egcon.id_egresos
 										   WHERE egcon.id_egresos = :IDegreso;");
 			$query -> bindParam(':IDegreso', $idEgreso);
 			$query -> execute();
-			$conceptosEgresos = $query -> fetchAll();
+			$conceptosEgresos = $query -> fetchAll(PDO::FETCH_ASSOC);
 			return $conceptosEgresos;
 		} // Fin conceptos detalle egresos.
 		// Busca la forma de pago del egreso.
@@ -1016,7 +1017,8 @@
 																tasacuota_impuesto_concepto_e,
 																importe_impuesto_concepto_e,
 																id_egresos,
-																inventariado
+																inventariado,
+																agregar_inv
 															)
 													VALUES (
 																:clavConcepto,
@@ -1033,7 +1035,8 @@
 																:tasaCuotaImpConc,
 																:importImpConc,
 																:IDegr,
-																:Inventariado
+																:Inventariado,
+																:AddConInv
 															);");
 					$query -> bindParam(':clavConcepto', trim($conceptosComp['claveC']));
 					$query -> bindParam(':cantConcepto', trim($conceptosComp['cantidadC']));
@@ -1051,6 +1054,8 @@
 					$query -> bindParam(':IDegr', $idEgreso);
 					$inventariado = 'No';
 					$query -> bindParam(':Inventariado', $inventariado);
+					$addConInv = 'Si';
+					$query -> bindParam(':AddConInv', $addConInv);
 					$resultQuery = $query -> execute();
                     
 				}
@@ -1802,6 +1807,35 @@
 											WHERE idegresos = :IdEg;");
 			$queryUp -> bindParam(':IdEg', $idEg);
 			$queryUp -> execute();
+		}
+
+		public function setNoEgConAddInv($idEcon) {
+			$Conexion = new dataBaseConn();
+			$query = $Conexion -> prepare("UPDATE egresos_conceptos
+											SET agregar_inv = 'No'
+											WHERE id_egresos_conceptos = :IdECon");
+			$query->bindParam(':IdECon',$idEcon);
+			$query->execute();
+		}
+
+		public function setSiEgConAddInv($idEcon) {
+			$Conexion = new dataBaseConn();
+			$query = $Conexion -> prepare("UPDATE egresos_conceptos
+											SET agregar_inv = 'Si'
+											WHERE id_egresos_conceptos = :IdECon");
+			$query->bindParam(':IdECon',$idEcon);
+			$query->execute();
+		}
+
+		public function getInvCon($idEcon) {
+			$Conexion = new dataBaseConn();
+			$query = $Conexion -> prepare("SELECT agregar_inv
+											FROM egresos_conceptos
+											WHERE id_egresos_conceptos = :IdEcon");
+			$query->bindParam(':IdEcon', $idEcon);
+			$query->execute();
+			$InvCon = $query->fetch(PDO::FETCH_ASSOC);
+			return $InvCon;
 		}
 	} // Fin clase Egresos.
 ?>

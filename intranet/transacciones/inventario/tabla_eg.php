@@ -1,4 +1,3 @@
-<div id="FactSin">;
 	<link rel="stylesheet" type="text/css" href="../../css/busqueda.css">
 <!-- DataTables -->
     <!-- CSS --><link rel="stylesheet" type="text/css" href="../../libs/dataTables/css/datatables.css">
@@ -11,13 +10,13 @@
 	$egresos = $funInv->getEgInv();
 	
 ?>
-<h1>Egresos</h1>
-<div class="botones">
-    <button id="facSinCap" class="btnSinCap">Facturas Por Capturar</button>
-    <button id="facIn" class="btnInc">Facturas Incompletas</button>
-    <button id="facCap" class="btnCap">Facturas Capturadas</button>
-</div>
 <div id="divFacturas">
+    <h1>Egresos (Facturas por capturar)</h1>
+    <div class="botones">
+        <button type="button" id="facSinCap" class="btnSinCap">Facturas Por Capturar</button>
+        <button type="button" id="facIn" class="btnInc">Facturas Incompletas</button>
+        <button type="button" id="facCap" class="btnCap">Facturas Capturadas</button>
+    </div>
     <?php if($funInv->getEgInv()): ?>
         <div id="status_inv">
             <table cellspacing="0" cellpadding="2" class="display" id="egre">
@@ -70,6 +69,7 @@
                         </tr>
                 </tfoot>
             </table>
+
             <div id="contenido" class="modal-c"></div>
         </div>
     <?php else:?>
@@ -83,6 +83,7 @@
 
     $(".cargar-conceptos").click(function(e){
         e.preventDefault();
+        
         $.ajax({
             url: 'ver_conceptos.php',
             data: {
@@ -93,13 +94,35 @@
                 id_prov: e.currentTarget.form[4].value
             },
             success: function(res) {
+                
                 let listaConceptos = $("#contenido");
                 listaConceptos.append(res);
-                listaConceptos.show();
+
+                let divError = document.getElementsByClassName('error').length;
+                
+                if (divError !== 0) {
+                    let errorConcepto = $("#errorContenido");
+                    errorConcepto.append(`<div id='noConcepto'>${res}</div>`);
+                    errorConcepto.show();
+
+                    setTimeout(function(){
+                       $("#noConcepto").remove();
+                        $.get('tabla_eg.php', function(dochtml) {
+                            $('#divTabla').html(dochtml)
+                        });
+                    },3000);
+
+                } else {
+                    listaConceptos.show();
+                }
+
                 $("#cerrar-contenido").click(function(){
                     listaConceptos.hide();
-                    $('#divTabla').hide();
-                    $('#fade').hide();
+                    $.get('tabla_eg.php', function(dochtml) {
+                        $('#divTabla').html(dochtml)
+                    });
+                //     // $('#divTabla').hide();
+                //     // $('#fade').hide();
                 });
             }
         })
@@ -158,7 +181,7 @@
                 method : "post"
             })
             .done(function(html){
-                $("#FactSin").html(html)
+                $("#divFacturas").html(html)
             });
         });
         

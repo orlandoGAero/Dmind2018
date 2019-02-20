@@ -145,7 +145,7 @@
 							<label>No. Folio:<span>&nbsp;*</span></label>
 							<input type="text" name="txtFolio" id="Folio" maxlength="10" autocomplete="off" required>
 						</li>
-						<div id="conceptos-comprobante"></div>
+
 						<li>
 							<label>Descuento ($):</label>
 							<input type="text" name="txtDescuento" id="Descuento" maxlength="15" autocomplete="off">
@@ -281,6 +281,8 @@
 							<label>RFC Proveedor:</label>
 							<input type="text" name="txtRFCprov" id="RFCproveedor" maxlength="13" autocomplete="off">
 						</li>
+						
+						<div id="conceptos-comprobante"></div>
 					</ul>
 					<br>
 					<div id="opcionesFechaPag" title="Agregar Fecha de Pago"></div>

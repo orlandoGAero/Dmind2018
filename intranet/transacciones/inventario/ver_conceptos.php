@@ -11,7 +11,7 @@
     //$conceptos = $funInv->getConceptosEg($idegreso);
     
     $prodConceptos = $funInv->getProductosEg($idegreso);
-    //print_r($prodConceptos);
+    // print_r($prodConceptos);
     
     if($prodConceptos != null) :
 ?>
@@ -92,7 +92,7 @@
             </div>
         <?php endforeach; ?>
         
-        <label for="cerrar-modal" id="cerrar-contenido" class="cerrar-modal">X</label>
+        <label for="cerrar-modal" id="cerrar-contenido" class="cerrar-modal" title="cerrar">X</label>
         <div style="display:table-cell;width:auto"></div>
         <div style="display:table-cell;width:auto"></div>
         <div style="display:table-cell;width:auto"></div>
@@ -122,7 +122,5 @@
 		});
 </script>
 <?php else:?>
-   <p class="title2">
-        No has agregado todos los conceptos de esta factura a productos para permitir capturarlos en inventario
-   </p>
+   <div id="errorC" class='error'><h3 style="z-index: 1002;">No has agregado los conceptos de esta factura a productos</h3></div>
 <?php endif;?>

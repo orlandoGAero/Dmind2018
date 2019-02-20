@@ -6,6 +6,13 @@
 	
 ?>
 <div id="divFacturas">
+	<h1>Egresos (Facturas capturadas)</h1>
+    <div class="botones">
+        <button type="button" id="facSinCap" class="btnSinCap">Facturas Por Capturar</button>
+        <button type="button" id="facIn" class="btnInc">Facturas Incompletas</button>
+        <button type="button" id="facCap" class="btnCap">Facturas Capturadas</button>
+    </div>
+
     <?php if($funInv->getEgInvComp()): ?>
         <div id="status_inv">
             <table cellspacing="0" cellpadding="2" class="display" id="egre">
@@ -37,8 +44,8 @@
                 <tfoot style="display:table-header-group;">
                         <tr>
                             <th class="search">Fecha</th>
-                            <th></th>
-                            <th></th>
+                            <th class="search2">RFC</th>
+                            <th class="search2">Razón Social</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -83,8 +90,8 @@
 	    .columnFilter({
 	    	aoColumns: [
 	    		{type:"date_range"},
-	    		null,
-	    		null,
+	    		{type:"text"},
+	    		{type:"text"},
 	    		null,
 	    		null,
 	    		null
@@ -114,5 +121,38 @@
 				}
 			})
 		});
+
+		$("#facIn").click(function(){
+            
+            $.ajax({
+                url : "tb_fac_incompletas.php",
+                method : "post"
+            })
+            .done(function(html){
+                $("#divFacturas").html(html)
+            });
+        });
+        
+        $("#facSinCap").click(function(){
+            
+            $.ajax({
+                url : "tabla_eg.php",
+                method : "post"
+            })
+            .done(function(html){
+                $("#divFacturas").html(html)
+            });
+        });
+        
+        $("#facCap").click(function(){
+            
+            $.ajax({
+                url : "tb_fac_capturadas.php",
+                method : "post"
+            })
+            .done(function(html){
+                $("#divFacturas").html(html)
+            });
+        });
     });
 </script>

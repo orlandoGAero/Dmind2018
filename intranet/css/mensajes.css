@@ -7,7 +7,7 @@
 	position: fixed;
     top: 50%;
     left: 50%;
-	width: 50%;
+	width: auto;
 	font-family: Helvetica, sans-serif;
 	font-size: medium;
 	text-align: center;
@@ -93,14 +93,14 @@
 	letter-spacing: 1.1px;
 	border-radius: 6px;
 	background: rgba(14,222,23,0.9);
-	width: max-content;
 	font-family: Helvetica, sans-serif;
 	font-size: medium;
 	color: #000;
 	position: fixed;
     top: 50%;
     left: 50%;
-	width: 50%;
+	width: auto;
+	text-align: center;
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
 }
