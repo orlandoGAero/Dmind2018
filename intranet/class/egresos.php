@@ -732,7 +732,7 @@
 			#...datos diferentes al seleccionado(Se utilizan para la modificación de Egresos).
 
 		// -*-*-*Registrar Egresos.-*-*-*
-		public function registrarEgresos($EfectoComprobante, $VersionComprobante, $TipoComprobante, $LugarExpedicionComprobante, $Fecha, $Hora, $rfcEmisor, $nombreEmisor, $guardarProv, $paisEmisor, $estadoEmisor, $municipioEmisor, $coloniaEmisor, $numExtEmisor, $numIntEmisor, $calleEmisor, $cpEmisor, $rfcReceptor, $nombreReceptor, $usoCFDIComprobante, $NumSerie, $NumFolio, $ConceptosComprobante, $DatosProducto, $Descuento, $SubTotal, $IVA, $Total, $MonedaComprobante, $MetodoPago, $CondicionesPagoComprobante, $FormaPagoComprobante, $FechaHoraPago, $NombreImpuesto, $TotalImpuesto, $TipoFactorImpuesto, $TasaImpuesto, $NumCuenta, $Concepto, $Clasificacion, $Estado, $Origen, $Destino, $EstadoComprobante, $FechaHoraCancel, $RegimenFiscalEmisor, $FolioFiscal, $FechaTimbrado, $HoraTimbrado, $SelloComprobante, $rfcProveedor) {
+		public function registrarEgresos($EfectoComprobante, $VersionComprobante, $TipoComprobante, $LugarExpedicionComprobante, $Fecha, $Hora, $rfcEmisor, $nombreEmisor, $nomProv, $guardarProv, $paisEmisor, $estadoEmisor, $municipioEmisor, $coloniaEmisor, $numExtEmisor, $numIntEmisor, $calleEmisor, $cpEmisor, $rfcReceptor, $nombreReceptor, $usoCFDIComprobante, $NumSerie, $NumFolio, $ConceptosComprobante, $DatosProducto, $Descuento, $SubTotal, $IVA, $Total, $MonedaComprobante, $MetodoPago, $CondicionesPagoComprobante, $FormaPagoComprobante, $FechaHoraPago, $NombreImpuesto, $TotalImpuesto, $TipoFactorImpuesto, $TasaImpuesto, $NumCuenta, $Concepto, $Clasificacion, $Estado, $Origen, $Destino, $EstadoComprobante, $FechaHoraCancel, $RegimenFiscalEmisor, $FolioFiscal, $FechaTimbrado, $HoraTimbrado, $SelloComprobante, $rfcProveedor) {
 			$Conexion = new dataBaseConn();
 			$band = 0;
 			if ($EfectoComprobante != "" && $VersionComprobante != "" && $TipoComprobante != "" && $LugarExpedicionComprobante != "" && $Fecha != "" && $EfectoComprobante != "" && $Hora != "" && $rfcEmisor != "" && $nombreEmisor != "" && $rfcReceptor != "" && $nombreReceptor != "" && $NumSerie !== "" && $NumFolio !== "" && $SubTotal != "" && $IVA !== "" && $Total != "" && $MonedaComprobante != "" && $MetodoPago !== "" && $FormaPagoComprobante !== "" && $NombreImpuesto !== "" && $TotalImpuesto !== "" && $TasaImpuesto !== "" && $FolioFiscal != "" && $FechaTimbrado != "" && $HoraTimbrado != "" && $SelloComprobante != "") {
@@ -1054,7 +1054,8 @@
 					$query -> bindParam(':IDegr', $idEgreso);
 					$inventariado = 'No';
 					$query -> bindParam(':Inventariado', $inventariado);
-					$addConInv = 'Si';
+
+					$addConInv = $conceptosComp['agregarInve'];
 					$query -> bindParam(':AddConInv', $addConInv);
 					$resultQuery = $query -> execute();
                     
@@ -1173,13 +1174,16 @@
 					// Insertar proveedor.
 					$queryProv = $Conexion -> prepare("INSERT INTO proveedores (
 													  	id_proveedor,
+													  	nom_proveedor,
 													  	fecha_registro
 													   )
 													   VALUES (
 													  	:IDprove,
+													  	:NOMprove,
 													  	NOW()
 													   );");
 					$queryProv -> bindParam(':IDprove', $idProveedor);
+					$queryProv -> bindParam(':NOMprove', $nomProv);
 					$resultProv = $queryProv -> execute();
 					// Insertar Datos Fiscales Proveedor.
 					if ($resultProv == TRUE) {
@@ -1354,7 +1358,7 @@
 			return $datosEgreso;
 		} // Fin datos de egreso.
 		// Modificar Egresos.
-		public function modificarEgresos($idEgreso, $EfectoComprobante, $VersionComprobante, $TipoComprobante, $LugarExpedicionComprobante, $Fecha, $Hora, $rfcEmisor, $nombreEmisor, $guardarProv, $provGuardado, $idEgrDir, $paisEmisor, $estadoEmisor, $municipioEmisor, $coloniaEmisor, $numExtEmisor, $numIntEmisor, $calleEmisor, $cpEmisor, $rfcReceptor, $nombreReceptor, $usoCFDIComprobante, $NumSerie, $NumFolio, $ConceptosComprobante, $Descuento, $SubTotal, $IVA, $Total, $MonedaComprobante, $MetodoPago, $CondicionesPagoComprobante, $FormaPagoComprobante, $FechaHoraPago, $NombreImpuesto, $TotalImpuesto, $TipoFactorImpuesto, $TasaImpuesto, $NumCuenta, $Concepto, $Clasificacion, $Estado, $Origen, $Destino, $EstadoComprobante, $FechaHoraCancel, $RegimenFiscalEmisor, $FolioFiscal, $FechaTimbrado, $HoraTimbrado, $SelloComprobante, $rfcProveedor, $DatosProducto) {
+		public function modificarEgresos($idEgreso, $EfectoComprobante, $VersionComprobante, $TipoComprobante, $LugarExpedicionComprobante, $Fecha, $Hora, $rfcEmisor, $nombreEmisor, $nomProv, $guardarProv, $provGuardado, $idEgrDir, $paisEmisor, $estadoEmisor, $municipioEmisor, $coloniaEmisor, $numExtEmisor, $numIntEmisor, $calleEmisor, $cpEmisor, $rfcReceptor, $nombreReceptor, $usoCFDIComprobante, $NumSerie, $NumFolio, $ConceptosComprobante, $Descuento, $SubTotal, $IVA, $Total, $MonedaComprobante, $MetodoPago, $CondicionesPagoComprobante, $FormaPagoComprobante, $FechaHoraPago, $NombreImpuesto, $TotalImpuesto, $TipoFactorImpuesto, $TasaImpuesto, $NumCuenta, $Concepto, $Clasificacion, $Estado, $Origen, $Destino, $EstadoComprobante, $FechaHoraCancel, $RegimenFiscalEmisor, $FolioFiscal, $FechaTimbrado, $HoraTimbrado, $SelloComprobante, $rfcProveedor, $DatosProducto) {
 			$Conexion = new dataBaseConn();
 			$band = 0;
 			if ($idEgreso != "" && $EfectoComprobante != "" && $VersionComprobante != "" && $TipoComprobante != "" && $LugarExpedicionComprobante != "" && $Fecha != "" && $EfectoComprobante != "" && $Hora != "" && $rfcEmisor != "" && $nombreEmisor != "" && $rfcReceptor != "" && $nombreReceptor != "" && $NumSerie != "" && $NumFolio != "" && $SubTotal != "" && $IVA != "" && $Total != "" && $MonedaComprobante != "" && $MetodoPago != "" && $FormaPagoComprobante != "" && $NombreImpuesto != "" && $TotalImpuesto != "" && $TasaImpuesto != "" && $FolioFiscal != "" && $FechaTimbrado != "" && $HoraTimbrado != "" && $SelloComprobante != "") {
@@ -1633,13 +1637,16 @@
 					// Insertar proveedor.
 					$queryProv = $Conexion -> prepare("INSERT INTO proveedores (
 													  	id_proveedor,
+													  	nom_proveedor,
 													  	fecha_registro
 													   )
 													   VALUES (
 													  	:IDprove,
+													  	:NOMprove,
 													  	NOW()
 													   );");
 					$queryProv -> bindParam(':IDprove', $idProveedor);
+					$queryProv -> bindParam(':NOMprove', $nomProv);
 					$resultProv = $queryProv -> execute();
 					// Insertar Datos Fiscales Proveedor.
 					if ($resultProv == TRUE) {
@@ -1773,7 +1780,7 @@
                     
 				}
 				if($resultRegEgre == TRUE){
-					header("Location: listar_egresos.php");
+					header("Location: index.php");
 					return $resultRegEgre;
 				}
 			}
@@ -1836,6 +1843,200 @@
 			$query->execute();
 			$InvCon = $query->fetch(PDO::FETCH_ASSOC);
 			return $InvCon;
+		}
+
+		public function buscarEg($fecha, $rfc, $razon, $serie, $folio, $subtotal, $iva, $total, $metodoPago, $fechaPago, $cuenta, $concepto, $clasificacion, $status) {
+			$Conexion = new dataBaseConn();
+			$criterio = "";
+
+			if(empty($criterio) && !empty($fecha)) {
+				$criterio .= "eg.fecha LIKE :FechaEg";
+			} elseif (!empty($criterio) && !empty($fecha)) {
+				$criterio .= "AND eg.fecha LIKE :FechaEg";
+			}
+
+			if (empty($criterio) && !empty($rfc)) {
+				$criterio .= "eg.rfc_emisor LIKE :RfcEg";
+			} elseif (!empty($criterio) && !empty($rfc)) {
+				$criterio .= " AND eg.rfc_emisor LIKE :RfcEg";
+			}
+
+			if (empty($criterio) && !empty($razon)) {
+				$criterio .= "eg.razon_social_emisor LIKE :RazonEg";
+			} elseif (!empty($criterio) && !empty($razon)) {
+				$criterio .= " AND eg.razon_social_emisor LIKE :RazonEg";
+			}
+
+			if (empty($criterio) && !empty($serie)) {
+				$criterio .= "eg.serie LIKE :SerieEg";
+			} elseif (!empty($criterio) && !empty($serie)) {
+				$criterio .= " AND eg.serie LIKE :SerieEg";
+			}
+
+			if (empty($criterio) && !empty($folio)) {
+				$criterio .= "eg.no_folio LIKE :FolioEg";
+			} elseif (!empty($criterio) && !empty($folio)) {
+				$criterio .= " AND eg.no_folio LIKE :FolioEg";
+			}
+
+			if (empty($criterio) && !empty($subtotal)) {
+				$criterio .= "eg.subtotal LIKE :SubTEg";
+			} elseif (!empty($criterio) && !empty($subtotal)) {
+				$criterio .= " AND eg.subtotal LIKE :SubTEg";
+			}
+
+			if (empty($criterio) && !empty($iva)) {
+				$criterio .= "eg.iva LIKE :IvaEg";
+			} elseif (!empty($criterio) && !empty($iva)) {
+				$criterio .= " AND eg.iva LIKE :IvaEg";
+			}
+
+			if (empty($criterio) && !empty($total)) {
+				$criterio .= "eg.total LIKE :TotalEg";
+			} elseif (!empty($criterio) && !empty($total)) {
+				$criterio .= " AND eg.total LIKE :TotalEg";
+			}
+
+			if (empty($criterio) && !empty($metodoPago)) {
+				$criterio .= "eg.metodo_pago LIKE :MetodoP";
+			} elseif (!empty($criterio) && !empty($metodoPago)) {
+				$criterio .= " AND eg.metodo_pago LIKE :MetodoP";
+			}
+
+			if (empty($criterio) && !empty($fechaPago)) {
+				$criterio .= "eg.fecha_pago LIKE :FechaP";
+			} elseif (!empty($criterio) && !empty($fechaPago)) {
+				$criterio .= " AND eg.fecha_pago LIKE :FechaP";
+			}
+
+			if (empty($criterio) && !empty($cuenta)) {
+				$criterio .= "eg.no_cuenta LIKE :CuentaEg";
+			} elseif (!empty($criterio) && !empty($cuenta)) {
+				$criterio .= " AND eg.no_cuenta LIKE :CuentaEg";
+			}
+
+			if (empty($criterio) && !empty($concepto)) {
+				$criterio .= "eg.concepto LIKE :ConceptoEg";
+			} elseif (!empty($criterio) && !empty($concepto)) {
+				$criterio .= " AND eg.concepto LIKE :ConceptoEg";
+			}
+
+			if (empty($criterio) && !empty($clasificacion)) {
+				$criterio .= "eg.clasificacion LIKE :ClasifEg";
+			} elseif (!empty($criterio) && !empty($clasificacion)) {
+				$criterio .= " AND eg.clasificacion LIKE :ClasifEg";
+			}
+
+			if (empty($criterio) && !empty($status)) {
+				$criterio .= "eg.estado LIKE :EstadoEg";
+			} elseif (!empty($criterio) && !empty($status)) {
+				$criterio .= " AND eg.estado LIKE :EstadoEg";
+			}
+			
+			$query = $Conexion -> prepare("SELECT
+									eg.idegresos,
+									eg.fecha,
+									eg.rfc_emisor,
+									eg.razon_social_emisor,
+									eg.serie,
+									eg.no_folio,
+									eg.subtotal,
+									eg.iva,
+									eg.total,
+									eg.metodo_pago,
+									eg.fecha_pago,
+									eg.no_cuenta,
+									eg.concepto,
+									eg.clasificacion,
+									eg.estado
+								   FROM egresos eg
+								   WHERE " . $criterio);
+			
+			if ($fecha !== "") {
+				$fecha = "%".$fecha."%";
+				$query->bindParam(':FechaEg', $fecha);
+			}
+
+			if ($rfc !== "") {
+				$rfc = "%".$rfc."%";
+				$query->bindParam(':RfcEg', $rfc);
+			}
+
+			if ($razon !== "") {
+				$razon = "%".$razon."%";
+				$query->bindParam(':RazonEg', $razon);
+			}
+			
+			if ($serie !== "") {
+				$serie = "%".$serie."%";
+				$query->bindParam(':SerieEg', $serie);
+			}
+
+			if ($folio !== "") {
+				$folio = "%".$folio."%";
+				$query->bindParam(':FolioEg', $folio);
+			}
+
+			if ($subtotal !== "") {
+				$subtotal = "%".$subtotal."%";
+				$query->bindParam(':SubTEg', $subtotal);
+			}
+
+			if ($iva !== "") {
+				$iva = "%".$iva."%";
+				$query->bindParam(':IvaEg', $iva);
+			}
+
+			if ($total !== "") {
+				$total = "%".$total."%";
+				$query->bindParam(':TotalEg', $total);
+			}
+
+			if ($metodoPago !== "") {
+				$metodoPago = "%".$metodoPago."%";
+				$query->bindParam(':MetodoP', $metodoPago);
+			}
+
+			if ($fechaPago !== "") {
+				$fechaPago = "%".$fechaPago."%";
+				$query->bindParam(':FechaP', $fechaPago);
+			}
+
+			if ($cuenta !== "") {
+				$cuenta = "%".$cuenta."%";
+				$query->bindParam(':CuentaEg', $cuenta);
+			}
+
+			if ($concepto !== "") {
+				$concepto = "%".$concepto."%";
+				$query->bindParam(':ConceptoEg', $concepto);
+			}
+
+			if ($clasificacion !== "") {
+				$clasificacion = "%".$clasificacion."%";
+				$query->bindParam(':ClasifEg', $clasificacion);
+			}
+
+			if ($status !== "") {
+				$status = "%".$status."%";
+				$query->bindParam(':EstadoEg', $status);
+			}
+
+			$query->execute();
+			// print_r( $query);
+			$res = $query->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+		}
+
+		public function encontrarEgxFolio($folioFi) {
+			$Conexion = new dataBaseConn();
+			$query = $Conexion -> prepare("SELECT folio_fiscal
+											FROM egresos
+											WHERE folio_fiscal = :FolioEg");
+			$query->bindParam(':FolioEg', $folioFi);
+			$query->execute();
+			$fila = $query->rowCount();
+			return $fila;
 		}
 	} // Fin clase Egresos.
 ?>

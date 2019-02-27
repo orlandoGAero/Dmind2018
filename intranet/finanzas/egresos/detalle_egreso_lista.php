@@ -289,5 +289,5 @@
 			<span class="sin-datos">(Sin pagos)</span>
 		<?php endif ?>
 	</div>
-	<p class="btnSalirDet"><a class="btn primary" href="listar_egresos.php">Salir</a></p>
+	<p class="btnSalirDet"><a class="btn primary" href="index.php">Salir</a></p>
 </article>

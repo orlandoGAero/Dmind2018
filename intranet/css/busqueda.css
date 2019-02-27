@@ -29,6 +29,15 @@
 	margin: 5px 1px 10px 1px;
 }
 
+.btnBuscar {
+	background-color: #28C7E0;
+    border: 0;
+    color: #000;
+    font-weight: bolder;
+    padding: 6px;
+    cursor: pointer;
+}
+
 /*Botones de Facturas*/
 
 .botones {

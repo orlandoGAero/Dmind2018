@@ -178,7 +178,7 @@
 				<?php endif; ?>
 			</p>
 			<p><span>RFC Proveedor:</span> <?=$detalleDatosEgresos['rfc_proveedor']?></p>
-			<p class="btnSalirDet"><a class="btn primary" href="listar_egresos.php">Salir</a></p>
+			<p class="btnSalirDet"><a class="btn primary" href="index.php">Salir</a></p>
 		</div>
 	</section>
 </article>

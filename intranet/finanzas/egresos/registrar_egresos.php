@@ -81,6 +81,12 @@
 							<input type="text" name="txtNombreEmisor" id="NombreEmisor" maxlength="100" autocomplete="off" required>
 						</li>
 						<li>
+							<div id="datoProv" style="display: none">
+								<label for="nomProv">Nombre Proveedor: </label>
+								<input type="text" name="txtNomProvEg">
+							</div>
+						</li>
+						<li>
 							<label>
 								<input type="checkbox" name="saveProv" value="Si" id="guardarProv" class="cbGuardarProv" disabled>
 								<span class="textGuardarProv">Guardar como proveedor</span>
@@ -329,11 +335,20 @@ $(document).ready(function(){
 		    		data: rfcEmi,
 		    		success: function(result) {
 		    			$("#registerEgresos").html(result);
+		    			
+		    			let divError = document.getElementsByClassName('error').length;
+
+		    			if (divError === 0) {
+							document.getElementById('datoProv').style.display = 'block';
+		    			}
 		    		}
 		    	});
 		    }
+		} else {
+			document.getElementById('datoProv').style.display = 'none';
 		}
 	});
+	
 	$('#btn_limpiar').click(function(){
 		$(':input','#form_egresos')
 		.not(':button, :submit, :reset, #efectCompro')

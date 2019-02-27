@@ -67,6 +67,7 @@
 													$datoEg['txtHora'],
 													$datoEg['txtRfcEmisor'],
 													$datoEg['txtNombreEmisor'],
+													null,
 													'No',
 													$datoEg['txtPais_dfe'],
 													$datoEg['txtEstado_dfe'],

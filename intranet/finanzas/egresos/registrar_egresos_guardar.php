@@ -26,6 +26,14 @@
 		$guardarProductos = null;
 	}
 
+	if (isset($_REQUEST['txtNomProvEg'])) {
+		$nomProvee = $_REQUEST['txtNomProvEg'];
+	} else {
+		$nomProvee = null;
+	}
+
+	// print_r($_REQUEST['conceptosFactura']);
+
 	if( $classEgresos -> registrarEgresos($_REQUEST['txtEfectCompr'],
 										$_REQUEST['txtVersion'],
 										$_REQUEST['txtTipoCompr'],
@@ -34,6 +42,7 @@
 										$_REQUEST['txtHora'],
 										$_REQUEST['txtRfcEmisor'],
 										$_REQUEST['txtNombreEmisor'],
+										$nomProvee,
 										$guardarComoProveedor,
 										$_REQUEST['txtPais_dfe'],
 										$_REQUEST['txtEstado_dfe'],

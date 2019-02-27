@@ -26,7 +26,7 @@
 	<center>
 		<div class="menu">
 			<ul>
-				<li><a href="egresos/listar_egresos.php"><div id="iconoEgresos"></div>Egresos</a></li>
+				<li><a href="egresos/"><div id="iconoEgresos"></div>Egresos</a></li>
 				<li><a href="ingresos/listar_ingresos.php"><div id="iconoIngresos"></div>Ingresos</a></li>
 				<li><a href="saldos/listar_saldos.php"><div id="iconoSaldos"></div>Saldos</a></li>
 			</ul>

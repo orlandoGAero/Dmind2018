@@ -474,16 +474,31 @@ input[type=text]:-moz-read-only{
 
 .nomFact {
     display: block;
-    background-color: #a9f3ff;
     width: 320px;
     padding: 5px;
     margin: 10px;
 }
 
+
 .nomFact p {
   font-size: 0.8rem;
   font-weight: 600;
   text-align: center;
+}
+
+.noExiste {
+    background-color: #a9f3ff;
+}
+
+.siExiste {
+    background-color: #ff7070;
+}
+
+.guardada-ant {
+  color: #fff; 
+  background-color: #e2141b; 
+  padding: 5px;
+  margin-left: auto;
 }
 
 /* botones de agregar nuevos datos en eggresos*/
@@ -496,4 +511,47 @@ input[type=text]:-moz-read-only{
     margin-left: 5px;
 }
 
-    
+/* boton mostrar todo*/
+.btnMostrarAll {
+  position: absolute;
+  background-color: #16555B;
+  font-size: 1.2rem;
+  color: #fff;
+  left: 14.5%;
+  padding: 5px;
+}
+
+/* clase para imagenes de si y no registrar egresos */
+.selector { margin-left: 25px }
+
+.selector input {
+  margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+
+.check-si { background-image: url("../images/checked.svg"); } 
+.cancel { background-image: url("../images/cancel.svg"); } 
+
+.selector input:checked + .etiqueta-img {
+   -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+
+.etiqueta-img {
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display:inline-block;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  -webkit-transition: all 100ms ease-in;
+  -moz-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
+  -moz-filter: brightness(1) grayscale(1) opacity(.7);
+  -webkit-filter: brightness(1) grayscale(1) opacity(.7);
+  filter: brightness(1) grayscale(1) opacity(.7);
+}

@@ -38,7 +38,7 @@
 		</nav>
 
 		 <h1 style="text-align:center; color:rgba(0,191,255,.9);">
-	    	<a href="listar_egresos.php">
+	    	<a href="index.php">
 				<img class="atras" src="../../images/atras.png" title="Regresar">
 			</a>Detalle Egresos
 	    </h1>

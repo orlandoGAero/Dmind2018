@@ -112,6 +112,13 @@
             } else {
                 $guardarProductos = null;
             }
+
+            if (isset($_REQUEST['txtNomProvEg'])) {
+				$nomProvee = $_REQUEST['txtNomProvEg'];
+			} else {
+				$nomProvee = null;
+			}
+
 			# Fin verificación de existencia de la dirección de Emisor.
 	    	$classEgresos -> modificarEgresos($_REQUEST['txt_ide'],
 	    									  $_REQUEST['txtEfectCompr'],
@@ -122,6 +129,7 @@
 											  $_REQUEST['txtHora'],
 											  $_REQUEST['txtRfcEmisor'],
 											  $_REQUEST['txtNombreEmisor'],
+											  $nomProvee,
 											  $guardarComoProveedor,
 											  $proveedorYaGuardado,
 											  $idEgresoDir,
@@ -187,7 +195,7 @@
 	?>
 
     <h1 style="text-align:center; color:rgba(0,191,255,.9);">
-    	<a href="listar_egresos.php">
+    	<a href="index.php">
 			<img class="atras" src="../../images/atras.png" title="Regresar">
 		</a>Modificar Egresos
 	</h1>
@@ -244,6 +252,12 @@
 							<li>
 								<label>Razón Social Emisor:<span>&nbsp;*</span></label>
 								<input type="text" name="txtNombreEmisor" value="<?=$ModE['razon_social_emisor']?>" maxlength="100" autocomplete="off" required>
+							</li>
+							<li>
+								<div id="datoProv" style="display: none">
+									<label for="nomProv">Nombre Proveedor: </label>
+									<input type="text" name="txtNomProvEg">
+								</div>
 							</li>
 							<li>
 								<label>
@@ -741,15 +755,24 @@
 			    		data: rfcEmi,
 			    		success: function(result) {
 			    			$("#rfcProv").html(result);
+
+			    			let divError = document.getElementsByClassName('error').length;
+
+			    			if (divError === 0) {
+								document.getElementById('datoProv').style.display = 'block';
+			    			}
 			    		}
 			    	});
 			    }
+			} else {
+				document.getElementById('datoProv').style.display = 'none';
 			}
 		});
+
 		$('#btnCancelarE').click(function(){
 			var msjConfirm = confirm('¿Esta seguro de cancelar el registro?');
 			if (msjConfirm == true) {
-				window.location.href = "listar_egresos.php";
+				window.location.href = "index.php";
 			}
 		});
 

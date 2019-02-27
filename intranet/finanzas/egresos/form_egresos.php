@@ -1,10 +1,21 @@
 <?php 
 	$folioFis = $egreso['folioFiscalE'];
+	
 	$folio8dig = substr($folioFis, 0, 8);
+	
+	$fila = $classEgresos->encontrarEgxFolio($folioFis);
+	
  ?>
-<div class="nomFact">
-	<p>Factura No. <?=$i+1?> - <?=$folio8dig?></p>
+
+<div class="nomFact <?php if($fila == 1){ echo "siExiste"; } else { echo "noExiste"; } ?>" <?php if($fila == 1){ echo "style='display:flex; flex-direction:row; '"; } ?> >
+	<div>
+		<p>Factura No. <?=$i+1?> - <?=$folio8dig?></p>
+	</div>
+	<?php if ($fila == 1) : ?>
+		<div class="guardada-ant">Ya Existe</div>
+	<?php endif ?>
 </div>
+
 <div style="display: none;">
 	<ul>
 		<li>
@@ -119,7 +130,7 @@
 					<span class='azul'><b> - Concepto <?=$numC?> -</b></span>
 				</div>
 			</li>
-			
+			<input type='hidden' name='conceptosFactura[<?=$i?>][<?=$numC?>][agregarInve]' value='Si' />
 			<li>
 				<label>Clave Concepto <?=$numC?>:</label>
 				<input type='text' name='conceptosFactura[<?=$i?>][<?=$numC?>][claveC]' maxlength='20' value="<?=$concepto['claveConceptoE']?>" autocomplete='off'>
