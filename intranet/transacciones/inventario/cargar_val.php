@@ -652,7 +652,7 @@
 
 										<div class='alinearC'>
 											<label class='tamanioC'>Fecha:</label>
-											<label class='tamanioC'>Descripción:</label>
+											<label class='tamanioC'>Nota:</label>
 										</div>
 
 										<div class='alinearC'>

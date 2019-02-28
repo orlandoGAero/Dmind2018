@@ -14,7 +14,9 @@
 	$idEgreso = $_REQUEST['idEg'];
 	
 	if($classEgresos -> eliminarEgreso($idEgreso)){
-		echo "<div class='success2'><h3>" . $classEgresos -> msj . "</h3></div>";
+		echo "<div class='success'><h3>" . $classEgresos -> msj . "</h3></div>";
+	} else {
+		if(isset($classEgresos -> msjErr)) echo"<div class='error'><h3>".$classEgresos -> msjErr."</h3></div>";
 	}
 ?>
 
@@ -33,7 +35,10 @@
 <script type='text/javascript'>
 	egresos(document).ready(function(){
 		setTimeout(function(){
-			egresos('.success2').fadeOut(1500);
+			egresos('.success').fadeOut(1500);
+		},3000);
+		setTimeout(function(){
+			egresos('.error').fadeOut(1500);
 		},3000);
 	});
 </script>

@@ -610,6 +610,148 @@
 			$prov = $query->fetch(PDO::FETCH_ASSOC);
 			return $prov;
 		}
+
+		public function buscarInv($prov, $prod, $tipo, $marca, $noserie, $factura, $estado, $status, $ubicacion) {
+			$Conexion = new dataBaseConn();
+
+			$criterio = "";
+
+			if (empty($criterio) && !empty($prov)) {
+				$criterio .= "prov.nom_proveedor LIKE :ProvInv";
+			} elseif (!empty($criterio) && !empty($prov)) {
+				$criterio .= " AND prov.nom_proveedor LIKE :ProvInv";
+			}
+
+			if (empty($criterio) && !empty($prod)) {
+				$criterio .= "nomProd.nombre LIKE :ProdInv";
+			} elseif (!empty($criterio) && !empty($prod)) {
+				$criterio .= " AND nomProd.nombre LIKE :ProdInv";
+			}
+
+			if (empty($criterio) && !empty($tipo)) {
+				$criterio .= "tiProd.nombre_tipo LIKE :TipoInv";
+			} elseif (!empty($criterio) && !empty($tipo)) {
+				$criterio .= " AND tiProd.nombre_tipo LIKE :TipoInv";
+			}
+
+			if (empty($criterio) && !empty($marca)) {
+				$criterio .= "maProd.nombre_marca LIKE :MarInv";
+			} elseif (!empty($criterio) && !empty($marca)) {
+				$criterio .= " AND maProd.nombre_marca LIKE :MarInv";
+			}
+
+			if (empty($criterio) && !empty($noserie)) {
+				$criterio .= "inv.no_serie LIKE :NoSerieInv";
+			} elseif (!empty($criterio) && !empty($noserie)) {
+				$criterio .= " AND inv.no_serie LIKE :NoSerieInv";
+			}
+
+			if (empty($criterio) && !empty($factura)) {
+				$criterio .= "inv.no_factura LIKE :NoFacInv";
+			} elseif (!empty($criterio) && !empty($factura)) {
+				$criterio .= " AND inv.no_factura LIKE :NoFacInv";
+			}
+
+			if (empty($criterio) && !empty($estado)) {
+				$criterio .= "estProd.nombre_estado LIKE :EstadoInv";
+			} elseif (!empty($criterio) && !empty($estado)) {
+				$criterio .= " AND estProd.nombre_estado LIKE :EstadoInv";
+			}
+
+			if (empty($criterio) && !empty($status)) {
+				$criterio .= "staInv.nombre_status LIKE :StatusInv";
+			} elseif (!empty($criterio) && !empty($status)) {
+				$criterio .= " AND staInv.nombre_status LIKE :StatusInv";
+			}
+
+			if (empty($criterio) && !empty($ubicacion)) {
+				$criterio .= "ubicInv.nombre_ubicacion LIKE :UbicacionInv";
+			} elseif (!empty($criterio) && !empty($ubicacion)) {
+				$criterio .= " AND ubicInv.nombre_ubicacion LIKE :UbicacionInv";
+			}
+
+			$query = $Conexion -> prepare("SELECT 
+								 		  inv.id_inventario,
+								 		  prov.nom_proveedor,
+								 		  nomProd.nombre,
+								 		  prod.modelo,
+								 		  tiProd.nombre_tipo,
+								 		  maProd.nombre_marca,
+								 		  inv.no_serie,
+								 		  inv.no_factura,
+								 		  estProd.nombre_estado,
+								 		  staInv.nombre_status,
+								 		  ubicInv.nombre_ubicacion,
+								 		  inv.id_producto
+								 		FROM
+								 		  inventario inv
+								 		 LEFT JOIN proveedores prov 
+								 		  ON inv.id_proveedor = prov.id_proveedor
+								 		 LEFT JOIN productos prod
+								 		  ON inv.id_producto = prod.id_producto
+								 		 INNER JOIN nombres nomProd
+								 		  ON nomProd.id_nombre = prod.id_nombre
+								 		 INNER JOIN tipos tiProd
+								 		  ON tiProd.id_tipo = prod.id_tipo
+								 		 INNER JOIN marca_productos maProd
+								 		  ON maProd.id_marca = prod.id_marca
+								 		 LEFT JOIN estados estProd
+								 		  ON inv.id_estado = estProd.id_estado
+								 		 LEFT JOIN status_inventario staInv
+								 		  ON inv.id_status = staInv.id_status
+								 		 LEFT JOIN ubicaciones ubicInv
+								 		  ON inv.id_ubicacion = ubicInv.id_ubicacion
+										 WHERE " . $criterio);
+
+			if ($prov !== "") {
+				$prov = "%".$prov."%";
+				$query->bindParam(':ProvInv', $prov);
+			}
+
+			if ($prod !== "") {
+				$prod = "%".$prod."%";
+				$query->bindParam(':ProdInv', $prod);
+			}
+
+			if ($tipo !== "") {
+				$tipo = "%".$tipo."%";
+				$query->bindParam(':TipoInv', $tipo);
+			}
+
+			if ($marca !== "") {
+				$marca = "%".$marca."%";
+				$query->bindParam(':MarInv', $marca);
+			}
+
+			if ($noserie !== "") {
+				$noserie = "%".$noserie."%";
+				$query->bindParam(':NoSerieInv', $noserie);
+			}
+
+			if ($factura !== "") {
+				$factura = "%".$factura."%";
+				$query->bindParam(':NoFacInv', $factura);
+			}
+
+			if ($estado !== "") {
+				$estado = "%".$estado."%";
+				$query->bindParam(':EstadoInv', $estado);
+			}
+
+			if ($status !== "") {
+				$status = "%".$status."%";
+				$query->bindParam(':StatusInv', $status);
+			}
+
+			if ($ubicacion !== "") {
+				$ubicacion = "%".$ubicacion."%";
+				$query->bindParam(':UbicacionInv', $ubicacion);
+			}
+
+			$query->execute();
+			$res = $query->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+		}
 		// tal vez borrar
 		// public function getNomProvEg($idEgreso) {
 		// 	$Conexion = new dataBaseConn();

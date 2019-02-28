@@ -87,7 +87,6 @@
 			</b>
     	</section>
 		
-		<div id="buscando-res"></div>
     	<div id="lista_egresos" style="margin-top: 50px">
     		<div id="cargando-res"></div>
     	</div>
@@ -127,7 +126,7 @@
 				});
 
 				egresos("#formBuscar").submit(function(e) {
-					egresos("#buscando-res").html("<center><img src='../../images/buscando.gif' /></center>")
+					egresos("#cargando-res").html("<center><img src='../../images/esperando.svg' /></center>")
 					e.preventDefault();
 					egresos.ajax({
 						url: 'busquedad_filtrada.php',
@@ -136,7 +135,6 @@
 						data: egresos("#formBuscar").serialize(),
 					})
 					.done(function(res) {
-						egresos("#buscando-res").remove();
 						egresos("#lista_egresos").html(res);
 					})
 				});

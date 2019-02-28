@@ -56,12 +56,17 @@
 				}
 			}
 			if ($band == 0) {
+				$queryDel = $Conexion-> prepare('DELETE FROM conceptos_productos
+						WHERE id_prod = :idProducto');
+				$queryDel->bindParam(':idProducto', $IDproduct);
+				$resDel = $queryDel->execute();
+
 				$sth = $Conexion -> prepare('DELETE FROM productos WHERE id_producto = :idProducto');
 				$sth -> bindParam(':idProducto', $IDproduct);
 				$result = $sth -> execute();
-				if ($result) {
+				if ($resDel && $result) {
 					$this -> msjOk = "Producto eliminado correctamente.";
-					return $result;
+					return $resDel & $result;
 				}
 			}
 		}

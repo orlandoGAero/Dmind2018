@@ -1275,6 +1275,23 @@
 		public function eliminarEgreso($idEgreso) {
 			$Conexion = new dataBaseConn();
 			$band = 0;
+
+			if ($band === 0) {
+				$query = $Conexion-> prepare("SELECT cpr.id_eg_con
+											FROM egresos eg
+											INNER JOIN egresos_conceptos econ ON eg.idegresos = econ.id_egresos
+											INNER JOIN conceptos_productos cpr ON econ.id_egresos_conceptos = cpr.id_eg_con
+											WHERE eg.idegresos = :egresoId");
+				$query->bindParam(':egresoId', $idEgreso);
+				$query->execute();
+				$fila = $query->rowCount();
+				
+				if ($fila !== 0) {
+					$this -> msjErr = "El egreso tiene productos guardados, por lo tanto no podrá eliminarse.";
+					$band = 1;
+				}
+			}
+
 			if($band == 0){
 				$queryDelEgrCon = $Conexion -> prepare("DELETE FROM egresos_conceptos WHERE id_egresos = :egresoId;");
 				$queryDelEgrCon -> bindParam(':egresoId', $idEgreso);
@@ -1294,6 +1311,7 @@
 					return $resultDelEgrCon & $resultDelDirE & $resultDelEgr;
 				}
 			}
+
 		} // Fin eliminar egreso.
 		// Datos de Egreso.
 		public function datosEditarEgreso($idEgreso) {

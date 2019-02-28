@@ -83,7 +83,7 @@ $query="SELECT I.id_inventario,nom_proveedor,nombre,modelo,no_factura,no_serie,p
 		<tr><th>Status</th><td><?php echo $fila["nombre_status"]; ?></td></tr>
 		<tr><th>Ubicación</th><td><?php echo $fila["nombre_ubicacion"]; ?></td></tr>
 		<tr><th>Color</th><td><?php echo $fila["color"]; ?></td></tr>
-		<tr><th>Descripción</th><td><?php echo $fila["descripcion"]; ?></td></tr>
+		<tr><th>Nota</th><td><?php echo $fila["descripcion"]; ?></td></tr>
 	</table>
 	<a href="./" class="btn primary">Salir</a>
 </form>
