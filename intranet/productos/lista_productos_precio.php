@@ -19,9 +19,9 @@
 				<th>MODELO</th>
 				<th>PRECIO</th>
 				<th>EXISTENCIAS</th>
-				<th></th>
-				<th></th>
-				<th></th>
+				<th class="nosort"></th>
+				<th class="nosort"></th>
+				<th class="nosort"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -89,17 +89,17 @@
 			    </tr>
 			<?php endforeach; ?>
 		</tbody>
-		<tfoot style="display:table-header-group;">
+		<tfoot>
 			<tr>
-				<th class="search" title="Clave">Clave</th>
-				<th class="search" title="Categoría">Categoría</th>
-				<th class="search2" title="Subcategoría">Subcategoría</th>
-				<th class="search" title="División">División</th>
-				<th class="search" title="Nombre">Nombre</th>
-				<th class="search" title="Tipo">Tipo</th>
-				<th class="search" title="Marca">Marca</th>
-				<th class="search" title="Modelo">Modelo</th>
-				<th class="search" title="Precio">Precio</th>
+				<th class="search search_txt">Clave</th>
+				<th class="search search_txt">Categoría</th>
+				<th class="search search_txt">Subcategoría</th>
+				<th class="search search_txt">División</th>
+				<th class="search search_txt">Nombre</th>
+				<th class="search search_txt">Tipo</th>
+				<th class="search search_txt">Marca</th>
+				<th class="search search_txt">Modelo</th>
+				<th class="search search_txt">Precio</th>
 				<th></th>
 				<th></th>
 				<th></th>
@@ -114,12 +114,17 @@
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
-				<th align="center">
-					<?php if($nameMoneda == "pesoMx") :?>
-						<button title="Cambiar Precio a Dólares" id="precioDolares"><img src="../images/moneda_usa.png"></button>
-					<?php elseif($nameMoneda == "dolarAm") :?>
-						<button title="Cambiar Precio a Pesos" id="precioPesos"><img src="../images/moneda_mex.png"></button>
-					<?php endif; ?>
+				<th align="center" id="thMon">
+					<?php //if($nameMoneda == "pesoMx") :?>
+						<button
+							style='display: <?php if($nameMoneda == "pesoMx") echo 'block'; else echo 'none'  ?>;'
+							title="Cambiar Precio a Dólares" id="precioDolares"><img src="../images/moneda_usa.png">
+						</button>
+					<?php //elseif($nameMoneda == "dolarAm") :?>
+						<button
+							style='display: <?php if($nameMoneda == "dolarAm") echo 'block'; else echo 'none'  ?>;'
+							title="Cambiar Precio a Pesos" id="precioPesos"><img src="../images/moneda_mex.png"></button>
+					<?php //endif; ?>
 				</th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
@@ -133,60 +138,3 @@
 		(Sin registros)
 	</div>
 <?php endif; ?>
-<script type="text/javascript">
-	var pro = jQuery.noConflict();
-	pro(document).ready(function(){
-		// DataTable
-		pro('#products').dataTable({ 
-	        // Damos formato a la paginación(números).
-	        "sPaginationType": "full_numbers",
-	        // Desactiva el filtrado de datos.
-	        // bFilter: false,
-	        // Ordenar de forma ascendente la columna de la posición 1.
-	        aaSorting: [[0,"asc"]],
-	        // Muestra el número de filas en una sola página.
-	        iDisplayLength: 25,
-	        /*Configura el menú que se utiliza para seleccionar 
-	        	el número de filas en una sola página. */
-	        aLengthMenu: [[25, 50, 100], [25, 50, 100]],
-	        // Desactivar la ordenación de una columna.
-	        aoColumnDefs:[{
-	        	bSortable: false,
-	        	// Posición de la columna.
-	        	aTargets: [10, 11, 12]
-	        }],
-			// Cambiar de posición los elementos(paginado,buscar,etc.)
-			"sDom" : '<"top"lp>rt<"bottom"i><"clear">'
-	    })
-
-		.columnFilter({
-	    	aoColumns: [
-	    		{type:"number"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		null,
-	    		null,
-	    		null,
-	    		null
-	    	]
-	    });
-	     //FUNCIÓN que cambia el PRECIO del PRODUCTO a DÓlARES AMERICANOS.
-	    pro('#precioDolares').click(function() {
-	    	pro.post('lista_productos_precio.php', {moneda: 'dolarAm'}, function(data) {
-	    		pro('#tablaProductos').html(data);
-	    	});
-	    });
-	    // FUNCIÓN que cambia el PRECIO del PRODUCTO a PESOS MEXICANOS.
-	    pro('#precioPesos').click(function() {
-	    	pro.post('lista_productos_precio.php', {moneda: 'pesoMx'}, function(data) {
-	    		pro('#tablaProductos').html(data);
-	    	});
-	    });
-	});
-</script>

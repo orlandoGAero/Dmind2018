@@ -13,9 +13,33 @@
 	$fnProductos = new Productos();
 	// Obtiene la moneda predeterminada, para mostrar el precio del producto.
 	$nameMoneda = $fnProductos -> monedaPredeterminada();
-	$buscarNameProd = $_REQUEST['nombrePro'];
+
+	if (isset($_REQUEST['catPro'])
+		|| isset($_REQUEST['subPro'])
+		|| isset($_REQUEST['divPro'])
+		|| isset($_REQUEST['nombrePro'])
+		|| isset($_REQUEST['tipoProd'])
+		|| isset($_REQUEST['marPro'])
+		|| isset($_REQUEST['modeloPro'])
+		|| isset($_REQUEST['precioProd'])
+	) {
+		$catProd = $_REQUEST['catPro'];
+		$subProd = $_REQUEST['subPro'];
+		$divProd = $_REQUEST['divPro'];
+		$nameProd = $_REQUEST['nombrePro'];
+		$tipoProd = $_REQUEST['tipoProd'];
+		$marcProd = $_REQUEST['marPro'];
+		$modProd = $_REQUEST['modeloPro'];
+		$precioProd = $_REQUEST['precioProd'];
+	}
+
+	if ( !empty($catProd) || !empty($subProd) || !empty($divProd) 
+		|| !empty($nameProd) || !empty($tipoProd) || !empty($marcProd) 
+		|| !empty($modProd) || !empty($precioProd) ) :
+		$DatProd = $fnProductos -> buscarProd($catProd, $subProd, $divProd, $nameProd, $tipoProd, $marcProd, $modProd, $precioProd);
+		// print_r($DatProd);
 ?>
-<?php if(	$DatProd = $fnProductos -> buscarProductosNombre($buscarNameProd) ) :?>
+<?php if(count($DatProd) >= 1) : ?>
 	<div id="eliminacion"></div>
 	<table class="display" id="products">
 		<thead>
@@ -30,9 +54,9 @@
 				<th>MODELO</th>
 				<th>PRECIO</th>
 				<th>EXISTENCIAS</th>
-				<th></th>
-				<th></th>
-				<th></th>
+				<th class="nosort"></th>
+				<th class="nosort"></th>
+				<th class="nosort"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -97,17 +121,17 @@
 			    </tr>
 			<?php endforeach; ?>
 		</tbody>
-		<tfoot style="display:table-header-group;">
+		<tfoot >
 			<tr>
-				<th class="search" title="Clave">Clave</th>
-				<th class="search" title="Categoría">Categoría</th>
-				<th class="search2" title="Subcategoría">Subcategoría</th>
-				<th class="search" title="División">División</th>
-				<th class="search" title="Nombre">Nombre</th>
-				<th class="search" title="Tipo">Tipo</th>
-				<th class="search" title="Marca">Marca</th>
-				<th class="search" title="Modelo">Modelo</th>
-				<th class="search" title="Precio">Precio</th>
+				<th class="search search_txt" title="Clave">Clave</th>
+				<th class="search search_txt" title="Categoría">Categoría</th>
+				<th class="search search_txt"  title="Subcategoría">Subcategoría</th>
+				<th class="search search_txt" title="División">División</th>
+				<th class="search search_txt" title="Nombre">Nombre</th>
+				<th class="search search_txt" title="Tipo">Tipo</th>
+				<th class="search search_txt" title="Marca">Marca</th>
+				<th class="search search_txt" title="Modelo">Modelo</th>
+				<th class="search search_txt" title="Precio">Precio</th>
 				<th></th>
 				<th></th>
 				<th></th>
@@ -122,12 +146,17 @@
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
-				<th align="center">
-					<?php if(in_array("PESO", $nameMoneda)) :?>
-						<button title="Cambiar Precio a Dólares" id="precioDolares"><img src="../images/moneda_usa.png"></button>
-					<?php elseif(in_array("DOLAR", $nameMoneda)) :?>
-						<button title="Cambiar Precio a Pesos" id="precioPesos"><img src="../images/moneda_mex.png"></button>
-					<?php endif; ?>
+				<th align="center" id="thMon">
+					<button 
+						style='display: <?php if(in_array("PESO", $nameMoneda)) echo 'block'; else echo 'none'  ?>;'
+						title="Cambiar Precio a Dólares" id="precioDolares">
+						<img src="../images/moneda_usa.png">
+					</button>
+					<button 
+						style='display: <?php if(in_array("DOLAR", $nameMoneda)) echo 'block'; else echo 'none'  ?>;' 
+						title="Cambiar Precio a Pesos" id="precioPesos">
+						<img src="../images/moneda_mex.png">
+					</button>
 				</th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
@@ -138,64 +167,11 @@
 	</table>
 <?php else :?>
 	<div class="vacio">
-		(Sin registros)
+		(No se encontraron resultados)
 	</div>
 <?php endif; ?>
-<script type="text/javascript">
-	var pro = jQuery.noConflict();
-	pro(document).ready(function(){
-		// DataTable
-		pro('#products').dataTable({ 
-	        // Damos formato a la paginación(números).
-	        "sPaginationType": "full_numbers",
-	        // Desactiva el filtrado de datos.
-	        // bFilter: false,
-	        // Ordenar de forma ascendente la columna de la posición 1.
-	        aaSorting: [[0,"asc"]],
-	        // Muestra el número de filas en una sola página.
-	        iDisplayLength: 25,
-	        /*Configura el menú que se utiliza para seleccionar 
-	        	el número de filas en una sola página. */
-	        aLengthMenu: [[25, 50, 100], [25, 50, 100]],
-	        // Desactivar la ordenación de una columna.
-	        aoColumnDefs:[{
-	        	bSortable: false,
-	        	// Posición de la columna.
-	        	aTargets: [10, 11, 12]
-	        }],
-			// Cambiar de posición los elementos(paginado,buscar,etc.)
-			"sDom" : '<"top"lp>rt<"bottom"i><"clear">'
-	    })
-
-		.columnFilter({
-	    	aoColumns: [
-	    		{type:"number"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		null,
-	    		null,
-	    		null,
-	    		null
-	    	]
-	    });
-	     //FUNCIÓN que cambia el PRECIO del PRODUCTO a DÓlARES AMERICANOS.
-	    pro('#precioDolares').click(function() {
-	    	pro.post('lista_productos_precio.php', {moneda: 'dolarAm'}, function(data) {
-	    		pro('#tablaProductos').html(data);
-	    	});
-	    });
-	    // FUNCIÓN que cambia el PRECIO del PRODUCTO a PESOS MEXICANOS.
-	    pro('#precioPesos').click(function() {
-	    	pro.post('lista_productos_precio.php', {moneda: 'pesoMx'}, function(data) {
-	    		pro('#tablaProductos').html(data);
-	    	});
-	    });
-	});
-</script>
-
+<?php else: ?>
+	<div class='caption'>
+		<h3 style='top: 65%;'>Se requiere por lo menos un criterio para realizar la búsqueda</h3>
+	</div>
+ <?php endif; ?>

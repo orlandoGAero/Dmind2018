@@ -178,7 +178,7 @@ tr.even {
 	color: #FFFFFF;
 }
 
-.paging_full_numbers a.paginate_active {
+.paging_full_numbers a.current {
 	background-color: #0064cd;
 	color: #FFFFFF;
 }
@@ -245,6 +245,7 @@ tr.even {
 
 	table.display tfoot {
 		background: #16555B;
+		display: table-header-group;
 	}
 
 	table.display tfoot td {

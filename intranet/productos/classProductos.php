@@ -238,8 +238,8 @@
 		public function getFilaAfectada($modelo, $id_producto) {
 			$Conexion = new dataBaseConn();
 			$query = $Conexion->prepare('SELECT modelo
-																		FROM productos
-																		WHERE modelo = :model AND id_producto != :IDproducto');
+										FROM productos
+										WHERE modelo = :model AND id_producto != :IDproducto');
 			$query->bindParam(':model', $modelo);
 			$query->bindParam(':IDproducto', $id_producto);
 			$query->execute();
@@ -330,6 +330,135 @@
 			} catch(PDOException $e) {
 				print $e->getMessage();
 			}
+		}
+
+		public function buscarProd($cate, $subc, $divi, $nomb, $tipo, $marc, $mode, $prec
+		) {
+			$Conexion = new dataBaseConn();
+
+			$criterio = "";
+
+			if (empty($criterio) && !empty($cate)) {
+				$criterio .= "categorias.nombre_categoria LIKE :Cat";
+			} elseif (!empty($criterio) && !empty($cate)) {
+				$criterio .= " AND categorias.nombre_categoria LIKE :Cat";
+			}
+
+			if (empty($criterio) && !empty($subc)) {
+				$criterio .= "subcategorias.nombre_subcategoria LIKE :Sub";
+			} elseif (!empty($criterio) && !empty($subc)) {
+				$criterio .= " AND subcategorias.nombre_subcategoria LIKE :Sub";
+			}
+
+			if (empty($criterio) && !empty($divi)) {
+				$criterio .= "D.nombre_division LIKE :Div";
+			} elseif (!empty($criterio) && !empty($divi)) {
+				$criterio .= " AND D.nombre_division LIKE :Div";
+			}
+
+			if (empty($criterio) && !empty($nomb)) {
+				$criterio .= "nombres.nombre LIKE :Nom";
+			} elseif (!empty($criterio) && !empty($nomb)) {
+				$criterio .= " AND nombres.nombre LIKE :Nom";
+			}
+
+			if (empty($criterio) && !empty($tipo)) {
+				$criterio .= "tipos.nombre_tipo LIKE :Tip";
+			} elseif (!empty($criterio) && !empty($tipo)) {
+				$criterio .= " AND tipos.nombre_tipo LIKE :Tip";
+			}
+
+			if (empty($criterio) && !empty($marc)) {
+				$criterio .= "M.nombre_marca LIKE :Mar";
+			} elseif (!empty($criterio) && !empty($marc)) {
+				$criterio .= " AND M.nombre_marca LIKE :Mar";
+			}
+
+			if (empty($criterio) && !empty($mode)) {
+				$criterio .= "P.modelo LIKE :Mod";
+			} elseif (!empty($criterio) && !empty($mode)) {
+				$criterio .= " AND P.modelo LIKE :Mod";
+			}
+
+			if (empty($criterio) && !empty($prec)) {
+				$criterio .= "P.precio LIKE :Pre";
+			} elseif (!empty($criterio) && !empty($prec)) {
+				$criterio .= " AND P.precio LIKE :Pre";
+			}
+
+			$query = $Conexion->prepare("SELECT 
+											  P.id_producto,
+											  categorias.nombre_categoria,
+											  subcategorias.nombre_subcategoria,
+											  D.nombre_division,
+											  nombre,
+											  nombre_tipo,
+											  M.nombre_marca,
+											  P.modelo,
+											  P.precio,
+											  P.exit_inventario,
+											  mon.id_moneda 
+										FROM
+										  productos P 
+										  LEFT JOIN categorias 
+										    ON P.id_categoria = categorias.id_categoria 
+										  LEFT JOIN subcategorias 
+										    ON P.id_subcategoria = subcategorias.id_subcategoria 
+										  LEFT JOIN division D
+										    ON P.id_division = D.id_division
+										  LEFT JOIN marca_productos M 
+										    ON P.id_marca = M.id_marca 
+										  LEFT JOIN nombres 
+										    ON P.id_nombre = nombres.id_nombre 
+										  LEFT JOIN tipos 
+										    ON P.id_tipo = tipos.id_tipo
+				    					  LEFT JOIN moneda mon
+											ON mon.id_moneda = P.id_moneda 
+										WHERE " . $criterio);
+			
+			if ($cate !== "") {
+				$cate = "%".$cate."%";
+				$query->bindParam(':Cat', $cate);
+			}
+
+			if ($subc !== "") {
+				$subc = "%".$subc."%";
+				$query->bindParam(':Sub', $subc);
+			}
+
+			if ($divi !== "") {
+				$divi = "%".$divi."%";
+				$query->bindParam(':Div', $divi);
+			}
+
+			if ($nomb !== "") {
+				$nomb = "%".$nomb."%";
+				$query->bindParam(':Nom', $nomb);
+			}
+
+			if ($tipo !== "") {
+				$tipo = "%".$tipo."%";
+				$query->bindParam(':Tip', $tipo);
+			}
+
+			if ($marc !== "") {
+				$marc = "%".$marc."%";
+				$query->bindParam(':Mar', $marc);
+			}
+
+			if ($mode !== "") {
+				$mode = "%".$mode."%";
+				$query->bindParam(':Mod', $mode);
+			}
+
+			if ($prec !== "") {
+				$prec = "%".$prec."%";
+				$query->bindParam(':Pre', $prec);
+			}
+
+			$query->execute();
+			$res = $query->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
 		}
 		
 	}

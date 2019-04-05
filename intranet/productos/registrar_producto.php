@@ -116,7 +116,7 @@
 								 $monedas = $productos->getMonedas();
 								 foreach($monedas as $moneda) :
 							?>
-									<option value='<?=$moneda['id_moneda']?>'><?=$moneda['nombre_moneda']?></option>		
+									<option value='<?=$moneda['id_moneda']?>' <?php if($moneda['nombre_moneda'] == 'PESO') echo 'selected';?>><?=$moneda['nombre_moneda']?></option>		
 							<?php endforeach;?>	
 						</select>
 					</td>
@@ -143,104 +143,10 @@
 					<td><span id="alerta10" class="errores">Ingresa la descripción</span><br></td>
 				</tr>
 			</table>
-			<div id="guardarProd"></div>
 		</div>
 		<div style="width:555px;background:#16555B;border-bottom-right-radius:10px;border-bottom-left-radius:10px;padding:5px;">
 			<center><input type="submit" class="btn primary" value="Guardar" /></center>
 		</div>
 	</form>
+	<div id="guardarProd"></div>
 </center>
-<script type="text/javascript">
-var regProd = jQuery.noConflict();
-regProd(document).ready(function(){
-	regProd(".btn").click(function(){
-	    var cat = regProd(".categoria").val();
-	    var subcat = regProd(".subcategoria").val();
-		var div = regProd(".division").val();
-		var nom = regProd(".nombre").val();
-		var tip = regProd(".tipo").val();
-		var marc = regProd(".marca").val();
-		var mod = regProd(".modelo").val();
-		var prec = regProd(".precio").val();
-		var uni = regProd(".unidad").val();
-		var desc = regProd(".descripcion").val();
-
-      if (cat==0) {
-      	  regProd(".nombre").focus();
-          regProd("#alerta1").fadeIn();
-          return false;
-      }else{
-      	regProd("#alerta1").fadeOut();
-	      if (subcat==0) {
-	      	  regProd(".subcategoria").focus();
-	          regProd("#alerta2").fadeIn();
-	          return false;
-	      }else{
-	      	regProd("#alerta2").fadeOut();
-		      if (div==0) {
-		      	  regProd(".division").focus();
-		          regProd("#alerta3").fadeIn();
-		          return false;
-		      }else{
-		      	regProd("#alerta3").fadeOut();
-			      if (nom==0) {
-			      	  regProd(".nombre").focus();
-			          regProd("#alerta4").fadeIn();
-			          return false;
-			      }else{
-			      	regProd("#alerta4").fadeOut();
-				      if (tip==0) {
-				      	  regProd(".tipo").focus();
-				          regProd("#alerta5").fadeIn();
-				          return false;
-				      }else{
-				      	regProd("#alerta5").fadeOut();
-					      if (marc==0) {
-					      	  regProd(".marca").focus();
-					          regProd("#alerta6").fadeIn();
-					          return false;
-					      }else{
-					      	regProd("#alerta6").fadeOut();
-						      if (mod=="") {
-						      	  regProd(".modelo").focus();
-						          regProd("#alerta7").fadeIn();
-						          return false;
-						      }else{
-						      	 regProd("#alerta7").fadeOut();
-								    if (prec=="") {
-								   	  regProd(".precio").focus();
-								      regProd("#alerta8").fadeIn();
-								      return false;
-						      	}else{
-							      regProd("#alerta8").fadeOut();
-								    if (uni==0) {
-								   	  regProd(".unidad").focus();
-								      regProd("#alerta9").fadeIn();
-								      return false;
-								    }else{
-								      	regProd("#alerta9").fadeOut();
-								      	if (desc == 0) {
-								      		regProd(".descripcion").focus();
-								      		regProd("#alerta10").fadeIn();
-								      		return false;
-								      	}else{
-								      		regProd("#alerta10").fadeOut();
-								      	}
-								    }
-								 }
-						      }
-					      }
-				      }
-			      }
-		      }
-
-	      }
-      }
-    });
-
-    regProd("#formProdAdd").submit(function(newProd) {
-    	newProd.preventDefault();
-    	regProd("#guardarProd").load('guardar_producto.php?' + regProd("#formProdAdd").serialize());
-    });
-});
-</script>

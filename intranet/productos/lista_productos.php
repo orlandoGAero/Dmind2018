@@ -25,13 +25,15 @@
 				<th>MODELO</th>
 				<th>PRECIO</th>
 				<th>EXISTENCIAS</th>
-				<th></th>
-				<th></th>
-				<th></th>
+				<th class="nosort"></th>
+				<th class="nosort"></th>
+				<th class="nosort"></th>
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach($arrProductos as $producto) : ?>
+			<?php
+				$i = 1; 
+				foreach($arrProductos as $producto) : ?>
 			    <tr>
 			    	<td align="center"><?=$producto['id_producto']?></td>
 			    	<td align="center"><?=$producto['nombre_categoria']?></td>
@@ -41,7 +43,7 @@
 			    	<td align="center"><?=$producto['nombre_tipo']?></td>
 			    	<td align="center"><?=$producto['nombre_marca']?></td>
 			    	<td align="center"><?=$producto['modelo']?></td>
-			    	<td align="center">
+			    	<td align="center" id="col<?=$i?>">
 			 				<!-- Si la MONEDA PREDETERMINADA es PESOS MEXICANOS, el precio de todos los PRODUCTOS se muestra en la MONEDA mencionada. -->
 						<?php 
 							if(in_array("PESO", $monedaPredProduct)) :
@@ -98,19 +100,22 @@
 			    	<td><a href="detalle.php?productdetail=<?=$idProducto?>"><img src="../images/detalle.png" title="Detalle"></a></td>
 			    	<td><a href="editar.php?productedit=<?=$idProducto?>" class="edita"><img src="../images/editar.png" title="Editar"></a></td>
 			    </tr>
-			<?php endforeach; ?>
+			<?php
+				$i++; 
+				endforeach; 
+			?>
 		</tbody>
-		<tfoot style="display:table-header-group;">
+		<tfoot >
 			<tr>
-				<th class="search" title="Clave">Clave</th>
-				<th class="search" title="Categoría">Categoría</th>
-				<th class="search2" title="Subcategoría">Subcategoría</th>
-				<th class="search" title="División">División</th>
-				<th class="search" title="Nombre">Nombre</th>
-				<th class="search" title="Tipo">Tipo</th>
-				<th class="search" title="Marca">Marca</th>
-				<th class="search" title="Modelo">Modelo</th>
-				<th class="search" title="Precio">Precio</th>
+				<th class="search search_txt">Clave</th>
+				<th class="search search_txt">Categoría</th>
+				<th class="search search_txt">Subcategoría</th>
+				<th class="search search_txt">División</th>
+				<th class="search search_txt">Nombre</th>
+				<th class="search search_txt">Tipo</th>
+				<th class="search search_txt">Marca</th>
+				<th class="search search_txt">Modelo</th>
+				<th class="search search_txt">Precio</th>
 				<th></th>
 				<th></th>
 				<th></th>
@@ -125,12 +130,17 @@
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
-				<th align="center">
-					<?php if(in_array("PESO", $monedaPredProduct)) :?>
-						<button title="Cambiar Precio a Dólares" id="precioDolares"><img src="../images/moneda_usa.png"></button>
-					<?php elseif(in_array("DOLAR", $monedaPredProduct)) :?>
-						<button title="Cambiar Precio a Pesos" id="precioPesos"><img src="../images/moneda_mex.png"></button>
-					<?php endif; ?>
+				<th align="center" id="thMon">
+					<button 
+						style='display: <?php if(in_array("PESO", $monedaPredProduct)) echo 'block'; else echo 'none'  ?>;'
+						title="Cambiar Precio a Dólares" id="precioDolares">
+						<img src="../images/moneda_usa.png">
+					</button>
+					<button 
+						style='display: <?php if(in_array("DOLAR", $monedaPredProduct)) echo 'block'; else echo 'none'  ?>;' 
+						title="Cambiar Precio a Pesos" id="precioPesos">
+						<img src="../images/moneda_mex.png">
+					</button>
 				</th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
@@ -144,60 +154,3 @@
 		(Sin registros)
 	</div>
 <?php endif; ?>
-<script type="text/javascript">
-	var a = jQuery.noConflict();
-	a(document).ready(function(){
-		// DataTable
-		a('#products').dataTable({ 
-	        // Damos formato a la paginación(números).
-	        "sPaginationType": "full_numbers",
-	        // Desactiva el filtrado de datos.
-	        // bFilter: false,
-	        // Ordenar de forma ascendente la columna de la posición 1.
-	        aaSorting: [[0,"asc"]],
-	        // Muestra el número de filas en una sola página.
-	        iDisplayLength: 25,
-	        /*Configura el menú que se utiliza para seleccionar 
-	        	el número de filas en una sola página. */
-	        aLengthMenu: [[25, 50, 100], [25, 50, 100]],
-	        // Desactivar la ordenación de una columna.
-	        aoColumnDefs:[{
-	        	bSortable: false,
-	        	// Posición de la columna.
-	        	aTargets: [10, 11, 12]
-	        }],
-			// Cambiar de posición los elementos(paginado,buscar,etc.)
-			"sDom" : '<"top"lp>rt<"bottom"i><"clear">'
-	    })
-
-		.columnFilter({
-	    	aoColumns: [
-	    		{type:"number"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		{type:"text"},
-	    		null,
-	    		null,
-	    		null,
-	    		null
-	    	]
-	    });
-	    //FUNCIÓN que cambia el PRECIO del PRODUCTO a DÓlARES AMERICANOS.
-	    a('#precioDolares').click(function() {
-	    	a.post('lista_productos_precio.php', {moneda: 'dolarAm'}, function(data) {
-	    		a('#tablaProductos').html(data);
-	    	});
-	    });
-	    // FUNCIÓN que cambia el PRECIO del PRODUCTO a PESOS MEXICANOS.
-	    a('#precioPesos').click(function() {
-	    	a.post('lista_productos_precio.php', {moneda: 'pesoMx'}, function(data) {
-	    		a('#tablaProductos').html(data);
-	    	});
-	    });
-	});
-</script>
