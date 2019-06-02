@@ -71,10 +71,10 @@
 					</div>
 						<div class='selector'>
 							<input type='radio' name='conceptosFactura[".$i."][agregarInve]' value='Si' checked id='checked-si{$i}'/>
-							<label class='etiqueta-img check-si' for='checked-si{$i}'></label>
+							<label class='etiqueta-img check-si' for='checked-si{$i}' title='Se va a inventariar'></label>
 
 							<input type='radio' name='conceptosFactura[".$i."][agregarInve]' value='No' id='cancel{$i}'/>
-							<label class='etiqueta-img cancel' for='cancel{$i}'></label>
+							<label class='etiqueta-img cancel' for='cancel{$i}' title='No se va a inventariar'></label>
 						</div>
 				</li>
 					<div id='fade' class='overlay-egresos cerrarDatos'></div>

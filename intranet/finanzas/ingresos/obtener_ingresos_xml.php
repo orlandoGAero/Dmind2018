@@ -35,8 +35,8 @@
 		foreach ($conceptosXmlIngresos as $conceptosComprobante) {
 			$i = $i + 1;
 			$arrayConceptosComprobante[] = "
-				<li>
-					<center>---------------------------------------------&nbsp;&nbsp;&nbsp;<b>Concepto ".$i."</b>&nbsp;&nbsp;&nbsp;---------------------------------------------</center>
+				<li style='margin: 20px 0;'>
+					<span class='azul'><b> - Concepto ".$i." -</b></span>
 				</li>
 				<li>
 					<label>Clave Concepto ".$i.":</label>
@@ -96,11 +96,12 @@
 		// Convierte un array PHP a un array JS.
 		var conceptosComprobanteJS = <?=json_encode($arrayConceptosComprobante)?>;
 		// Lee los datos del array JS.
+		regIngr('#conceptos-comprobante').append("<hr class='linea-azul'>");
 		for (var i = 0; i < conceptosComprobanteJS.length; i++) {
 			// Agregar los input text en el div con id conceptos-comprobante.
 			regIngr('#conceptos-comprobante').append(conceptosComprobanteJS[i]);
 		}
-		regIngr('#conceptos-comprobante').append('<center>-----------------------------------------------------------------------------------------------------------</center>');
+		// regIngr('#conceptos-comprobante').append('<center>-----------------------------------------------------------------------------------------------------------</center>');
 		// La información extraida del XML se agrega en los input text correspondientes.
 		regIngr('#Version').val('<?=$xmlIngresos['versionI']?>');
 		regIngr('#TipoComprobante').val('<?=$xmlIngresos['tipoComprobanteI']?>');

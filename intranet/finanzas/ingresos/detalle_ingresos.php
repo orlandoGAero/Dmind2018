@@ -44,7 +44,7 @@
 		</nav>
 
 		 <h1 style="text-align:center; color:rgba(0,191,255,.9);">
-	    	<a href="listar_ingresos.php">
+	    	<a href="index.php">
 				<img class="atras" src="../../images/atras.png" title="Regresar">
 			</a>Detalle Ingresos
 	    </h1>
@@ -222,7 +222,7 @@
 							<?php endif; ?>
 						</p>
 						<p><span>RFC Proveedor:</span> <?=$datosIngresos['rfc_proveedor']?></p>
-						<p class="btnSalirDet"><a class="btn primary" href="listar_ingresos.php">Salir</a></p>
+						<p class="btnSalirDet"><a class="btn primary" href="index.php">Salir</a></p>
 					</div>
 				</section>
 			</article>

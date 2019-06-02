@@ -127,7 +127,6 @@
 							<label>No. Folio:<span>&nbsp;*</span></label>
 							<input type="text" name="txtFolio" id="Folio" maxlength="10" autocomplete="off" required>
 						</li>
-						<div id="conceptos-comprobante"></div>
 						<li>
 							<label>Descuento ($):</label>
 							<input type="text" name="txtDescuento" id="Descuento" maxlength="15" autocomplete="off">
@@ -266,12 +265,14 @@
 							<label>RFC Proveedor:</label>
 							<input type="text" name="txtRFCprov" id="RFCproveedor" maxlength="13" autocomplete="off">
 						</li>
+						
+						<div id="conceptos-comprobante"></div>
 					</ul>
 					<br>
 				</div>
 				
 				<div class="finanzasformpie">
-					<input type="submit" name="btnRegistrarIngreso" value="Registrar" class="btn primary" />
+					<input type="submit" id="btnRegIn" name="btnRegistrarIngreso" value="Registrar" class="btn primary" />
 					<input type="button" value="Limpiar" id="btn_limpiar" class="btn" />
 					<input type="button" name="btnCancelarIngreso" id="btnCancelarI" value="Cancelar" class="btneliminar" />
 				</div>
@@ -298,7 +299,7 @@ regIngr(document).ready(function(){
 	regIngr('#btnCancelarI').click(function(){
 		var msjConfirm = confirm('¿Esta seguro de cancelar el registro?');
 		if (msjConfirm == true) {
-			ingresos.fancybox.close();
+			$.fancybox.close();
 		}
 	});
 
@@ -320,9 +321,19 @@ regIngr(document).ready(function(){
 			});
 	});
 
+	const btnNameReg = regIngr('#btnRegIn').attr('name');
+
 	regIngr("#form_ingresos").submit(function(guardar) {
 		guardar.preventDefault();
-		regIngr.post('guardar_registro_ingreso.php', regIngr("#form_ingresos").serialize())
+		let datosForm = regIngr('#form_ingresos').serializeArray();
+		datosForm.push({name: 'btnNameReg', value: btnNameReg});
+		
+		regIngr.ajax({
+			url: 'guardar_registro_ingreso.php',
+			type: 'post',
+			dataType: 'html',
+			data: datosForm
+		})
 		.done(function(data){
 			regIngr("#registerIngresos").html(data);
 		});

@@ -161,7 +161,7 @@
 	?>
 
     <h1 style="text-align:center; color:rgba(0,191,255,.9);">
-    	<a href="listar_ingresos.php">
+    	<a href="index.php">
 			<img class="atras" src="../../images/atras.png" title="Regresar">
 		</a>Modificar Ingresos
 	</h1>
@@ -578,7 +578,7 @@
 		$('#btnCancelarModI').click(function(){
 			var msjConfirm = confirm('¿Esta seguro de cancelar el registro?');
 			if (msjConfirm == true) {
-				window.location.href = "listar_ingresos.php";
+				window.location.href = "index.php";
 			}
 		});
 

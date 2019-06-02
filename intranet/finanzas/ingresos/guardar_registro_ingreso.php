@@ -14,6 +14,9 @@
 
 <?php
 	$band = 0;
+	if (isset($_REQUEST['btnNameReg'])) {
+		$nomBtn = $_REQUEST['btnNameReg'];
+	}
 
 	if( $classIngresos -> registrarIngresos($_REQUEST['txtEfectCompr'],
 										$_REQUEST['txtVersion'],
@@ -63,7 +66,8 @@
 										$_REQUEST['txtFechaTimbr'],
 										$_REQUEST['txtHoraTimbr'],
 										$_REQUEST['txtSello'],
-										$_REQUEST['txtRFCprov'])) {
+										$_REQUEST['txtRFCprov'],
+										$nomBtn)) {
 
 		$band = 0;
 	}else{
@@ -80,8 +84,9 @@
 			regIgreGuardar( function() {
 				var flag = ".$band.";
 				if (flag == 0) {
-					ingresos.fancybox.close();
+					$.fancybox.close();
 					regIgreGuardar('#lista_ingresos').load('nuevo_ingreso.php');
+					mostrarTbIn();
 				}
 			} );
 

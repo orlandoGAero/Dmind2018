@@ -30,7 +30,8 @@
 		}
 		// Extraer datos del archivo XML.
 		public function obtenerDatosXML($nombreArchivo, $nombreArchivoTemporal, $tipo){
-			define('DIR_BASE', dirname(__FILE__).'/');
+			dirname(__FILE__).'/';
+			// define('DIR_BASE', dirname(__FILE__).'/');
 			$band = 0;
 
 			if (isset($nombreArchivo)) {
@@ -518,7 +519,7 @@
 			#...datos diferentes al seleccionado(Se utilizan para la modificación de Ingresos).
 
 		// Registrar Ingresos.
-		public function registrarIngresos($EfectoComprobante, $VersionComprobante, $TipoComprobante, $LugarExpedicionComprobante, $Fecha, $Hora, $rfcEmisor, $nombreEmisor, $paisEmisor, $estadoEmisor, $municipioEmisor, $coloniaEmisor, $numExtEmisor, $numIntEmisor, $calleEmisor, $cpEmisor, $rfcReceptor, $nombreReceptor, $usoCFDIComprobante, $NumSerie, $NumFolio, $ConceptosComprobante, $Descuento, $SubTotal, $IVA, $Total, $MonedaComprobante, $MetodoPago, $CondicionesPagoComprobante, $FormaPagoComprobante, $FechaHoraPago, $NombreImpuesto, $TotalImpuesto, $TipoFactorImpuesto, $TasaImpuesto, $NumCuenta, $Concepto, $Clasificacion, $Estado, $Origen, $Destino, $EstadoComprobante, $FechaHoraCancel, $RegimenFiscalEmisor, $FolioFiscal, $FechaTimbrado, $HoraTimbrado, $SelloComprobante, $rfcProveedor) {
+		public function registrarIngresos($EfectoComprobante, $VersionComprobante, $TipoComprobante, $LugarExpedicionComprobante, $Fecha, $Hora, $rfcEmisor, $nombreEmisor, $paisEmisor, $estadoEmisor, $municipioEmisor, $coloniaEmisor, $numExtEmisor, $numIntEmisor, $calleEmisor, $cpEmisor, $rfcReceptor, $nombreReceptor, $usoCFDIComprobante, $NumSerie, $NumFolio, $ConceptosComprobante, $Descuento, $SubTotal, $IVA, $Total, $MonedaComprobante, $MetodoPago, $CondicionesPagoComprobante, $FormaPagoComprobante, $FechaHoraPago, $NombreImpuesto, $TotalImpuesto, $TipoFactorImpuesto, $TasaImpuesto, $NumCuenta, $Concepto, $Clasificacion, $Estado, $Origen, $Destino, $EstadoComprobante, $FechaHoraCancel, $RegimenFiscalEmisor, $FolioFiscal, $FechaTimbrado, $HoraTimbrado, $SelloComprobante, $rfcProveedor, $btnGuardar) {
 			$Conexion = new dataBaseConn();
 			$band = 0;
 			if ($EfectoComprobante != "" && $VersionComprobante != "" && $TipoComprobante != "" && $LugarExpedicionComprobante != "" && $Fecha != "" && $EfectoComprobante != "" && $Hora != "" && $rfcEmisor != "" && $nombreEmisor != "" && $rfcReceptor != "" && $nombreReceptor != "" && $NumSerie != "" && $NumFolio != "" && $SubTotal != "" && $IVA != "" && $Total != "" && $MonedaComprobante != "" && $MetodoPago != "" && $FormaPagoComprobante != "" && $NombreImpuesto != "" && $TotalImpuesto != "" && $TasaImpuesto != "" && $FolioFiscal != "" && $FechaTimbrado != "" && $HoraTimbrado != "" && $SelloComprobante != "") {
@@ -753,16 +754,46 @@
 				$queryRegIngre -> bindParam(':rfcProv', $rfcProveedor);
 				$resultRegIngre = $queryRegIngre -> execute();
 
-				foreach ($ConceptosComprobante as $conceptosComp) {
-					if ($conceptosComp['baseImpuestoC'] == "") {
-						$conceptosComp['baseImpuestoC'] = 0;
+				foreach ($ConceptosComprobante as $concepto) {
+					if ($btnGuardar == 'btnGuardarVariosIn') {
+
+						$baseImpuesto = $concepto['baseConceptoI'];
+						$tasaCuota = $concepto['tasaCuotaConceptoI'];
+						$importeImpuesto = $concepto['importeImpuestoConceptoI'];
+						$claveCon = $concepto['claveConceptoI'];
+						$cantidadCon = $concepto['cantidadConceptoI'];
+						$claveUnidadCon = $concepto['claveUnidadConceptoI'];
+						$UnidadCon = $concepto['unidadConceptoI'];
+						$descripcionCon = $concepto['descripcionConceptoI'];
+						$valorUniCon = $concepto['valorUnitarioConceptoI'];
+						$importeCon = $concepto['importeConceptoI'];
+						$impuestoCon = $concepto['impuestoConceptoI'];
+						$tipoFactorImp = $concepto['tipoFactorConceptoI'];
+					} else if($btnGuardar == 'btnRegistrarIngreso') {
+						$baseImpuesto = $concepto['baseImpuestoC'];
+						$tasaCuota = $concepto['tasaCuotaImpuestoC'];
+						$importeImpuesto = $concepto['importeImpuestoC'];
+						$claveCon = $concepto['claveC'];
+						$cantidadCon = $concepto['cantidadC'];
+						$claveUnidadCon = $concepto['claveUnidadC'];
+						$UnidadCon = $concepto['unidadC'];
+						$descripcionCon = $concepto['descripcionC'];
+						$valorUniCon = $concepto['valorUnitarioC'];
+						$importeCon = $concepto['importeC'];
+						$impuestoCon = $concepto['impuestoC'];
+						$tipoFactorImp = $concepto['tipoFactorImpuestoC'];
 					}
-					if ($conceptosComp['tasaCuotaImpuestoC'] == "") {
-						$conceptosComp['tasaCuotaImpuestoC'] = 0;
+
+					if ($baseImpuesto == "") {
+						$baseImpuesto = 0;
 					}
-					if ($conceptosComp['importeImpuestoC'] == "") {
-						$conceptosComp['importeImpuestoC'] = 0;
+					if ($tasaCuota == "") {
+						$tasaCuota = 0;
 					}
+					if ($importeImpuesto == "") {
+						$importeImpuesto = 0;
+					}
+
 					$query = $Conexion -> prepare("INSERT INTO ingresos_conceptos (
 																clave_concepto_i,
 																cantidad_concepto_i,
@@ -793,18 +824,18 @@
 																:importImpConc,
 																:IDingre
 															);");
-					$query -> bindParam(':clavConcepto', $conceptosComp['claveC']);
-					$query -> bindParam(':cantConcepto', $conceptosComp['cantidadC']);
-					$query -> bindParam(':clavUnidConcepto', $conceptosComp['claveUnidadC']);
-					$query -> bindParam(':unidConcepto', $conceptosComp['unidadC']);
-					$query -> bindParam(':descripConcepto', $conceptosComp['descripcionC']);
-					$query -> bindParam(':valUnitConcepto', $conceptosComp['valorUnitarioC']);
-					$query -> bindParam(':importConcepto', $conceptosComp['importeC']);
-					$query -> bindParam(':baseImpConcepto', $conceptosComp['baseImpuestoC']);
-					$query -> bindParam(':impConcepto', $conceptosComp['impuestoC']);
-					$query -> bindParam(':tipFactImpConc', $conceptosComp['tipoFactorImpuestoC']);
-					$query -> bindParam(':tasaCuotaImpConc', $conceptosComp['tasaCuotaImpuestoC']);
-					$query -> bindParam(':importImpConc', $conceptosComp['importeImpuestoC']);
+					$query -> bindParam(':clavConcepto', $claveCon);
+					$query -> bindParam(':cantConcepto', $cantidadCon);
+					$query -> bindParam(':clavUnidConcepto', $claveUnidadCon);
+					$query -> bindParam(':unidConcepto', $UnidadCon);
+					$query -> bindParam(':descripConcepto', $descripcionCon);
+					$query -> bindParam(':valUnitConcepto', $valorUniCon);
+					$query -> bindParam(':importConcepto', $importeCon);
+					$query -> bindParam(':baseImpConcepto', $baseImpuesto);
+					$query -> bindParam(':impConcepto', $impuestoCon);
+					$query -> bindParam(':tipFactImpConc', $tipoFactorImp);
+					$query -> bindParam(':tasaCuotaImpConc', $tasaCuota);
+					$query -> bindParam(':importImpConc', $importeCon);
 					$query -> bindParam(':IDingre', $idIngreso);
 					$resultQuery = $query -> execute();
 				}
@@ -854,9 +885,16 @@
 					$queryDirI -> bindParam(':IDingreso', $idIngreso);
 					$resultDirI = $queryDirI -> execute();
 				}
+
+				if ($btnGuardar == 'btnGuardarVariosIn') {
+					$this -> msjSuccess = "Ingresos guardados exitosamente";
+				}
+
+				
 				if($resultRegIngre){
 					return $resultRegIngre;
 				}
+
 			}
 		}
 		// Eliminar Ingreso.
@@ -1195,10 +1233,204 @@
 					}
 				} // Fin de verificación de dirección del Emisor.
 				if($resultModIngre == TRUE){
-					header("Location: listar_ingresos.php");
+					header("Location: index.php");
 					return $resultModIngre;
 				}
 			}
+		}
+
+		public function encontrarIngxFolio($folioFi) {
+			$Conexion = new dataBaseConn();
+			$query = $Conexion -> prepare("SELECT folio_fiscal
+											FROM ingresos
+											WHERE folio_fiscal = :FolioEg");
+			$query->bindParam(':FolioEg', $folioFi);
+			$query->execute();
+			$fila = $query->rowCount();
+			return $fila;
+		}
+
+		public function buscarIng($fecha, $rfc, $razon, $serie, $folio, $subtotal, $iva, $total, $metodoPago, $fechaPago, $cuenta, $concepto, $clasificacion, $status) {
+			$Conexion = new dataBaseConn();
+			$criterio = "";
+
+			if(empty($criterio) && !empty($fecha)) {
+				$criterio .= "ingr.fecha LIKE :FechaIng";
+			} elseif (!empty($criterio) && !empty($fecha)) {
+				$criterio .= "AND ingr.fecha LIKE :FechaIng";
+			}
+
+			if (empty($criterio) && !empty($rfc)) {
+				$criterio .= "ingr.rfc_emisor LIKE :RfcIng";
+			} elseif (!empty($criterio) && !empty($rfc)) {
+				$criterio .= " AND ingr.rfc_emisor LIKE :RfcIng";
+			}
+
+			if (empty($criterio) && !empty($razon)) {
+				$criterio .= "ingr.razon_social_emisor LIKE :RazonIng";
+			} elseif (!empty($criterio) && !empty($razon)) {
+				$criterio .= " AND ingr.razon_social_emisor LIKE :RazonIng";
+			}
+
+			if (empty($criterio) && !empty($serie)) {
+				$criterio .= "ingr.serie LIKE :SerieIng";
+			} elseif (!empty($criterio) && !empty($serie)) {
+				$criterio .= " AND ingr.serie LIKE :SerieIng";
+			}
+
+			if (empty($criterio) && !empty($folio)) {
+				$criterio .= "ingr.no_folio LIKE :FolioIng";
+			} elseif (!empty($criterio) && !empty($folio)) {
+				$criterio .= " AND ingr.no_folio LIKE :FolioIng";
+			}
+
+			if (empty($criterio) && !empty($subtotal)) {
+				$criterio .= "ingr.subtotal LIKE :SubTIng";
+			} elseif (!empty($criterio) && !empty($subtotal)) {
+				$criterio .= " AND ingr.subtotal LIKE :SubTIng";
+			}
+
+			if (empty($criterio) && !empty($iva)) {
+				$criterio .= "ingr.iva LIKE :IvaIng";
+			} elseif (!empty($criterio) && !empty($iva)) {
+				$criterio .= " AND ingr.iva LIKE :IvaIng";
+			}
+
+			if (empty($criterio) && !empty($total)) {
+				$criterio .= "ingr.total LIKE :TotalIng";
+			} elseif (!empty($criterio) && !empty($total)) {
+				$criterio .= " AND ingr.total LIKE :TotalIng";
+			}
+
+			if (empty($criterio) && !empty($metodoPago)) {
+				$criterio .= "ingr.metodo_pago LIKE :MetodoP";
+			} elseif (!empty($criterio) && !empty($metodoPago)) {
+				$criterio .= " AND ingr.metodo_pago LIKE :MetodoP";
+			}
+
+			if (empty($criterio) && !empty($fechaPago)) {
+				$criterio .= "ingr.fecha_pago LIKE :FechaP";
+			} elseif (!empty($criterio) && !empty($fechaPago)) {
+				$criterio .= " AND ingr.fecha_hora_pago LIKE :FechaP";
+			}
+
+			if (empty($criterio) && !empty($cuenta)) {
+				$criterio .= "ingr.no_cuenta LIKE :CuentaIng";
+			} elseif (!empty($criterio) && !empty($cuenta)) {
+				$criterio .= " AND ingr.no_cuenta LIKE :CuentaIng";
+			}
+
+			if (empty($criterio) && !empty($concepto)) {
+				$criterio .= "ingr.concepto LIKE :ConceptoIng";
+			} elseif (!empty($criterio) && !empty($concepto)) {
+				$criterio .= " AND ingr.concepto LIKE :ConceptoIng";
+			}
+
+			if (empty($criterio) && !empty($clasificacion)) {
+				$criterio .= "ingr.clasificacion LIKE :ClasifIng";
+			} elseif (!empty($criterio) && !empty($clasificacion)) {
+				$criterio .= " AND ingr.clasificacion LIKE :ClasifIng";
+			}
+
+			if (empty($criterio) && !empty($status)) {
+				$criterio .= "ingr.estado LIKE :EstadoIng";
+			} elseif (!empty($criterio) && !empty($status)) {
+				$criterio .= " AND ingr.estado LIKE :EstadoIng";
+			}
+
+			$query = $Conexion -> prepare("SELECT 
+										  ingr.id_ingresos,
+										  ingr.fecha,
+										  ingr.rfc_emisor,
+										  ingr.razon_social_emisor,
+										  ingr.serie,
+										  ingr.no_folio,
+										  ingr.subtotal,
+										  ingr.iva,
+										  ingr.total,
+										  ingr.metodo_pago,
+										  ingr.fecha_hora_pago,
+										  ingr.no_cuenta,
+										  ingr.concepto,
+										  ingr.clasificacion,
+										  ingr.estado
+										FROM ingresos ingr
+										WHERE " . $criterio);
+
+			if ($fecha !== "") {
+				$fecha = "%".$fecha."%";
+				$query->bindParam(':FechaIng', $fecha);
+			}
+
+			if ($rfc !== "") {
+				$rfc = "%".$rfc."%";
+				$query->bindParam(':RfcIng', $rfc);
+			}
+
+			if ($razon !== "") {
+				$razon = "%".$razon."%";
+				$query->bindParam(':RazonIng', $razon);
+			}
+			
+			if ($serie !== "") {
+				$serie = "%".$serie."%";
+				$query->bindParam(':SerieIng', $serie);
+			}
+
+			if ($folio !== "") {
+				$folio = "%".$folio."%";
+				$query->bindParam(':FolioIng', $folio);
+			}
+
+			if ($subtotal !== "") {
+				$subtotal = "%".$subtotal."%";
+				$query->bindParam(':SubTIng', $subtotal);
+			}
+
+			if ($iva !== "") {
+				$iva = "%".$iva."%";
+				$query->bindParam(':IvaIng', $iva);
+			}
+
+			if ($total !== "") {
+				$total = "%".$total."%";
+				$query->bindParam(':TotalIng', $total);
+			}
+
+			if ($metodoPago !== "") {
+				$metodoPago = "%".$metodoPago."%";
+				$query->bindParam(':MetodoP', $metodoPago);
+			}
+
+			if ($fechaPago !== "") {
+				$fechaPago = "%".$fechaPago."%";
+				$query->bindParam(':FechaP', $fechaPago);
+			}
+
+			if ($cuenta !== "") {
+				$cuenta = "%".$cuenta."%";
+				$query->bindParam(':CuentaIng', $cuenta);
+			}
+
+			if ($concepto !== "") {
+				$concepto = "%".$concepto."%";
+				$query->bindParam(':ConceptoIng', $concepto);
+			}
+
+			if ($clasificacion !== "") {
+				$clasificacion = "%".$clasificacion."%";
+				$query->bindParam(':ClasifIng', $clasificacion);
+			}
+
+			if ($status !== "") {
+				$status = "%".$status."%";
+				$query->bindParam(':EstadoIng', $status);
+			}
+
+			$query->execute();
+			// print_r( $query);
+			$res = $query->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
 		}
 	}
 ?>

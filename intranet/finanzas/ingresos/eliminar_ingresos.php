@@ -31,9 +31,9 @@
 <?php endif; ?>
 
 <script type='text/javascript'>
-	ingresos(document).ready(function(){
+	$(document).ready(function(){
 		setTimeout(function(){
-			ingresos('.success2').fadeOut(1500);
+			$('.success2').fadeOut(1500);
 		},3000);
 	});
 </script>
